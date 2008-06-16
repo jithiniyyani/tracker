@@ -20,8 +20,7 @@ public class UserController {
 	public ResponseEntity<String> ping() {
 		LOGGER.debug("Entering ping");
 		LOGGER.debug("Done with ping");
-		return new ResponseEntity<String>("Test" + maxMessagelength,
-				HttpStatus.OK);
+		return new ResponseEntity<String>("Test" + maxMessagelength, HttpStatus.OK);
 
 	}
 }

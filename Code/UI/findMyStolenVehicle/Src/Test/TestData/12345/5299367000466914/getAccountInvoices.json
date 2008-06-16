@@ -1,0 +1,59 @@
+{
+    "invoices": [
+        {
+            "invoiceId": "01022011",
+            "statementDate": "01.02.2015",
+            "dueDate": "15.02.2015",
+            "amountDue": "15250",
+            "minimumDue": "250"
+        },
+        {
+            "invoiceId": "01012012",
+            "statementDate": "01.01.2015",
+            "dueDate": "15.01.2015",
+            "amountDue": "16250",
+            "minimumDue": "250"
+        },
+        {
+            "invoiceId": "01122013",
+            "statementDate": "01.12.2014",
+            "dueDate": "15.12.2014",
+            "amountDue": "9250",
+            "minimumDue": "250"
+        },
+        {
+            "invoiceId": "01112014",
+            "statementDate": "01.11.2014",
+            "dueDate": "15.11.2014",
+            "amountDue": "11250",
+            "minimumDue": "250"
+        },
+        {
+            "invoiceId": "01102015",
+            "statementDate": "01.10.2014",
+            "dueDate": "15.10.2014",
+            "amountDue": "12250",
+            "minimumDue": "250"
+        }
+    ,
+        {
+            "invoiceId": "01112016",
+            "statementDate": "01.11.2014",
+            "dueDate": "15.11.2014",
+            "amountDue": "11250",
+            "minimumDue": "250"
+        },
+        {
+            "invoiceId": "01102017",
+            "statementDate": "01.10.2014",
+            "dueDate": "15.10.2014",
+            "amountDue": "12250",
+            "minimumDue": "250"
+        }
+    ],
+    "pagination": {
+        "page": 1,
+        "perPage": 50,
+        "total": 500
+    }
+}

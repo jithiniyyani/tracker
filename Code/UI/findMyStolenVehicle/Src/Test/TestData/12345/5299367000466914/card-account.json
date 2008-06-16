@@ -1,0 +1,26 @@
+{
+  "account": {
+    "productName": "re: MC silver",
+    "creditLimit": 1000.000,
+    "usedCredit": 0.000,
+    "openToBuy": 1000.00,
+    "displayEFaktura": false,
+    "displayAutoGiro": false,
+    "cards": [
+      {
+        "cardHolderName": "JANNECKE KROGSTAD",
+        "maskedNr": "5410 63XX XXXX 1791",
+        "id": "2301218",
+        "issueDate": "2011-12-27",
+        "expiryDate": "2014-12-31",
+        "status": "DORM",
+        "isPrimary": true,
+        "canChangePin": true
+      }
+    ],
+    "eFakturaMsg": null,
+    "autoPaymentMsg": null,
+    "KID": "720001230161",
+    "kid": "720001230161"
+  }
+}

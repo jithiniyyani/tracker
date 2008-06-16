@@ -1,0 +1,37 @@
+{
+  "marketingInformation": [
+    {
+      "Id": 1,
+      "PuffCreatedDate": "2015-03-30T11:17:11",
+      "Title": "PuffRight",
+      "EpiServerId": 3814,
+      "Subject": "Gumbo beet greens corn soko endive gumbo gourd. ",
+      "Text": "tato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion ",
+      "ImageUrl": "http://remembercardepi7.no/Global/NORGE/smabilder/image003.png",
+      "ButtonText": "Test",
+      "ButtonUrl": "http://www.dn.se/"
+    },
+    {
+      "Id": 2,
+      "PuffCreatedDate": "2015-03-30T11:05:03",
+      "Title": "PuffMiddle",
+      "EpiServerId": 3813,
+      "Subject": "Turnip greens yarrow ricebean rutabaga endive",
+      "Text": "Nori grape silver beet broccoli kombu beet greens fava bean potato quandong celery. Bunya nuts black-eyed pea prairie turnip leek lentil turnip greens parsnip. Sea lettuce lettuce water chestnut eggplant winter purslane fennel azuki bean earthnut pea sierra leone bologi leek soko chicory celtuce parsley j­cama salsify.",
+      "ImageUrl": "http://remembercardepi7.no/Global/NORGE/smabilder/avtalegiro.jpg",
+      "ButtonText": "Text På knappen",
+      "ButtonUrl": "/portal/customerservice"
+    },
+    {
+      "Id": 3,
+      "PuffCreatedDate": "2015-03-26T10:56:40",
+      "Title": "PuffLeft",
+      "EpiServerId": 3811,
+      "Subject": "Testpuffen",
+      "Text": "Här kommer lite html text som är kul att ha ibland.",
+      "ImageUrl": "http://remembercardepi7.no/Global/NORGE/smabilder/faktura.PNG",
+      "ButtonText": "ButtonTexten hamnar här",
+      "ButtonUrl": "http://www.dn.se/"
+    }
+  ]
+}

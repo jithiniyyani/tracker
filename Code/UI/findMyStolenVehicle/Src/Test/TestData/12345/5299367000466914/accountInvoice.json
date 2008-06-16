@@ -1,0 +1,11 @@
+{
+  "cardInvoice": {
+    "invoiceId": "09102013",
+    "statementDate": "2013-9-10",
+    "dueDate": "2014-05-30",
+    "amountDue": 12250,
+    "minimumDue": 250,
+    "isLatestInvoice":true,
+    "KID":23456
+  }
+}

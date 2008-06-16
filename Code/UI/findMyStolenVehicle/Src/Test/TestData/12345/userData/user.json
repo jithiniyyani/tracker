@@ -1,0 +1,35 @@
+{"user": {
+    "name": "Harry Peter",
+    "phoneNumber": "12345",
+    "unreadMessages": 1,
+    "hideTermsAndConditions":false,
+    "data":"MzUxMTEwNjYwODI=",
+    "products": [
+        {
+            "type": "card",
+            "isDefault": true,
+            "group": "remember",
+            "shortName": "re:member VISA",
+            "accountId": "5299367000466914",
+            "enterCardAccountNumber": "123456789128",
+            "isICInsurancePresent": "true"
+       },
+        {
+            "type": "Loan",
+            "group": "remember",
+            "shortName": "re:member lev",
+            "accountId": "5299365487856236",
+            "enterCardAccountNumber": "123456789123",
+            "isICInsurancePresent": "false"
+        },
+        {
+            "type": "card",
+            "group": "remember",
+            "shortName": "re:member more",
+            "accountId": "5299367000466916",
+            "enterCardAccountNumber": "123456789129",
+            "isICInsurancePresent": "true"
+        }
+    ],
+    "isFirstTimeAccess": true
+}}

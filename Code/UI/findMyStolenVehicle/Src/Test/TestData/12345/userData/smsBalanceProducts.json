@@ -1,0 +1,14 @@
+{
+    "smsBalanceRegistration": [
+        {
+            "accountNr": "5299367000466914",
+            "productName": "re: VisaGold",
+            "enabled": true
+        },
+        {
+            "accountNr": "5299367000466915",
+            "productName": "re: MCsilver",
+            "enabled": false
+        }
+    ]
+}

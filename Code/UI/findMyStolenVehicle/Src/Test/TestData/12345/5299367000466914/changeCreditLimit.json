@@ -1,0 +1,17 @@
+{
+    "changeCreditLimit": {
+        "newCreditLimit": 60000,
+        "oldCreditLimit": 50000,
+        "employmentType": "Fast ansatt",
+        "employerName": "Coop",
+        "employerPhone": "0702336995",
+        "employedSince": "10.01.2007",
+        "housingType": "Tenancy",
+        "numberOfChildren": 2,
+        "numberOfAdults": 3,
+        "yearlyIncome": 940000,
+        "mortgage": 200000,
+        "otherLoans": 0
+    }
+
+}

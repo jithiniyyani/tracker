@@ -1,0 +1,48 @@
+{
+  "installments": [
+    {
+      "description": "Mobile",
+      "principal": 3600,
+      "installment": 600,
+      "period":6,
+      "balance":3000,
+      "remainingPeriod":5,
+      "creationFees":100,
+      "monthlyFees":25,
+      "amountDue":725
+    },
+    {
+      "description": "Mobile Accessories",
+      "principal": 4800,
+      "installment": 800,
+      "period":6,
+      "balance":2400,
+      "remainingPeriod":3,
+      "creationFees":100,
+      "monthlyFees":25,
+      "amountDue":925
+    },
+    {
+      "description": "Mobile Phone",
+      "principal": 6000,
+      "installment": 1000,
+      "period":6,
+      "balance":2000,
+      "remainingPeriod":2,
+      "creationFees":100,
+      "monthlyFees":25,
+      "amountDue":1125
+    },
+    {
+      "description": "Bag",
+      "principal": 3600,
+      "installment": 600,
+      "period":6,
+      "balance":600,
+      "remainingPeriod":1,
+      "creationFees":100,
+      "monthlyFees":25,
+      "amountDue":725
+    }
+  ]
+}

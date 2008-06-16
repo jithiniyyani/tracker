@@ -1,0 +1,47 @@
+{
+  "transactions": [
+    {
+      "transactionAmount": 510,
+      "transactionCurrency": "NOK",
+      "billingAmount": 510,
+      "billingCurrency": "NOK",
+      "cardHolderName": "Karl Johan",
+      "country": "Norway",
+      "transactionDate’": "2014-06-17",
+      "description": "StarBucks Coffee",
+      "id": "txn0000023",
+      "canBeSplitted": false
+
+    },
+    {
+      "transactionAmount": 510,
+      "transactionCurrency": "NOK",
+      "billingAmount": 510,
+      "billingCurrency": "NOK",
+      "cardHolderName": "Karl Johan",
+      "country": "Norway",
+      "transactionDate’": "2014-06-17",
+      "description": "StarBucks Coffee",
+      "id": "txn0000023",
+      "canBeSplitted": false
+    }
+  ,
+    {
+      "transactionAmount": 510,
+      "transactionCurrency": "NOK",
+      "billingAmount": 510,
+      "billingCurrency": "NOK",
+      "cardHolderName": "Karl Johan",
+      "country": "Norway",
+      "transactionDate’": "2014-06-17",
+      "description": "StarBucks Coffee",
+      "id": "txn0000023",
+      "canBeSplitted": false
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "perPage": 2,
+    "total": 3
+  }
+}

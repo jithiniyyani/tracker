@@ -1,0 +1,46 @@
+{
+  "messages": [
+    {
+      "id": "8c9e39f1f7fe4286a356912e7b642349",
+      "subject": "Test Mail For inbox",
+      "receivedAt": "2015-05-07T10:37:38.556Z",
+      "unread": true,
+      "hasAttachments": true
+    },
+    {
+      "id": "8b9e39f1f7fe4286a356912e7b642310",
+      "subject": "Test Mail For inbox",
+      "receivedAt": "2015-05-06T05:37:38.556Z",
+      "unread": true,
+      "hasAttachments": true
+    },
+    {
+      "id": "8b9e39f1f7fe4286a356912e7b642311",
+      "subject": "Test Mail For inbox",
+      "receivedAt": "2015-06-14T10:37:38.556Z",
+      "isUnread": false
+    },
+    {
+      "id": "8b9e39f1f7fe4286a356912e7b642312",
+      "subject": "Test Mail For inbox",
+      "receivedAt": "2015-06-15T10:37:38.556Z",
+      "isUnread": false
+    },
+    {
+      "id": "83ec637c-c123-4f1b-b0f4-b00f1c7053d6",
+      "subject": "lol",
+      "receivedAt": "2015-10-06T09:00:46.336Z",
+      "sentAt": null,
+      "mailData": "<img src='. Onerror=alert(1)'>\n",
+      "productShortName": null,
+      "hasAttachments": false,
+      "attachments": [],
+      "unread": false
+    }
+  ],
+  "pagination": {
+    "total": 120,
+    "pageNr": 2,
+    "pageSize": 3
+  }
+}

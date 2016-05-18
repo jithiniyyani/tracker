@@ -1,0 +1,18 @@
+Logout
+
+Pre condition :
+
+User is logged into the site.
+
+
+Steps:
+1) User is logged into the site and wishes to logout.
+2) User clicks the logout button.
+3) User session should be destroyed.
+4) User should be redirected to login page.
+
+
+Alternate flows:
+1)User clicks logout when session has already expired then
+  System will redirect the user back to user name password page.
+

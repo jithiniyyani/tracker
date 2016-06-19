@@ -1,0 +1,44 @@
+<div>
+	<h1>User settings go here</h1>
+
+	
+	<div class="container profile" ng-controller="UserController as ctrl">
+		<table class="table">
+			<thead>
+				<tr>
+					<th class="col-md-2"></th>
+					<th text-center></th>
+				</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>User Name</td>
+				<td>{{ctrl.user.username}}</td>			
+			</tr>
+			<tr>
+				<td>Contact Number</td>
+				<td>{{ctrl.user.contactNumber}}</td>			
+			</tr>
+			<tr>
+				<td>Email Address</td>
+				<td>{{ctrl.user.emailaddress}}</td>			
+			</tr>
+			<tr>
+				<td>Gender</td>
+				<td>{{ctrl.user.gender}}</td>			
+			</tr>
+			<tr>
+				<td>Location</td>
+				<td>{{ctrl.user.location}}</td>			
+			</tr>
+			<tr>
+				<td>User Name</td>
+				<td>{{ctrl.user.name}}</td>			
+			</tr>
+			<tr>
+				<td>Passport</td>
+				<td>{{ctrl.user.passport}}</td>			
+			</tr>
+		</tbody>
+	</table>
+</div>

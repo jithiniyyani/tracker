@@ -1,0 +1,103 @@
+<div ng-controller="CarController as ctrl" class="container">
+	<h1>{{ctrl.message}}</h1>
+
+	<table class="table table-striped">
+		<thead>
+			<td>Registration Number</td>
+			<td>Manufacturer</td>
+			<td>Model</td>
+			<td>Color</td>
+			<td>Stolen</td>
+			<td>Delete</td>
+		</thead>
+		<tbody>
+			<tr ng-repeat="car in ctrl.cars" ng-click="ctrl.setSelectedCar(car)">
+				<td>{{car.registrationNo}}</td>
+				<td>{{car.manufacturer}}</td>
+				<td>{{car.model}}</td>
+				<td>{{car.color}}</td>
+				<td>{{car.stolen}}</td>
+				<td><button type="button" class="btn btn-info btn-lg"
+						data-toggle="modal" data-target="#deleteCarModal">Delete</button></td>
+			</tr>
+		</tbody>
+	</table>
+	<div>
+		<h1>Want to save one more car</h1>
+		<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+			data-target="#registerCarModal">Add Car</button>
+		<form action="#" id="registerCarForm">
+			<div class="modal fade" id="registerCarModal" tabindex="-1">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title" id="loginModalLabel">Login</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label class="control-label" for="registrationNo">Car
+									registration Number</label> <input type="text" class="form-control"
+									id="registrationNo" placeholder="Enter registration number"
+									ng-model="ctrl.car.car.registrationNo">
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="carColor">Car color</label> <input
+									type="text" class="form-control" id="carColor"
+									placeholder="Enter car color" ng-model="ctrl.car.car.color">
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="manufacturer">Car
+									manufacturer</label> <input type="text" class="form-control"
+									id="manufacturer" placeholder="Enter car manu"
+									ng-model="ctrl.car.car.manufacturer">
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="model">Car model</label> <input
+									type="text" class="form-control" id="model"
+									placeholder="Enter car model" ng-model="ctrl.car.car.model">
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="stolen">Is car stolen</label>
+								<input type="checkbox" name="stolen" value="true"
+									ng-model="ctrl.car.car.stolen" /> Yes
+							</div>
+					<!-- 		<div class="form-group">
+								<label class="control-label" for="stolen">Upload Car Image</label>
+								<input type="file" id="carImage" file-model="ctrl.car.car.image"/>
+							</div> -->
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" ng-click="ctrl.addCar()">Add Car</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<form action="#" id="deleteCarForm">
+			<div class="modal fade" id="deleteCarModal" tabindex="-1">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title" id="loginModalLabel">Delete this car</h4>
+						</div>
+						<div class="modal-body">
+							<h2>Confirm deletion</h2>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" ng-click="ctrl.deleteCar()">Delete
+								Car</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>	
+</div>

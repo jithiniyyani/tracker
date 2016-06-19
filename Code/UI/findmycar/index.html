@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html ng-app="findMyCar">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--  <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+	<link
+	href="css/app.css"
+	rel="stylesheet">
+<title>Welcome</title>
+
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#/default">Find My Car</a>
+			</div>
+
+			<div>
+				<ul class="nav navbar-nav">
+					<li><a href="#home">Home</a></li>
+					<li><a href="#pagea">Page A</a></li>
+					<li><a href="#pageb">Page B</a></li>
+					<!--   <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page C <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Page C - 1</a></li>
+                            <li><a href="#">Page C - 2</a></li>
+                            <li><a href="#">Page C - 3</a></li>
+                        </ul>
+                    </li> -->
+				</ul>
+				<ul class="nav navbar-nav navbar-right"
+					ng-controller="LoginController as ctrl">
+					<li ng-if="!ctrl.isLoggedIn()"><a href="#" data-toggle="modal"
+						data-target="#signUpModal"><span
+							class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li ng-if="!ctrl.isLoggedIn()"><a href="#" data-toggle="modal"
+						data-target="#loginModal"><span
+							class="glyphicon glyphicon-log-in"></span> Login</a></li>
+					<!--  <li><a href="#" ng-click="ctrl.submitLogout()"><span class="glyphicon glyphicon-log-in"></span>Log out</a></li> -->
+					<li ng-if="ctrl.isLoggedIn()"><a href="#settings"><span
+							class="glyphicon glyphicon-log-in"></span>Settings</a></li>
+					<li ng-if="ctrl.isLoggedIn()"><a href="#"
+						ng-click="ctrl.logout()"><span
+							class="glyphicon glyphicon-log-in"></span>Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
+
+	<div ng-view></div>
+	<form action="#" id="loginForm">
+		<div class="modal fade" id="loginModal" tabindex="-1"
+			ng-controller="LoginController as ctrl">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title" id="loginModalLabel">Login</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group" id="inputUserIDFormGroup">
+							<label class="control-label" for="inputUserID">User ID</label> <input
+								type="text" class="form-control" id="inputUserID"
+								placeholder="Enter your user ID"
+								ng-model="ctrl.user.user.username">
+						</div>
+						<div class="form-group" id="inputPasswordFormGroup">
+							<label class="control-label" for="inputPassword">Password</label>
+							<input type="password" class="form-control" id="inputPassword"
+								placeholder="Enter your password"
+								ng-model="ctrl.user.user.password">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							ng-click="ctrl.login()">Login</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<form action="#" id="signUpForm">
+            <div class="modal fade" id="signUpModal" tabindex="-1" ng-controller="UserController as ctrl">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title" id="loginModalLabel">Login</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <label class="control-label" for="userName">User Name</label>
+                                <input type="text" class="form-control" id="userName" placeholder="Enter your user Id" ng-model="ctrl.user.user.username">
+                            </div>
+                            <div>
+                                <label class="control-label" for="name">Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter your name" ng-model="ctrl.user.user.name">
+                            </div>
+                            <div>
+                                <label class="control-label" for="emailAddress">Email address</label>
+                                <input type="text" class="form-control" id="emailAddress" placeholder="Enter your email address" ng-model="ctrl.user.user.emailaddress">
+                            </div>
+                            <div>
+                                <label class="control-label" for="inputPassword">Password</label>
+                                <input type="password" class="form-control" id="inputPassword" placeholder="Enter your password" ng-model="ctrl.user.user.password">
+                            </div>
+                            <div>
+                                <label class="control-label" for="inputPasswordRe">Re type Password</label>
+                                <input type="password" class="form-control" id="inputPasswordRe" placeholder="Re type your password">
+                            </div>
+                            <div>
+                                <label class="control-label" for="inputPassword">Passport</label>
+                                <input type="text" class="form-control" id="inputPassword" placeholder="Enter your passport number" ng-model="ctrl.user.user.passport">
+                            </div>
+                            <div>
+                                <label class="control-label" for="contactNumber">Contact Number</label>
+                                <input type="text" class="form-control" id="contactNumber" placeholder="Enter your contact number" ng-model="ctrl.user.user.contactNumber">
+                            </div>
+                            <div>
+                                <label class="control-label" for="gender">Gender</label><br />
+                                <input type="radio" name="gender" value="male" checked ng-model="ctrl.user.user.gender"> Male<br>
+                                <input type="radio" name="gender" value="female"  ng-model="ctrl.user.user.gender"> Female<br>
+                                <input type="radio" name="gender" value="other" ng-model="ctrl.user.user.gender"> Other<br>                              
+                            </div>
+                            <div>
+                                <label class="control-label" for="tandc">Terms and condition</label>
+                                <input type="checkbox" name="termsAndConditions" value="true" id="tandc">I accept terms and condition<br>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button class="btn btn-primary" ng-click="ctrl.registerUser()">Register</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </form>
+	<!-- <script src="scripts/jquery-1.11.1.min.js"></script> -->
+
+
+	<!-- When we go to production -->
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+		integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+		crossorigin="anonymous"></script>
+	<!--   -->
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
+	<script src="scripts/app.js"></script>
+	<script src="scripts/services/LoginService.js"></script>
+	<script src="scripts/controller/UserController.js"></script>
+	<script src="scripts/controller/CarController.js"></script>
+	<script src="scripts/controller/CountryController.js"></script>
+	<script src="scripts/controller/HomePageController.js"></script>
+	<script src="scripts/controller/LoginController.js"></script>
+</body>
+</html>

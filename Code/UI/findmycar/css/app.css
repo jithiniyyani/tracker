@@ -1,0 +1,8 @@
+.profile{
+	background: url(/img/profile_bg.jpg) left top;
+    min-height: 150px;
+    background-size: cover;
+    font-size: 24px;
+    color: #fff;
+    line-height: 24px;
+}

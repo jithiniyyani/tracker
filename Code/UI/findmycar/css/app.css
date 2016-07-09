@@ -1,8 +1,42 @@
-.profile{
+form .ng-invalid.ng-dirty {
+	background-color: lightpink;
+}
+
+.nav,.pagination,.carousel,.panel-title a {
+	cursor: pointer;
+}
+
+.map {
+	height: 200px;
+	width: 400px;
+}
+
+.footer {
+	background-color: black;
+	color: white;	
+}
+
+.settings_heading{
+	font-size: 24px;
+	color : black;
+	line-height: 24px;
+}
+
+.profile_upper {
 	background: url(/img/profile_bg.jpg) left top;
-    min-height: 150px;
-    background-size: cover;
-    font-size: 24px;
-    color: #fff;
-    line-height: 24px;
+	min-height: 150px;
+	background-size: cover
+}
+
+.add_padding{
+	
+	padding-top : 10px;
+}
+
+.profile{
+	color: white;
+}
+
+.edit{
+	float : right;
 }

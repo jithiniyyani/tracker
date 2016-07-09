@@ -1,0 +1,67 @@
+<div class="modal-header">
+	<h3 class="modal-title">Sign Up</h3>
+</div>
+<div class="modal-body">
+	<form id="signUpForm" novalidate name="signUpForm">
+		<div class="form-group" id="inputUserNameFormGroup">
+			<label class="control-label" for="inputUserName" ng-bind="userName"></label>
+			<input type="text" required class="form-control" id="inputUserName"
+				placeholder="Enter your name" ng-model="user.name">
+		</div>
+		
+		<div class="form-group" id="inputUserIDFormGroup">
+			<label class="control-label" for="inputUserID" ng-bind="userId"></label>
+			<input type="text" required class="form-control" id="inputUserID"
+				placeholder="Enter your user ID" ng-model="user.username">
+		</div>
+		<div class="form-group" id="inputPasswordFormGroup">
+			<label class="control-label" for="inputPassword" ng-bind="password"></label>
+			<input type="password" required class="form-control"
+				id="inputPassword" placeholder="Enter your password"
+				ng-model="user.password">
+		</div>
+		<div class="form-group" id="inputRePasswordFormGroup">
+			<label class="control-label" for="inputRePassword"
+				ng-bind="reTypePassword"></label> <input type="password" required
+				class="form-control" id="inputRePassword"
+				placeholder="Re type your password">
+		</div>
+		<div class="form-group" id="inputEmailFormGroup">
+			<label class="control-label" for="inputemailId"
+				ng-bind="emailAddress"></label> <input type="email" required
+				class="form-control" id="inputemailId"
+				placeholder="Enter your email address" ng-model="user.emailaddress">
+		</div>
+		<div class="form-group" id="inputGenderFormGroup">
+			<label class="control-label" for="inputGender" ng-bind="gender"></label>
+			<select class="form-control" ng-model="user.gender" required>
+				<option selected="selected">Male</option>
+				<option>Female</option>
+				<option>Other</option>
+			</select>
+		</div>
+		<div class="form-group" id="inputPassportlFormGroup">
+			<label class="control-label" for="inputPassport" ng-bind="passport"></label>
+			<input type="text" class="form-control" required id="inputPassport"
+				placeholder="Enter your passport number" ng-model="user.passport">
+		</div>
+		<div class="form-group" id="inputContactDetailsFormGroup">
+			<label class="control-label" for="inputContactDetails"
+				ng-bind="contactNumber"></label> <input required type="text"
+				class="form-control" id="inputContactDetails"
+				placeholder="Enter your contact Number"
+				ng-model="user.contactNumber">
+		</div>
+		<div class="form-group" id="inputTAndCFormGroup">
+			<label class="control-label" for="inputTermsAndConditions"
+				ng-bind="termsAndConditions"></label> <input
+				name="termsAndCondtions" type="checkbox"
+				ng-model="user.termsAndConditions">
+		</div> 
+		</form>
+</div>
+
+<div class="modal-footer">
+	<button class="btn btn-primary" type="button" ng-click="registerUser(user)">Register</button>
+	<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>

@@ -1,44 +1,78 @@
-<div>
-	<h1>User settings go here</h1>
-
-	
-	<div class="container profile" ng-controller="UserController as ctrl">
-		<table class="table">
-			<thead>
-				<tr>
-					<th class="col-md-2"></th>
-					<th text-center></th>
-				</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>User Name</td>
-				<td>{{ctrl.user.username}}</td>			
-			</tr>
-			<tr>
-				<td>Contact Number</td>
-				<td>{{ctrl.user.contactNumber}}</td>			
-			</tr>
-			<tr>
-				<td>Email Address</td>
-				<td>{{ctrl.user.emailaddress}}</td>			
-			</tr>
-			<tr>
-				<td>Gender</td>
-				<td>{{ctrl.user.gender}}</td>			
-			</tr>
-			<tr>
-				<td>Location</td>
-				<td>{{ctrl.user.location}}</td>			
-			</tr>
-			<tr>
-				<td>User Name</td>
-				<td>{{ctrl.user.name}}</td>			
-			</tr>
-			<tr>
-				<td>Passport</td>
-				<td>{{ctrl.user.passport}}</td>			
-			</tr>
-		</tbody>
-	</table>
+<div ng-controller="settingsPageController">
+	<div ng-init="getUser();getCars()" >
+		<div class="container">
+			<div class="row">
+				<div>
+					<!--  div for header of setting page -->
+					<span class="settings_heading"> Hi, {{user.username}}</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="row profile_upper" >
+					<!-- personal info goes here -->
+						<div class="col-md-4">
+							<p class="add_padding">
+							<img src="/img/profile_pic_default.jpg"/>
+							</p>
+						</div>
+						<div class="col-md-8 profile">
+						  <p>User Name : {{user.username}} <span class="edit"><a>Edit</a></span></p>
+						  <p>Emaild Address : {{user.emailaddress}}</p>
+						  <p>Contact Number : {{user.contactNumber}}</p>
+						  <p>Passport : {{user.passport}}</p>
+						  <p>Enable SMS notification : yes</p>
+						  <p>Enable Email notification : yes</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					  	Some info can go here
+					</div>
+				</div>
+				<div class="row" ng-controller="modalController">				
+				<div class="col-md-8">
+						<div ng-init="getCars()">
+						<table class="table table-striped">
+							<thead>
+								<td>{{label_manufacturer}}</td>
+								<td>{{label_model}}</td>
+								<td>{{label_color}}</td>
+								<td>{{label_registrationNumber}}</td>
+								<td>{{label_registrationDate}}</td>
+								<td>{{label_stolen}}</td>
+								<td>{{label_delete}}</td>
+								<td>{{label_seeImage}}</td>
+								
+							</thead>
+							<tbody>
+								<tr ng-repeat="car in cars">
+									<td>{{car.manufacturer}}</td>
+									<td>{{car.model}}</td>
+									<td>{{car.color}}</td>
+									<td>{{car.registrationNo}}</td>
+									<td>{{car.registrationDate}}</td>
+									<td>{{car.stolen}}</td>
+									<td><input type="checkbox"></td>
+									<td>
+									
+									   <span ng-repeat="image in car.images"><a ng-click="open('md','dialog/carImage.html','imageController',image)"><img src="/img/car.jpg"/></a></span>
+								
+									</tr>
+							</tbody>
+						</table>
+					</div>
+					<div >
+						<a class="btn btn-primary"
+							ng-click="open('md','dialog/addCar.html','carController')">Add
+							Vehicle</a>
+						<a class="btn btn-primary" ng-click="">Delete selected
+							vechicles</a>
+					</div>
+			</div>
+			<div class="col-md-4">
+			</div>
+		</div>
+			
+	</div>
 </div>

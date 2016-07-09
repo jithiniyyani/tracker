@@ -57,3 +57,30 @@ create table car(
    primary key (id)
    
 );
+
+create table attachments(
+ 
+   id varchar(255),
+   attachment_name varchar(255),
+   attachment_path varchar(255),
+   car_id varchar(255),
+   createdBy varchar(255),
+   createdAt DATETIME,
+   modifiedBy varchar(255),
+   modifiedAt DATETIME,   
+   primary key (id)
+   
+);
+
+create table stolen_location(
+ 
+   id varchar(255),
+   location_cordinates varchar(255),
+   car_id varchar(255),
+   createdBy varchar(255),
+   createdAt DATETIME,
+   modifiedBy varchar(255),
+   modifiedAt DATETIME,   
+   primary key (id)
+   
+);

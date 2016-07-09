@@ -2,7 +2,6 @@ package com.findmycar.to;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import com.findmycar.contants.UserType;
 
@@ -29,6 +28,7 @@ public class User {
 
 	private List<Car> cars;
 
+	
 	// technical attributes
 	private String userId;
 

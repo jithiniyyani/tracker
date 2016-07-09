@@ -2,6 +2,8 @@ package com.findmycar.to;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Car {
 
 	// business values
@@ -19,8 +21,12 @@ public class Car {
 	// technical values
 	private String carId;
 
+	
+	@JsonProperty(required=false)
+	private String registrationDate;
+
 	public Car() {
-		
+
 	}
 
 	public Car(String registrationNo, String manufacturer, String model,
@@ -90,5 +96,14 @@ public class Car {
 		this.carId = carId;
 	}
 
+	public String getRegistrationDate() {
+		return registrationDate;
+	}
+
+	public void setRegistrationDate(String registrationDate) {
+		this.registrationDate = registrationDate;
+	}
 	
+	
+
 }

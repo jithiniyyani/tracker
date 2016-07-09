@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.findmycar.dao.CarDao;
+import com.findmycar.exception.BusinessException;
 import com.findmycar.service.CarService;
+import com.findmycar.to.Attachment;
 import com.findmycar.to.Car;
 
 @Service
@@ -22,15 +24,30 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
-	public Car createCarForUser(Car car, String userId) {
+	public Car createCarForUser(Car car, String userId,List<Attachment> images) {
 
-		return carDao.addCarForUser(car, userId);
+		return carDao.addCarForUser(car, userId,images);
 	}
 
 	@Override
 	public boolean deleteCar(String carId) {
 		// TODO Auto-generated method stub
 		return carDao.deleteCar(carId);
+	}
+
+	@Override
+	public boolean markCarAsStolen(String carId) throws BusinessException {
+		
+		boolean status = false;
+		status = carDao.markCarAsStolen(carId);
+		return status;
+	}
+
+	@Override
+	public List<Car> getListOfStolenCars(String registrationNumber)
+			throws BusinessException {
+
+		return carDao.getStolenCars(registrationNumber);
 	}
 
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	
+	<appender name="fileAppenderForApp" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="C:/logs/stolenVehicle.log" />
+		<param name="Append" value="true" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />	
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%t] %C (%F:%L) - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="asyncAppenderForApp" class="org.apache.log4j.AsyncAppender">
+            <param name="BufferSize" value="5000"/>
+            <param name="LocationInfo" value="true"/>
+            <appender-ref ref="fileAppenderForApp"/>
+  	</appender>
+  	
+  	<logger name="org.springframework" additivity="false">
+		<level value="error" />
+		<appender-ref ref="asyncAppenderForApp" />
+	</logger>
+
+	<logger name="org.springframework.beans" additivity="false">
+		<level value="error" />
+		<appender-ref ref="asyncAppenderForApp" />
+	</logger>
+
+	<logger name="org.springframework.security" additivity="false">
+		<level value="error" />
+		<appender-ref ref="asyncAppenderForApp" />
+	</logger>
+
+	<logger name="org.springframework.jdbc.core" additivity="false">
+		<level value="error" />
+		<appender-ref ref="asyncAppenderForApp" />
+	</logger>
+	
+	<logger name="org.springframework.transaction" additivity="false">
+		<level value="error" />
+		<appender-ref ref="asyncAppenderForApp" />
+	</logger>	
+	<logger name="com.stolenvehicle" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="asyncAppenderForApp" />
+	</logger>
+	<root>
+		<priority value="debug" />
+		<appender-ref ref="asyncAppenderForApp" />
+	</root>
+</log4j:configuration>

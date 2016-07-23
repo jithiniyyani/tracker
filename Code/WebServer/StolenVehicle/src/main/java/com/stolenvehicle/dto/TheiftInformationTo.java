@@ -1,5 +1,5 @@
 package com.stolenvehicle.dto;
 
-public class Attachment {
+public class TheiftInformationTo {
 
 }

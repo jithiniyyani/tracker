@@ -1,6 +1,6 @@
 package com.stolenvehicle.constants;
 
-public enum FindStatus {
+public enum FindStatusEnum {
 
 	REPORTED, ACCEPTED, REJECTED, REWARDED;
 }

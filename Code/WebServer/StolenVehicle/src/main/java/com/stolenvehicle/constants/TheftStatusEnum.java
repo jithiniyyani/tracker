@@ -1,6 +1,6 @@
 package com.stolenvehicle.constants;
 
-public enum TheftStatus {
+public enum TheftStatusEnum {
 
 	REGISTERED, ACCCEPTED, REJECTED, REWARDED;
 }

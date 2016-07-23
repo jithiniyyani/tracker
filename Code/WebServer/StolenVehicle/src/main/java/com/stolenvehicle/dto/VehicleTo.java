@@ -1,5 +1,5 @@
 package com.stolenvehicle.dto;
 
-public class FindInformation {
+public class VehicleTo {
 
 }

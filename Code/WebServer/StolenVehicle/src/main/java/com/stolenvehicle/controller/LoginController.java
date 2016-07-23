@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.stolenvehicle.dto.UserTo;
 import com.stolenvehicle.service.UserService;
+import com.stolenvehicle.util.JsonUtil;
 
 @Controller
 public class LoginController {
@@ -23,6 +25,39 @@ public class LoginController {
 	@RequestMapping(method = RequestMethod.POST, path = "/login")
 	public ResponseEntity<String> login(@RequestBody String requestBody) {
 
-		return new ResponseEntity<>(HttpStatus.OK);
+		ResponseEntity<String> response;
+		try {
+
+			UserTo user = JsonUtil.toObject(requestBody, "user", UserTo.class);
+			user = userService.authenticateUser(user);
+			response = new ResponseEntity<String>(HttpStatus.OK);
+
+		} catch (Exception ex) {
+
+			LOGGER.error("Error while authenticating user with Request : "
+					+ requestBody, ex);
+			response = new ResponseEntity<String>(HttpStatus.FORBIDDEN);
+		}
+		return response;
 	}
+	
+	@RequestMapping(method = RequestMethod.POST, path = "/register")
+	public ResponseEntity<String> register(@RequestBody String requestBody) {
+
+		ResponseEntity<String> response;
+		try {
+
+			UserTo user = JsonUtil.toObject(requestBody, "user", UserTo.class);
+			user = userService.registerUser(user);
+			response = new ResponseEntity<String>(HttpStatus.OK);
+
+		} catch (Exception ex) {
+
+			LOGGER.error("Error while authenticating user with Request : "
+					+ requestBody, ex);
+			response = new ResponseEntity<String>(HttpStatus.FORBIDDEN);
+		}
+		return response;
+	}
+	
 }

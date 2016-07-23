@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.stolenvehicle.dao.UserDao;
 import com.stolenvehicle.dto.UserTo;
+import com.stolenvehicle.entity.User;
 import com.stolenvehicle.exception.BusinessException;
 import com.stolenvehicle.service.UserService;
 
@@ -19,11 +20,19 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 
 	@Override
-	public boolean authenticateUser(UserTo user) throws BusinessException {
+	public UserTo authenticateUser(UserTo user) throws BusinessException {
 
-		boolean status = false;
-		userDao.getUser(user.getEmailaddress(), user.getPassword());
-		status = true;
-		return status;
+		User userFromDb = userDao.getUser(user.getEmailaddress(),
+				user.getPassword());
+		// copy from entity to dto
+		return user;
+	}
+
+	@Override
+	public UserTo registerUser(UserTo user) throws BusinessException {
+
+		userDao.saveUser(null);
+		// convert from entity to dto
+		return user;
 	}
 }

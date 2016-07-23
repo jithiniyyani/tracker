@@ -2,6 +2,7 @@ package com.stolenvehicle.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.UUID;
 
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -69,6 +70,23 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
 			return user;
 		}
+	}
+
+	@Override
+	public User saveUser(User user) {
+
+		String userId = UUID.randomUUID().toString();
+		user.setId(userId);
+		this.save(
+				Query.SAVE_USER,
+				new Object[] { user.getId(), user.getName(),
+						user.getEmailaddress(), user.getPassword(),
+						user.getGender(), user.getIc_password(),
+						user.getContactNumber(), user.getCity(),
+						user.getAddress(), user.getUserStatus(),
+						user.isEmail_notification(),
+						user.isTermsAndCondition(), "1", Constants.APP_NAME });
+		return user;
 	}
 
 }

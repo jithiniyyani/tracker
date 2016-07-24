@@ -67,6 +67,23 @@ public class ConversionUtil {
 		return vehicle;
 	}
 
+	public static VehicleTo convertVehicleEntity(Vehicle vehicle) {
+
+		VehicleTo vehicleTo = new VehicleTo();
+		vehicleTo.setId(vehicle.getId());
+		vehicleTo.setColor(vehicle.getColor());
+		vehicleTo.setCountry_id(vehicle.getCountry_id());
+		vehicleTo.setExtra_info(vehicle.getExtra_info());
+		vehicleTo.setMake(vehicle.getMake());
+		vehicleTo.setModel(vehicle.getMake());
+		vehicleTo.setRegistrationNo(vehicle.getRegistrationNo());
+		vehicleTo.setStolen(vehicle.isStolen());
+		vehicleTo.setType(vehicle.getType());
+		vehicleTo.setUser_id(vehicle.getUser_id());
+		vehicleTo.setYear_of_make(vehicle.getYear_of_make());
+		return vehicleTo;
+	}
+
 	public static TheftInformation convertTheftInformationTo(
 			TheftInformationTo theftInformationTo) {
 
@@ -95,11 +112,17 @@ public class ConversionUtil {
 				.getFind_information_id());
 		theftInformationTo.setRewards(theftInformation.getRewards());
 		theftInformationTo.setStatus(theftInformation.getStatus());
-	/*	theftInformationTo.setTheft_dateTime(theftInformation
-				.getTheft_dateTime().toLocaleString());
-	*/	theftInformationTo.setTheft_location_cordinates(theftInformation
+		theftInformationTo.setTheft_dateTime(theftInformation.getTheft_dateTime().toString());
+		/*
+		 * theftInformationTo.setTheft_dateTime(theftInformation
+		 * .getTheft_dateTime().toLocaleString());
+		 */theftInformationTo.setTheft_location_cordinates(theftInformation
 				.getTheft_location_cordinates());
 		theftInformationTo.setVehicle_id(theftInformation.getVehicle_id());
+		theftInformationTo.setUser(ConversionUtil
+				.convertUserEntity(theftInformation.getUser()));
+		theftInformationTo.setVehicle(convertVehicleEntity(theftInformation
+				.getVehicle()));
 		return theftInformationTo;
 	}
 }

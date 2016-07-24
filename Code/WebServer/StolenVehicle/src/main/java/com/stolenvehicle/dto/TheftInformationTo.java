@@ -13,6 +13,8 @@ public class TheftInformationTo {
 	private TheftStatus status;
 	private String find_information_id;
 
+	private UserTo user;
+
 	public String getId() {
 		return id;
 	}
@@ -85,6 +87,14 @@ public class TheftInformationTo {
 
 	public void setVehicle(VehicleTo vehicle) {
 		this.vehicle = vehicle;
+	}
+
+	public UserTo getUser() {
+		return user;
+	}
+
+	public void setUser(UserTo user) {
+		this.user = user;
 	}
 
 }

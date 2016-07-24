@@ -15,6 +15,8 @@ public class TheftInformation {
 	private TheftStatus status;
 	private String find_information_id;
 	private AuditToken auditToken;
+	private User user;
+	private Vehicle vehicle;
 
 	public String getId() {
 		return id;
@@ -86,6 +88,22 @@ public class TheftInformation {
 
 	public void setAuditToken(AuditToken auditToken) {
 		this.auditToken = auditToken;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
 	}
 
 }

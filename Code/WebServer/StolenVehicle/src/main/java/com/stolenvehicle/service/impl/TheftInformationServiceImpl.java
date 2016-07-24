@@ -38,4 +38,17 @@ public class TheftInformationServiceImpl implements TheftInformationService {
 		return theftInformationTo;
 	}
 
+	@Override
+	public TheftInformationTo getTheftInformationByVehicleRegistrationNumber(
+			String registrationNumber) throws BusinessException {
+		TheftInformation theftInformation = theftInformationDao
+				.getTheftInformationByVehicleRegistrationNumber(registrationNumber);
+		if (theftInformation == null) {
+			throw new IllegalArgumentException("Not registered thefts");
+		}
+		TheftInformationTo theftInformationTo = ConversionUtil
+				.convertTheftInformation(theftInformation);
+		return theftInformationTo;
+	}
+
 }

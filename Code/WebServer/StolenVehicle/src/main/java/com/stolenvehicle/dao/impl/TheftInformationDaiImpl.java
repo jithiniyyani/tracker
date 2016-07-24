@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.stolenvehicle.constants.Constants;
 import com.stolenvehicle.constants.Query;
+import com.stolenvehicle.constants.VehicleEnum;
 import com.stolenvehicle.dao.TheftInformationDao;
 import com.stolenvehicle.entity.TheftInformation;
+import com.stolenvehicle.entity.User;
+import com.stolenvehicle.entity.Vehicle;
 import com.stolenvehicle.exception.BusinessException;
 
 @Service
@@ -24,12 +27,29 @@ public class TheftInformationDaiImpl extends AbstractDao implements
 		public TheftInformation extractData(final ResultSet resultSet)
 				throws SQLException {
 
+			// ti.id,u.name,
+			// v.registrationNo,ti.theft_dateTime,ti.theft_location_cordinates,v.type,v.make,v.model,v.year_of_make
 			TheftInformation theftInformation = null;
 			if (resultSet.next()) {
 				theftInformation = new TheftInformation();
 				theftInformation.setId(resultSet.getString("ti.id"));
+				theftInformation.setTheft_dateTime(resultSet
+						.getTimestamp("ti.theft_dateTime"));
 				theftInformation.setTheft_location_cordinates(resultSet
 						.getString("ti.theft_location_cordinates"));
+
+				User user = new User();
+				user.setName(resultSet.getString("u.name"));
+				theftInformation.setUser(user);
+				Vehicle vehicle = new Vehicle();
+				vehicle.setType(VehicleEnum.valueOf(resultSet
+						.getString("v.type")));
+				vehicle.setModel(resultSet.getString("v.model"));
+				vehicle.setYear_of_make((resultSet.getString("v.year_of_make")));
+				vehicle.setRegistrationNo(resultSet
+						.getString("v.registrationNo"));
+				theftInformation.setVehicle(vehicle);
+
 			}
 			return theftInformation;
 		}
@@ -58,8 +78,19 @@ public class TheftInformationDaiImpl extends AbstractDao implements
 	public TheftInformation getTheftInformation(String theftInformationId)
 			throws BusinessException {
 
-		final Object theftInfoOjbect = this.fetch(Query.GET_THEFT_INFO,
+		final Object theftInfoOjbect = this.fetch(Query.GET_THEFT_INFO_BY_ID,
 				new Object[] { theftInformationId },
+				new TheftInformationResultSetExtractor());
+		TheftInformation theftInformation = (TheftInformation) theftInfoOjbect;
+		return theftInformation;
+	}
+
+	@Override
+	public TheftInformation getTheftInformationByVehicleRegistrationNumber(
+			String registrationNumber) throws BusinessException {
+
+		final Object theftInfoOjbect = this.fetch(Query.GET_THEFT_INFO_BY_REGISTRATION_NUMBER,
+				new Object[] { "%" + registrationNumber + "%"},
 				new TheftInformationResultSetExtractor());
 		TheftInformation theftInformation = (TheftInformation) theftInfoOjbect;
 		return theftInformation;

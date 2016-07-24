@@ -11,4 +11,7 @@ public interface TheftInformationService {
 	public TheftInformationTo getTheftInformation(String theftId)
 			throws BusinessException;
 
+	public TheftInformationTo getTheftInformationByVehicleRegistrationNumber(
+			String registrationNUmber) throws BusinessException;
+
 }

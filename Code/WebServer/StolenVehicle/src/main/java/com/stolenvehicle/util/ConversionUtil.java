@@ -1,7 +1,9 @@
 package com.stolenvehicle.util;
 
 import com.stolenvehicle.dto.UserTo;
+import com.stolenvehicle.dto.VehicleTo;
 import com.stolenvehicle.entity.User;
+import com.stolenvehicle.entity.Vehicle;
 
 /*bad class we  need to improve this*/
 
@@ -44,5 +46,22 @@ public class ConversionUtil {
 		user.setTermsAndCondition(userEntity.isTermsAndCondition());
 		user.setUserStatus(userEntity.getUserStatus());
 		return user;
+	}
+
+	public static Vehicle convertVehicleTo(VehicleTo vehicleTo) {
+
+		Vehicle vehicle = new Vehicle();
+		vehicle.setId(vehicleTo.getId());
+		vehicle.setColor(vehicleTo.getColor());
+		vehicle.setCountry_id(vehicleTo.getCountry_id());
+		vehicle.setExtra_info(vehicleTo.getExtra_info());
+		vehicle.setMake(vehicleTo.getMake());
+		vehicle.setModel(vehicleTo.getMake());
+		vehicle.setRegistrationNo(vehicleTo.getRegistrationNo());
+		vehicle.setStolen(vehicleTo.isStolen());
+		vehicle.setType(vehicleTo.getType());
+		vehicle.setUser_id(vehicleTo.getUser_id());
+		vehicle.setYear_of_make(vehicleTo.getYear_of_make());
+		return vehicle;
 	}
 }

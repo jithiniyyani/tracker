@@ -113,6 +113,7 @@ public class JsonUtil {
 			// #TODO: should we rethrow so that we can have
 			// clearer error handling
 			LOGGER.error("Json construction exception", e);
+			throw new IllegalArgumentException("Bad Request");
 		}
 
 		return jsonObject;

@@ -73,7 +73,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 	}
 
 	@Override
-	public User saveUser(User user) {
+	public User saveUser(User user) throws BusinessException {
 
 		String userId = UUID.randomUUID().toString();
 		user.setId(userId);
@@ -81,11 +81,12 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 				Query.SAVE_USER,
 				new Object[] { user.getId(), user.getName(),
 						user.getEmailaddress(), user.getPassword(),
-						user.getGender(), user.getIc_password(),
+						user.getGender().toString(), user.getIc_password(),
 						user.getContactNumber(), user.getCity(),
-						user.getAddress(), user.getUserStatus(),
-						user.isEmail_notification(),
-						user.isTermsAndCondition(), "1", Constants.APP_NAME });
+						user.getAddress(), user.getUserStatus().toString(),
+						user.isEmail_notification() ? "true" : "false",
+						user.isTermsAndCondition() ? "true" : "false",
+						user.getCountry_id(), Constants.APP_NAME });
 		return user;
 	}
 

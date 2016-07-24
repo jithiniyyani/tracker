@@ -9,6 +9,7 @@ import com.stolenvehicle.dto.UserTo;
 import com.stolenvehicle.entity.User;
 import com.stolenvehicle.exception.BusinessException;
 import com.stolenvehicle.service.UserService;
+import com.stolenvehicle.util.ConversionUtil;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,19 +21,20 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 
 	@Override
-	public UserTo authenticateUser(UserTo user) throws BusinessException {
+	public UserTo authenticateUser(UserTo userTo) throws BusinessException {
 
-		User userFromDb = userDao.getUser(user.getEmailaddress(),
-				user.getPassword());
-		// copy from entity to dto
-		return user;
+		User userFromDb = userDao.getUser(userTo.getEmailaddress(),
+				userTo.getPassword());
+		userTo = ConversionUtil.convertUserEntity(userFromDb);
+		return userTo;
 	}
 
 	@Override
-	public UserTo registerUser(UserTo user) throws BusinessException {
+	public UserTo registerUser(UserTo userTo) throws BusinessException {
 
-		userDao.saveUser(null);
-		// convert from entity to dto
-		return user;
+		User user = ConversionUtil.covertUserTo(userTo);
+		user = userDao.saveUser(user);
+		userTo.setId(user.getId());
+		return userTo;
 	}
 }

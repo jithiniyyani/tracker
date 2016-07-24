@@ -9,7 +9,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.stolenvehicle.constants.Constants;
+import com.stolenvehicle.constants.ErrorEnum;
+import com.stolenvehicle.constants.ExceptionConstants;
+import com.stolenvehicle.dto.ErrorTo;
 import com.stolenvehicle.dto.UserTo;
+import com.stolenvehicle.exception.BusinessException;
 import com.stolenvehicle.service.UserService;
 import com.stolenvehicle.util.JsonUtil;
 
@@ -40,7 +45,7 @@ public class LoginController {
 		}
 		return response;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, path = "/register")
 	public ResponseEntity<String> register(@RequestBody String requestBody) {
 
@@ -51,13 +56,36 @@ public class LoginController {
 			user = userService.registerUser(user);
 			response = new ResponseEntity<String>(HttpStatus.OK);
 
+		} catch (BusinessException ex) {
+
+			LOGGER.error("Error while registernig  user with request : "
+					+ requestBody, ex);
+			if (ex.getMessage().equals(ExceptionConstants.DUPLICATE_KEY)) {
+
+				response = new ResponseEntity<String>(
+						JsonUtil.toJson(Constants.ERROR, new ErrorTo(
+								ErrorEnum.USER_ALREADY_REGISTERED.getCode(),
+								ErrorEnum.USER_ALREADY_REGISTERED.getMessage())),
+						HttpStatus.BAD_REQUEST);
+
+			} else {
+
+				response = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			}
+
+		} catch (IllegalArgumentException ex) {
+
+			LOGGER.error("Bad Request : " + requestBody, ex);
+			response = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+
 		} catch (Exception ex) {
 
 			LOGGER.error("Error while authenticating user with Request : "
 					+ requestBody, ex);
-			response = new ResponseEntity<String>(HttpStatus.FORBIDDEN);
+			response = new ResponseEntity<String>(
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return response;
 	}
-	
+
 }

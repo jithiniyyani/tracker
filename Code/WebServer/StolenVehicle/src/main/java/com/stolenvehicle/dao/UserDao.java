@@ -8,5 +8,5 @@ public interface UserDao extends GenericDao {
 	public User getUser(String emailAddress, String password)
 			throws BusinessException;
 
-	public User saveUser(User user);
+	public User saveUser(User user) throws BusinessException;
 }

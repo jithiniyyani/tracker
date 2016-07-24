@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.stolenvehicle.constants.Constants;
 import com.stolenvehicle.constants.ErrorEnum;
 import com.stolenvehicle.constants.ExceptionConstants;
+import com.stolenvehicle.constants.TheftStatus;
 import com.stolenvehicle.dto.ErrorTo;
+import com.stolenvehicle.dto.RewardTo;
 import com.stolenvehicle.dto.TheftInformationTo;
 import com.stolenvehicle.service.TheftInformationService;
 import com.stolenvehicle.service.VehicleService;
@@ -102,6 +104,53 @@ public class TheftInformationController {
 
 			LOGGER.error("Error while getting theft info with request id "
 					+ theftId, ex);
+			response = new ResponseEntity<String>(JsonUtil.toJson(
+					Constants.ERROR, new ErrorTo(
+							ErrorEnum.INTERNAL_SERVICE_ERROR.getCode(),
+							ErrorEnum.INTERNAL_SERVICE_ERROR.getMessage())),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return response;
+
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/reward")
+	public ResponseEntity<String> rewardUserForFind(
+			@RequestBody String jsonRequest, HttpServletRequest request) {
+		ResponseEntity<String> response = null;
+		try {
+
+			AppUtil.checkIfUserHasSession(request);
+			RewardTo reward = JsonUtil.toObject(jsonRequest, Constants.REWARD,
+					RewardTo.class);
+			theftInformationService.updateTheftInformation(reward.getTheftId(),
+					TheftStatus.REWARDED);
+
+		} catch (IllegalArgumentException ex) {
+
+			LOGGER.error("Error while updating theft", ex);
+			if (ex.getMessage().equalsIgnoreCase(
+					ExceptionConstants.INVALID_SESSION)) {
+
+				response = new ResponseEntity<String>(JsonUtil.toJson(
+						Constants.ERROR,
+						new ErrorTo(ErrorEnum.INVALID_SESSION.getCode(),
+								ErrorEnum.INVALID_SESSION.getMessage())),
+						HttpStatus.FORBIDDEN);
+
+			} else {
+
+				response = new ResponseEntity<String>(JsonUtil.toJson(
+						Constants.ERROR,
+						new ErrorTo(ErrorEnum.JSON_NOT_CORRECT.getCode(),
+								ErrorEnum.JSON_NOT_CORRECT.getMessage())),
+						HttpStatus.BAD_REQUEST);
+			}
+
+		} catch (Exception ex) {
+
+			LOGGER.error("Error while getting theft info with request id "
+					+ request, ex);
 			response = new ResponseEntity<String>(JsonUtil.toJson(
 					Constants.ERROR, new ErrorTo(
 							ErrorEnum.INTERNAL_SERVICE_ERROR.getCode(),

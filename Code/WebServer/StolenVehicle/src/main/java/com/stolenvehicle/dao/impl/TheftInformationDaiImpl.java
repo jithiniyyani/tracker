@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.stolenvehicle.constants.Constants;
 import com.stolenvehicle.constants.Query;
+import com.stolenvehicle.constants.TheftStatus;
 import com.stolenvehicle.constants.VehicleEnum;
 import com.stolenvehicle.dao.TheftInformationDao;
 import com.stolenvehicle.entity.TheftInformation;
@@ -89,11 +90,23 @@ public class TheftInformationDaiImpl extends AbstractDao implements
 	public TheftInformation getTheftInformationByVehicleRegistrationNumber(
 			String registrationNumber) throws BusinessException {
 
-		final Object theftInfoOjbect = this.fetch(Query.GET_THEFT_INFO_BY_REGISTRATION_NUMBER,
-				new Object[] { "%" + registrationNumber + "%"},
+		final Object theftInfoOjbect = this.fetch(
+				Query.GET_THEFT_INFO_BY_REGISTRATION_NUMBER, new Object[] { "%"
+						+ registrationNumber + "%" },
 				new TheftInformationResultSetExtractor());
 		TheftInformation theftInformation = (TheftInformation) theftInfoOjbect;
 		return theftInformation;
+	}
+
+	@Override
+	public boolean updateTheftInformationStatus(String theftId,
+			TheftStatus theftStatus) throws BusinessException {
+
+		boolean status = false;
+		this.save(Query.UPDATE_THEFT_INFO_STATUS, new Object[] { theftId,
+				theftStatus.toString() });
+		status = true;
+		return status;
 	}
 
 }

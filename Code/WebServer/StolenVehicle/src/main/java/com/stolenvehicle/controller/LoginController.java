@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.stolenvehicle.constants.Constants;
 import com.stolenvehicle.constants.ErrorEnum;
 import com.stolenvehicle.constants.ExceptionConstants;
+import com.stolenvehicle.constants.UserStatusEnum;
+import com.stolenvehicle.dto.EmailTo;
 import com.stolenvehicle.dto.ErrorTo;
 import com.stolenvehicle.dto.UserTo;
 import com.stolenvehicle.exception.BusinessException;
+import com.stolenvehicle.service.EmailService;
 import com.stolenvehicle.service.UserService;
 import com.stolenvehicle.util.AppUtil;
 import com.stolenvehicle.util.JsonUtil;
@@ -30,6 +33,9 @@ public class LoginController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private EmailService emailService;
 
 	@RequestMapping(method = RequestMethod.POST, path = "/login")
 	public ResponseEntity<String> login(@RequestBody String requestBody,
@@ -62,7 +68,13 @@ public class LoginController {
 
 			UserTo user = JsonUtil.toObject(requestBody, Constants.USER,
 					UserTo.class);
+			user.setUserStatus(UserStatusEnum.EMAIL_VERFI);
 			user = userService.registerUser(user);
+		
+			/*emailService.sendEmail(new EmailTo(user.getEmailaddress(),
+					Constants.WELCOME_EMAIL_SUBJECT,
+					Constants.WELCOME_EMAIL_BODY));			
+*/
 			response = new ResponseEntity<String>(HttpStatus.OK);
 
 		} catch (BusinessException ex) {

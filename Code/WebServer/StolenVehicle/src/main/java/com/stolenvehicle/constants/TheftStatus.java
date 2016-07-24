@@ -2,5 +2,5 @@ package com.stolenvehicle.constants;
 
 public enum TheftStatus {
 
-	LOST, FOUND, REWARDED;
+	LOST, FOUND, REGISTERED, ACCCEPTED, REJECTED, REWARDED;
 }

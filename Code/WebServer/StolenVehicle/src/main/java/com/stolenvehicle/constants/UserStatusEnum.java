@@ -2,5 +2,5 @@ package com.stolenvehicle.constants;
 
 public enum UserStatusEnum {
 
-	ACTIVE, DISABLED, DELETED;
+	ACTIVE, DISABLED, DELETED,EMAIL_VERFI;
 }

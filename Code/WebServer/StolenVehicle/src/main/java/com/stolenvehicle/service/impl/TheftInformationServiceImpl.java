@@ -3,6 +3,7 @@ package com.stolenvehicle.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.stolenvehicle.constants.TheftStatus;
 import com.stolenvehicle.dao.TheftInformationDao;
 import com.stolenvehicle.dto.TheftInformationTo;
 import com.stolenvehicle.entity.TheftInformation;
@@ -49,6 +50,14 @@ public class TheftInformationServiceImpl implements TheftInformationService {
 		TheftInformationTo theftInformationTo = ConversionUtil
 				.convertTheftInformation(theftInformation);
 		return theftInformationTo;
+	}
+
+	@Override
+	public boolean updateTheftInformation(String theftId,
+			TheftStatus theftStatus) throws BusinessException {
+
+		return theftInformationDao.updateTheftInformationStatus(theftId, theftStatus);
+
 	}
 
 }

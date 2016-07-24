@@ -10,25 +10,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.stolenvehicle.constants.Constants;
 import com.stolenvehicle.constants.ErrorEnum;
 import com.stolenvehicle.constants.ExceptionConstants;
 import com.stolenvehicle.dto.ErrorTo;
 import com.stolenvehicle.dto.TheftInformationTo;
-import com.stolenvehicle.dto.VehicleTo;
+import com.stolenvehicle.service.TheftInformationService;
 import com.stolenvehicle.service.VehicleService;
 import com.stolenvehicle.util.AppUtil;
 import com.stolenvehicle.util.JsonUtil;
 
 @Controller
-public class TheftController {
+public class TheftInformationController {
 
 	private static final Logger LOGGER = Logger
-			.getLogger(TheftController.class);
+			.getLogger(TheftInformationController.class);
 
 	@Autowired
 	private VehicleService vehicleService;
+
+	@Autowired
+	private TheftInformationService theftInformationService;
 
 	@RequestMapping(method = RequestMethod.POST, path = "/registerTheft")
 	public ResponseEntity<String> reportTheft(@RequestBody String jsonRequest,
@@ -41,9 +45,14 @@ public class TheftController {
 			TheftInformationTo theftInformationTo = JsonUtil
 					.toObject(jsonRequest, Constants.THEFT_INFO,
 							TheftInformationTo.class);
-			
-			vehicleService.saveVehicle(theftInformationTo.getVehicle());
 
+			vehicleService.saveVehicle(theftInformationTo.getVehicle());
+			theftInformationTo.setVehicle_id(theftInformationTo.getVehicle()
+					.getId());
+			theftInformationService.saveTheftInformation(theftInformationTo);
+
+			response = new ResponseEntity<String>(JsonUtil.toJson(
+					Constants.THEFT_INFO, theftInformationTo), HttpStatus.OK);
 		} catch (IllegalArgumentException ex) {
 
 			LOGGER.error("Error while registering theft", ex);
@@ -67,6 +76,7 @@ public class TheftController {
 
 		} catch (Exception ex) {
 
+			LOGGER.error("Error while registering theft " + jsonRequest, ex);
 			response = new ResponseEntity<String>(JsonUtil.toJson(
 					Constants.ERROR, new ErrorTo(
 							ErrorEnum.INTERNAL_SERVICE_ERROR.getCode(),
@@ -76,4 +86,30 @@ public class TheftController {
 		return response;
 
 	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/getTheftInfo")
+	public ResponseEntity<String> getTheftInformation(
+			@RequestParam(name = "theftId") String theftId) {
+		ResponseEntity<String> response = null;
+		try {
+
+			TheftInformationTo theftInformation = theftInformationService
+					.getTheftInformation(theftId);
+			response = new ResponseEntity<String>(JsonUtil.toJson(
+					Constants.THEFT_INFO, theftInformation), HttpStatus.OK);
+
+		} catch (Exception ex) {
+
+			LOGGER.error("Error while getting theft info with request id "
+					+ theftId, ex);
+			response = new ResponseEntity<String>(JsonUtil.toJson(
+					Constants.ERROR, new ErrorTo(
+							ErrorEnum.INTERNAL_SERVICE_ERROR.getCode(),
+							ErrorEnum.INTERNAL_SERVICE_ERROR.getMessage())),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return response;
+
+	}
+
 }

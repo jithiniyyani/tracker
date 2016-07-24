@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="2.7" jmeter="2.12 r1636949">
+<jmeterTestPlan version="1.2" properties="2.9" jmeter="3.0 r1743807">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -65,7 +65,7 @@
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="login" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="login" enabled="false">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
@@ -108,7 +108,7 @@
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="register" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="register" enabled="false">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
@@ -162,7 +162,7 @@
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="registerTheft" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="registerTheft" enabled="false">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
@@ -170,18 +170,24 @@
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
 	&quot;theft_info&quot; : {&#xd;
-		&quot;name&quot; : &quot;rafa&quot;,&#xd;
-		&quot;emailaddress&quot; : &quot;rafa@gmail.com&quot;,&#xd;
-		&quot;password&quot; : &quot;rafa&quot;,&#xd;
-		&quot;gender&quot; : &quot;MALE&quot;,&#xd;
-		&quot;ic_password&quot; : &quot;passport123&quot;,&#xd;
-     	&quot;contactNumber&quot; : &quot;123456789&quot;,&#xd;
-     	&quot;city&quot; : &quot;mumbai&quot;,&#xd;
-     	&quot;address&quot; : &quot;india somewhere&quot;,&#xd;
-     	&quot;userStatus&quot; : &quot;ACTIVE&quot;,&#xd;
-     	&quot;email_notification&quot; : true,&#xd;
-     	&quot;termsAndCondition&quot; : true,&#xd;
-     	&quot;country_id&quot; : &quot;1&quot;&#xd;
+		&quot;theft_location_cordinates&quot; : &quot;234,234&quot;,&#xd;
+		&quot;country_id&quot; : &quot;1&quot;,&#xd;
+		&quot;rewards&quot; : &quot;201$&quot;,&#xd;
+		&quot;theft_dateTime&quot; : &quot;2016-07-24 16:12:12&quot;,&#xd;
+		&quot;status&quot; : &quot;LOST&quot;,&#xd;
+		&quot;vehicle&quot; : {&#xd;
+			&quot;type&quot; : &quot;TWO_WHEELER&quot;,&#xd;
+			&quot;make&quot; : &quot;bmw&quot;,&#xd;
+			&quot;model&quot; : &quot;X54&quot;,&#xd;
+			&quot;year_of_make&quot; : &quot;2014&quot;,&#xd;
+			&quot;color&quot; : &quot;black&quot;,&#xd;
+			&quot;registrationNo&quot; : &quot;511131523&quot;,&#xd;
+			&quot;extra_info&quot; : &quot;please help me&quot;,&#xd;
+			&quot;stolen&quot; : true,&#xd;
+			&quot;user_id&quot; : &quot;123&quot;,&#xd;
+			&quot;country_id&quot; : &quot;1&quot;	&#xd;
+			&#xd;
+		}&#xd;
      	&#xd;
 	}&#xd;
 }&#xd;
@@ -216,7 +222,45 @@
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="logout" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="getTheftInfo" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">&#xd;
+</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">StolenVehicle/getTheftInfo?theftId=9f09a458-bd42-4807-9eb9-a36641547158</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="logout" enabled="false">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">

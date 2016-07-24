@@ -1,7 +1,9 @@
 package com.stolenvehicle.util;
 
+import com.stolenvehicle.dto.TheftInformationTo;
 import com.stolenvehicle.dto.UserTo;
 import com.stolenvehicle.dto.VehicleTo;
+import com.stolenvehicle.entity.TheftInformation;
 import com.stolenvehicle.entity.User;
 import com.stolenvehicle.entity.Vehicle;
 
@@ -63,5 +65,41 @@ public class ConversionUtil {
 		vehicle.setUser_id(vehicleTo.getUser_id());
 		vehicle.setYear_of_make(vehicleTo.getYear_of_make());
 		return vehicle;
+	}
+
+	public static TheftInformation convertTheftInformationTo(
+			TheftInformationTo theftInformationTo) {
+
+		TheftInformation theftInformation = new TheftInformation();
+		theftInformation.setAuditToken(null);
+		theftInformation.setCountry_id(theftInformationTo.getCountry_id());
+		theftInformation.setFind_information_id(theftInformationTo
+				.getFind_information_id());
+		theftInformation.setRewards(theftInformationTo.getRewards());
+		theftInformation.setStatus(theftInformationTo.getStatus());
+		theftInformation.setTheft_dateTime(AppUtil
+				.convertStringToTimestamp(theftInformationTo
+						.getTheft_dateTime()));
+		theftInformation.setTheft_location_cordinates(theftInformationTo
+				.getTheft_location_cordinates());
+		theftInformation.setVehicle_id(theftInformationTo.getVehicle_id());
+		return theftInformation;
+	}
+
+	public static TheftInformationTo convertTheftInformation(
+			TheftInformation theftInformation) {
+
+		TheftInformationTo theftInformationTo = new TheftInformationTo();
+		theftInformationTo.setCountry_id(theftInformation.getCountry_id());
+		theftInformationTo.setFind_information_id(theftInformation
+				.getFind_information_id());
+		theftInformationTo.setRewards(theftInformation.getRewards());
+		theftInformationTo.setStatus(theftInformation.getStatus());
+	/*	theftInformationTo.setTheft_dateTime(theftInformation
+				.getTheft_dateTime().toLocaleString());
+	*/	theftInformationTo.setTheft_location_cordinates(theftInformation
+				.getTheft_location_cordinates());
+		theftInformationTo.setVehicle_id(theftInformation.getVehicle_id());
+		return theftInformationTo;
 	}
 }

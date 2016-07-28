@@ -93,7 +93,6 @@ public class ConversionUtil {
 
 			List<AttachmentTo> attachmentToList = new ArrayList<AttachmentTo>();
 			vehicleTo.setAttachments(attachmentToList);
-			;
 			for (Attachment attachment : attachments) {
 
 				attachmentToList.add(new AttachmentTo(attachment
@@ -179,5 +178,24 @@ public class ConversionUtil {
 		findInformation.setTheft_information_id(findInformationTo
 				.getTheft_information_id());
 		return findInformation;
+	}
+
+	public static List<FindInformationTo> convertFindInformationEntityList(
+			List<FindInformation> findInfomtionEntityList) {
+
+		List<FindInformationTo> findInformationToList = new ArrayList<>();
+		for (FindInformation findInformation : findInfomtionEntityList) {
+
+			FindInformationTo findInformationTo = new FindInformationTo(
+					findInformation.getId(),
+					findInformation.getLocators_name(),
+					findInformation.getLocators_email(),
+					findInformation.getLocators_contactNumber(),
+					findInformation.getFind_location_cordinates());
+
+			findInformationToList.add(findInformationTo);
+
+		}
+		return findInformationToList;
 	}
 }

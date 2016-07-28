@@ -45,6 +45,7 @@ public class TheftInformationDaiImpl extends AbstractDao implements
 
 				User user = new User();
 				user.setName(resultSet.getString("u.name"));
+				user.setId(resultSet.getString("u.id"));
 				theftInformation.setUser(user);
 				Vehicle vehicle = new Vehicle();
 				vehicle.setType(VehicleEnum.valueOf(resultSet

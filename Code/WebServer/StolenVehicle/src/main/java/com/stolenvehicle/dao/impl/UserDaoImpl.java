@@ -56,6 +56,19 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 		}
 	};
 
+	private static final class EmailAddressResultSetExtractor implements
+			ResultSetExtractor<String> {
+		@Override
+		public String extractData(final ResultSet resultSet)
+				throws SQLException {
+			String emailAddress = null;
+			if (resultSet.next()) {
+				emailAddress = resultSet.getString("emailaddress");
+			}
+			return emailAddress;
+		}
+	};
+
 	@Override
 	public User getUser(String emailAddress, String password)
 			throws BusinessException {
@@ -120,12 +133,18 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
 		boolean status = false;
 		int rowsUpdated = 0;
-		rowsUpdated = this.save(
-				Query.SET_USER_PASSWORD,
-				new Object[] { setPasswordTo.getPassword(),
-						setPasswordTo.getEmailAddress(),
-						setPasswordTo.getActiviationId() });
+		rowsUpdated = this.save(Query.SET_USER_PASSWORD, new Object[] {
+				setPasswordTo.getPassword(), setPasswordTo.getEmailAddress(),
+				setPasswordTo.getActiviationId() });
 		status = rowsUpdated == 1 ? true : false;
 		return status;
+	}
+
+	@Override
+	public String getEmailByUserId(String user_id) throws BusinessException {
+
+		final Object emailAddress = this.fetch(Query.GET_EMAIL_BY_USER_ID,
+				new Object[] { user_id }, new EmailAddressResultSetExtractor());
+		return (String) emailAddress;
 	}
 }

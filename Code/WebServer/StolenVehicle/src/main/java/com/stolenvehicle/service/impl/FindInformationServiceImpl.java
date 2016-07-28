@@ -1,11 +1,17 @@
 package com.stolenvehicle.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.stolenvehicle.constants.AttachmentTypeEnum;
 import com.stolenvehicle.dao.AttachmentDao;
 import com.stolenvehicle.dao.FindInformationDao;
+import com.stolenvehicle.dto.AttachmentTo;
 import com.stolenvehicle.dto.FindInformationTo;
+import com.stolenvehicle.entity.Attachment;
 import com.stolenvehicle.entity.FindInformation;
 import com.stolenvehicle.exception.BusinessException;
 import com.stolenvehicle.service.FindInformationService;
@@ -27,11 +33,33 @@ public class FindInformationServiceImpl implements FindInformationService {
 		FindInformation findInformation = ConversionUtil
 				.convertFindInformationTo(findInformationTo);
 		findInformationDao.saveFindInformation(findInformation);
-		attachmentDao.saveAttachmentList(null,
+		List<AttachmentTo> attachmentToList = findInformationTo
+				.getAttachments();
+		List<Attachment> attachmentList = new ArrayList<Attachment>();
+		for (AttachmentTo attachmentTo : attachmentToList) {
+
+			attachmentList.add(new Attachment(
+					attachmentTo.getAttachment_name(), attachmentTo
+							.getAttachment_path(), AttachmentTypeEnum.FIND,
+					findInformationTo.getVehicle_id(), findInformationTo
+							.getId()));
+
+		}
+		attachmentDao.saveAttachmentList(attachmentList,
 				findInformationTo.getVehicle_id(), findInformation.getId());
 		findInformationTo.setId(findInformation.getId());
-		// also send user notification here
 		return findInformationTo;
+	}
+
+	@Override
+	public List<FindInformationTo> getFindInformationListForUser(String user_id)
+			throws BusinessException {
+
+		List<FindInformation> findInforamtionForUser = findInformationDao
+				.getFindInforamtionForUser(user_id);
+		return ConversionUtil
+				.convertFindInformationEntityList(findInforamtionForUser);
+
 	}
 
 }

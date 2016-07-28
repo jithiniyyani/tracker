@@ -14,8 +14,18 @@ public class FindInformationTo {
 	private String locators_contactNumber;
 	private String theft_information_id;
 	private String vehicle_id;
+	private String user_id;
 	private FindStatusEnum findStatus;
 	private List<AttachmentTo> attachments;
+
+	public FindInformationTo(String id, String locators_name,
+			String locators_email, String locator_contactNumber,String find_location_cordinates) {
+		this.id = id;
+		this.locators_name = locators_name;
+		this.locators_email = locators_email;
+		this.locators_contactNumber = locator_contactNumber;
+		this.find_location_cordinates = find_location_cordinates;
+	}
 
 	public String getFind_location_cordinates() {
 		return find_location_cordinates;
@@ -96,9 +106,13 @@ public class FindInformationTo {
 	public void setVehicle_id(String vehicle_id) {
 		this.vehicle_id = vehicle_id;
 	}
-	
-	
-	
-	
+
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
 
 }

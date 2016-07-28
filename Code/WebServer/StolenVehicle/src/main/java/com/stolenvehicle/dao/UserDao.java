@@ -18,4 +18,5 @@ public interface UserDao extends GenericDao {
 	public boolean setUserPassword(SetPasswordTo setPasswordTo)
 			throws BusinessException;
 
+	public String getEmailByUserId(String user_id) throws BusinessException;
 }

@@ -12,6 +12,18 @@ public class Attachment {
 	private AttachmentTypeEnum attachmentEnum;
 	private AuditToken auditToken;
 
+	public Attachment(){
+		
+	}
+	public Attachment(String attachment_name, String attachment_path,
+			AttachmentTypeEnum attachmentTypeEnum, String vehicle_id,
+			String find_information_id) {
+		this.attachment_name = attachment_name;
+		this.attachment_path = attachment_path;
+		this.attachmentEnum = attachmentTypeEnum;
+		this.vehicle_id = vehicle_id;
+		this.find_information_id = find_information_id;
+	}
 	public String getId() {
 		return id;
 	}

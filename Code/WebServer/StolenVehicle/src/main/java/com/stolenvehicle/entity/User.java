@@ -14,6 +14,7 @@ public class User {
 	private String contactNumber;
 	private String city;
 	private String address;
+	private String activation_id;
 	private UserStatusEnum userStatus;
 	private boolean email_notification;
 	private boolean termsAndCondition;
@@ -132,4 +133,12 @@ public class User {
 		this.auditToke = auditToke;
 	}
 
+	public String getActivation_id() {
+		return activation_id;
+	}
+
+	public void setActivation_id(String activation_id) {
+		this.activation_id = activation_id;
+	}
+	
 }

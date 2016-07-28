@@ -5,11 +5,17 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.stolenvehicle.constants.Constants;
 import com.stolenvehicle.constants.ExceptionConstants;
+import com.stolenvehicle.dto.AttachmentTo;
+import com.stolenvehicle.dto.UserTo;
 
 public class AppUtil {
 
@@ -48,5 +54,22 @@ public class AppUtil {
 
 			return null;
 		}
+	}
+
+	public static UserTo getUserFromSession(HttpServletRequest request) {
+
+		HttpSession session = request.getSession(false);
+		return (UserTo) session.getAttribute(Constants.USER);
+	}
+
+	public static List<AttachmentTo> getAttachmentListForTheft(
+			HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		return (List<AttachmentTo>) session.getAttribute(Constants.ATTACHMENTS);
+	}
+
+	// new Locale(Constants.US_LOCALE)
+	public static ResourceBundle getResourceBundle(final Locale locale) {
+		return ResourceBundle.getBundle("locale", locale, new UTF8Control());
 	}
 }

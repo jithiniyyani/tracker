@@ -2,11 +2,17 @@ package com.stolenvehicle.constants;
 
 public class Query {
 
-	public static final String GET_USER_BY_EMAIL_ID = "select * from user where emailaddress = ? and password  = ?";
-	public static final String SAVE_USER = "insert into user values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),null,null);";
+	public static final String GET_USER_BY_EMAIL_ID = "select * from user where emailaddress = ? and password  = ? and status = 'ACTIVE'";
+	public static final String SAVE_USER = "insert into user values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),null,null);";
+	public static final String ACTIVATE_USER = "update user set status = 'ACTIVE',activation_id = null where activation_id = ?";
+	public static final String RESET_USER_PASSWORD = "update user set status = 'PASSWORD_RESET',activation_id = ? where emailaddress = ?";
+	public static final String SET_USER_PASSWORD = "update user set status = 'ACTIVE',activation_id = null,password = ? where emailaddress = ? and activation_id=?";
 	public static final String SAVE_VEHICLE = "insert into vehicle values(?,?,?,?,?,?,?,?,?,?,?,?,now(),null,null);";
 	public static final String SAVE_THEFT = "insert into theft_information values(?,?,?,?,?,?,?,?,?,now(),null,null);";
-	public static final String GET_THEFT_INFO_BY_ID = "select ti.id,u.name, v.registrationNo,ti.theft_dateTime,ti.theft_location_cordinates,v.type,v.make,v.model,v.year_of_make from theft_information ti,vehicle v,user u where ti.status = 'lost' and ti.vehicle_id = v.id and v.user_id = u.id and ti.id = ?";
-	public static final String GET_THEFT_INFO_BY_REGISTRATION_NUMBER = "select ti.id,u.name, v.registrationNo,ti.theft_dateTime,ti.theft_location_cordinates,v.type,v.make,v.model,v.year_of_make from theft_information ti,vehicle v,user u where ti.status = 'lost' and ti.vehicle_id = v.id and v.user_id = u.id and v.registrationNo  like ?";
+	public static final String GET_THEFT_INFO_BY_ID = "select ti.id,u.name, v.registrationNo,ti.theft_dateTime,ti.theft_location_cordinates,v.id,v.type,v.make,v.model,v.year_of_make from theft_information ti,vehicle v,user u where ti.status = 'lost' and ti.vehicle_id = v.id and v.user_id = u.id and ti.id = ?";
+	public static final String GET_VEHICLE_ATTACHMENTS = "select * from attachment where vehicle_id = ?";
+	public static final String GET_THEFT_INFO_BY_REGISTRATION_NUMBER = "select ti.id,u.name, v.id,v.registrationNo,ti.theft_dateTime,ti.theft_location_cordinates,v.type,v.make,v.model,v.year_of_make from theft_information ti,vehicle v,user u where ti.status = 'lost' and ti.vehicle_id = v.id and v.user_id = u.id and v.registrationNo  like ?";
 	public static final String UPDATE_THEFT_INFO_STATUS = "update theft_information set status = ? where id = ?;";
+	public static final String SAVE_ATTACHMENT = "insert into attachment values(?,?,?,?,?,?,?,now(),null,null);";
+	public static final String SAVE_FIND_INFORMATION = "insert into find_information values(?,?,?,?,?,?,?,?,?,now(),null,null);";
 }

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stolenvehicle.dao.UserDao;
+import com.stolenvehicle.dto.SetPasswordTo;
 import com.stolenvehicle.dto.UserTo;
 import com.stolenvehicle.entity.User;
 import com.stolenvehicle.exception.BusinessException;
@@ -35,6 +36,25 @@ public class UserServiceImpl implements UserService {
 		User user = ConversionUtil.covertUserTo(userTo);
 		user = userDao.saveUser(user);
 		userTo.setId(user.getId());
+		userTo.setActivationId(user.getActivation_id());
 		return userTo;
+	}
+
+	@Override
+	public boolean activateUser(String activationId) throws BusinessException {
+
+		return userDao.activateUser(activationId);
+	}
+
+	@Override
+	public String resetUserPassword(String userEmailId)
+			throws BusinessException {
+		return userDao.resetUserPassword(userEmailId);
+	}
+
+	@Override
+	public boolean setUserPassword(SetPasswordTo setPasswordTo)
+			throws BusinessException {
+		return userDao.setUserPassword(setPasswordTo);
 	}
 }

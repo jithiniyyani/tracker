@@ -1,8 +1,15 @@
 package com.stolenvehicle.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.stolenvehicle.dto.AttachmentTo;
+import com.stolenvehicle.dto.FindInformationTo;
 import com.stolenvehicle.dto.TheftInformationTo;
 import com.stolenvehicle.dto.UserTo;
 import com.stolenvehicle.dto.VehicleTo;
+import com.stolenvehicle.entity.Attachment;
+import com.stolenvehicle.entity.FindInformation;
 import com.stolenvehicle.entity.TheftInformation;
 import com.stolenvehicle.entity.User;
 import com.stolenvehicle.entity.Vehicle;
@@ -81,6 +88,20 @@ public class ConversionUtil {
 		vehicleTo.setType(vehicle.getType());
 		vehicleTo.setUser_id(vehicle.getUser_id());
 		vehicleTo.setYear_of_make(vehicle.getYear_of_make());
+		List<Attachment> attachments = vehicle.getAttachments();
+		if (attachments != null) {
+
+			List<AttachmentTo> attachmentToList = new ArrayList<AttachmentTo>();
+			vehicleTo.setAttachments(attachmentToList);
+			;
+			for (Attachment attachment : attachments) {
+
+				attachmentToList.add(new AttachmentTo(attachment
+						.getAttachment_name(), attachment.getAttachment_path(),
+						attachment.getAttachmentEnum()));
+
+			}
+		}
 		return vehicleTo;
 	}
 
@@ -107,16 +128,15 @@ public class ConversionUtil {
 			TheftInformation theftInformation) {
 
 		TheftInformationTo theftInformationTo = new TheftInformationTo();
+		theftInformationTo.setId(theftInformation.getId());
 		theftInformationTo.setCountry_id(theftInformation.getCountry_id());
 		theftInformationTo.setFind_information_id(theftInformation
 				.getFind_information_id());
 		theftInformationTo.setRewards(theftInformation.getRewards());
 		theftInformationTo.setStatus(theftInformation.getStatus());
-		theftInformationTo.setTheft_dateTime(theftInformation.getTheft_dateTime().toString());
-		/*
-		 * theftInformationTo.setTheft_dateTime(theftInformation
-		 * .getTheft_dateTime().toLocaleString());
-		 */theftInformationTo.setTheft_location_cordinates(theftInformation
+		theftInformationTo.setTheft_dateTime(theftInformation
+				.getTheft_dateTime().toString());
+		theftInformationTo.setTheft_location_cordinates(theftInformation
 				.getTheft_location_cordinates());
 		theftInformationTo.setVehicle_id(theftInformation.getVehicle_id());
 		theftInformationTo.setUser(ConversionUtil
@@ -124,5 +144,40 @@ public class ConversionUtil {
 		theftInformationTo.setVehicle(convertVehicleEntity(theftInformation
 				.getVehicle()));
 		return theftInformationTo;
+	}
+
+	public static Attachment convertAttachmentTo(AttachmentTo attachmentTo) {
+
+		Attachment attachment = new Attachment();
+		attachment.setAttachment_name(attachmentTo.getAttachment_name());
+		attachment.setAttachment_path(attachmentTo.getAttachment_path());
+		attachment.setAttachmentEnum(attachmentTo.getAttachmentTypeEnum());
+		return attachment;
+	}
+
+	public static AttachmentTo convertAttachmentEntity(Attachment attachment) {
+		AttachmentTo attachmentTo = new AttachmentTo();
+		attachmentTo.setAttachment_name(attachment.getAttachment_name());
+		attachmentTo.setAttachment_path(attachment.getAttachment_path());
+		return attachmentTo;
+	}
+
+	public static FindInformation convertFindInformationTo(
+			FindInformationTo findInformationTo) {
+
+		FindInformation findInformation = new FindInformation();
+		findInformation.setFind_dateTime(findInformationTo.getFind_dateTime());
+		findInformation.setFind_location_cordinates(findInformationTo
+				.getFind_location_cordinates());
+		findInformation.setFindStatus(findInformationTo.getFindStatus());
+		findInformation.setId(findInformationTo.getId());
+		findInformation.setLocators_contactNumber(findInformationTo
+				.getLocators_contactNumber());
+		findInformation
+				.setLocators_email(findInformationTo.getLocators_email());
+		findInformation.setLocators_name(findInformationTo.getLocators_name());
+		findInformation.setTheft_information_id(findInformationTo
+				.getTheft_information_id());
+		return findInformation;
 	}
 }

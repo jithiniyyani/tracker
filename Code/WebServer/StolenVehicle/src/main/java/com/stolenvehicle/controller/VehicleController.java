@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.stolenvehicle.constants.Constants;
 import com.stolenvehicle.dto.TheftInformationTo;
+import com.stolenvehicle.exception.ExceptionProcessor;
 import com.stolenvehicle.service.TheftInformationService;
 import com.stolenvehicle.util.JsonUtil;
 
@@ -32,13 +33,17 @@ public class VehicleController {
 
 			TheftInformationTo theftInformationTo = theftInformationService
 					.getTheftInformationByVehicleRegistrationNumber(regNumber);
+		
 			response = new ResponseEntity<String>(JsonUtil.toJson(
 					Constants.THEFT_INFO, theftInformationTo), HttpStatus.OK);
 
 		} catch (Exception ex) {
 
 			LOGGER.error("Error while find vehicle with id " + regNumber, ex);
-			response = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			response = ExceptionProcessor.handleException(ex);
+
+		} finally {
+
 		}
 		return response;
 	}

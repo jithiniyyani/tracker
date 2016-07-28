@@ -7,10 +7,12 @@ import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.stolenvehicle.constants.Constants;
+import com.stolenvehicle.constants.ExceptionConstants;
 
 public class JsonUtil {
 
@@ -73,6 +75,7 @@ public class JsonUtil {
 	public static <T> T toObject(final String jsonString, final Class object) {
 
 		final ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 		mapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
 		T jsonObject = null;
@@ -104,16 +107,16 @@ public class JsonUtil {
 			final String attributeName, final Class object) {
 
 		final ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
+				false);
 		T jsonObject = null;
 		try {
 			final JsonNode rootNode = mapper.readTree(jsonString);
 			final JsonNode node = rootNode.path(attributeName);
 			jsonObject = (T) mapper.readValue(node.toString(), object);
 		} catch (IOException e) {
-			// #TODO: should we rethrow so that we can have
-			// clearer error handling
-			LOGGER.error("Json construction exception", e);
-			throw new IllegalArgumentException("Bad Request");
+
+			throw new IllegalArgumentException(ExceptionConstants.INVALID_JSON);
 		}
 
 		return jsonObject;

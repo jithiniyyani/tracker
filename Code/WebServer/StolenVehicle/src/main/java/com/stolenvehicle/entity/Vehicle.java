@@ -1,5 +1,7 @@
 package com.stolenvehicle.entity;
 
+import java.util.List;
+
 import com.stolenvehicle.constants.VehicleEnum;
 
 public class Vehicle {
@@ -15,6 +17,8 @@ public class Vehicle {
 	private boolean stolen;
 	private String user_id;
 	private String country_id;
+
+	private List<Attachment> attachments;
 
 	public String getId() {
 		return id;
@@ -102,6 +106,14 @@ public class Vehicle {
 
 	public void setCountry_id(String country_id) {
 		this.country_id = country_id;
+	}
+
+	public List<Attachment> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(List<Attachment> attachments) {
+		this.attachments = attachments;
 	}
 
 }

@@ -1,8 +1,10 @@
 package com.stolenvehicle.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.stolenvehicle.constants.GenderEnum;
 import com.stolenvehicle.constants.UserStatusEnum;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserTo {
 
 	private String id;
@@ -14,6 +16,7 @@ public class UserTo {
 	private String contactNumber;
 	private String city;
 	private String address;
+	private String activationId;
 	private UserStatusEnum userStatus;
 	private boolean email_notification;
 	private boolean termsAndCondition;
@@ -121,6 +124,14 @@ public class UserTo {
 
 	public void setCountry_id(String country_id) {
 		this.country_id = country_id;
+	}
+
+	public String getActivationId() {
+		return activationId;
+	}
+
+	public void setActivationId(String activationId) {
+		this.activationId = activationId;
 	}
 
 }

@@ -6,7 +6,7 @@ import com.stolenvehicle.exception.BusinessException;
 
 public interface GenericDao {
 
-	void save(String insertQuery, Object[] queryParamterList) throws BusinessException;
+	int save(String insertQuery, Object[] queryParamterList) throws BusinessException;
 
 	Object fetch(String query, Object[] queryParamterList, ResultSetExtractor resultSetExtractor);
 

@@ -2,16 +2,20 @@ package com.stolenvehicle.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Service;
 
 import com.stolenvehicle.constants.Constants;
+import com.stolenvehicle.constants.ExceptionConstants;
 import com.stolenvehicle.constants.Query;
 import com.stolenvehicle.constants.TheftStatus;
 import com.stolenvehicle.constants.VehicleEnum;
 import com.stolenvehicle.dao.TheftInformationDao;
+import com.stolenvehicle.entity.Attachment;
 import com.stolenvehicle.entity.TheftInformation;
 import com.stolenvehicle.entity.User;
 import com.stolenvehicle.entity.Vehicle;
@@ -45,6 +49,7 @@ public class TheftInformationDaiImpl extends AbstractDao implements
 				Vehicle vehicle = new Vehicle();
 				vehicle.setType(VehicleEnum.valueOf(resultSet
 						.getString("v.type")));
+				vehicle.setId(resultSet.getString("v.id"));
 				vehicle.setModel(resultSet.getString("v.model"));
 				vehicle.setYear_of_make((resultSet.getString("v.year_of_make")));
 				vehicle.setRegistrationNo(resultSet
@@ -53,6 +58,28 @@ public class TheftInformationDaiImpl extends AbstractDao implements
 
 			}
 			return theftInformation;
+		}
+	};
+
+	private static final class TheftInformationAttachmentsResultSetExtractor
+			implements ResultSetExtractor<List<Attachment>> {
+
+		@Override
+		public List<Attachment> extractData(final ResultSet resultSet)
+				throws SQLException {
+
+			List<Attachment> attachments = new ArrayList<Attachment>();
+			if (resultSet.next()) {
+
+				Attachment attachment = new Attachment();
+				attachment.setAttachment_name(resultSet
+						.getString("attachment_name"));
+				attachment.setAttachment_path(resultSet
+						.getString("attachment_path"));
+
+				attachments.add(attachment);
+			}
+			return attachments;
 		}
 	};
 
@@ -83,7 +110,21 @@ public class TheftInformationDaiImpl extends AbstractDao implements
 				new Object[] { theftInformationId },
 				new TheftInformationResultSetExtractor());
 		TheftInformation theftInformation = (TheftInformation) theftInfoOjbect;
+		if (theftInformation == null) {
+
+			throw new BusinessException(ExceptionConstants.THEFT_INFO_NOT_FOUND);
+		} else {
+
+			String vehicle_id = theftInformation.getVehicle().getId();
+			final Object attachmentList = this.fetch(
+					Query.GET_VEHICLE_ATTACHMENTS, new Object[] { vehicle_id },
+					new TheftInformationAttachmentsResultSetExtractor());
+			theftInformation.getVehicle().setAttachments(
+					(List<Attachment>) attachmentList);
+		}
+
 		return theftInformation;
+
 	}
 
 	@Override
@@ -95,6 +136,18 @@ public class TheftInformationDaiImpl extends AbstractDao implements
 						+ registrationNumber + "%" },
 				new TheftInformationResultSetExtractor());
 		TheftInformation theftInformation = (TheftInformation) theftInfoOjbect;
+		if (theftInformation == null) {
+
+			throw new BusinessException(ExceptionConstants.THEFT_INFO_NOT_FOUND);
+		} else {
+
+			String vehicle_id = theftInformation.getVehicle().getId();
+			final Object attachmentList = this.fetch(
+					Query.GET_VEHICLE_ATTACHMENTS, new Object[] { vehicle_id },
+					new TheftInformationAttachmentsResultSetExtractor());
+			theftInformation.getVehicle().setAttachments(
+					(List<Attachment>) attachmentList);
+		}
 		return theftInformation;
 	}
 

@@ -1,0 +1,3 @@
+$resourceBundle.getString("email_balanceTransfer_SSN")
+
+your name is $user.name

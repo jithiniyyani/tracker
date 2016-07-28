@@ -9,7 +9,6 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import com.stolenvehicle.constants.Constants;
 import com.stolenvehicle.constants.ExceptionConstants;
 import com.stolenvehicle.dao.GenericDao;
 import com.stolenvehicle.exception.BusinessException;
@@ -41,13 +40,14 @@ public abstract class AbstractDao implements GenericDao {
 	 * @see com.ec.darwin.common.dao.GenericDao#save(java.lang.String,
 	 * java.lang.Object[])
 	 */
-	public void save(final String insertQuery, final Object[] queryParamterList)
+	public int save(final String insertQuery, final Object[] queryParamterList)
 			throws BusinessException {
 
+		int rowsUpdated = 0;
 		try {
 
 			final JdbcTemplate jdbcTemplate = getJdbcTemplate();
-			jdbcTemplate.update(insertQuery, queryParamterList);
+			rowsUpdated = jdbcTemplate.update(insertQuery, queryParamterList);
 
 		} catch (DuplicateKeyException ex) {
 
@@ -55,9 +55,10 @@ public abstract class AbstractDao implements GenericDao {
 
 		} catch (DataAccessException ex) {
 
-			throw new SystemException(Constants.SQL_EXCEPTION, ex);
+			throw new SystemException(ExceptionConstants.SQL_EXCEPTION, ex);
 
 		}
+		return rowsUpdated;
 	}
 
 	/*
@@ -78,7 +79,7 @@ public abstract class AbstractDao implements GenericDao {
 					resultSetExtractor);
 		} catch (DataAccessException ex) {
 
-			throw new SystemException(Constants.SQL_EXCEPTION, ex);
+			throw new SystemException(ExceptionConstants.SQL_EXCEPTION, ex);
 
 		}
 

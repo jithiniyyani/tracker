@@ -1,10 +1,11 @@
 package com.stolenvehicle.dto;
 
+import java.util.List;
+
 import com.stolenvehicle.constants.VehicleEnum;
 
 public class VehicleTo {
-	
-	
+
 	private String id;
 	private VehicleEnum type;
 	private String make;
@@ -16,6 +17,8 @@ public class VehicleTo {
 	private boolean stolen;
 	private String user_id;
 	private String country_id;
+
+	private List<AttachmentTo> attachments;
 
 	public String getId() {
 		return id;
@@ -104,4 +107,15 @@ public class VehicleTo {
 	public void setCountry_id(String country_id) {
 		this.country_id = country_id;
 	}
+
+	public List<AttachmentTo> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(List<AttachmentTo> attachments) {
+		this.attachments = attachments;
+	}
+	
+	
+
 }

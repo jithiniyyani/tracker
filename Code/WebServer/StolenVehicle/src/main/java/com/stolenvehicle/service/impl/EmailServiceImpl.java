@@ -3,12 +3,6 @@ package com.stolenvehicle.service.impl;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +15,7 @@ import com.stolenvehicle.service.EmailService;
 @Service
 public class EmailServiceImpl implements EmailService {
 
+	
 	@Value("#{properties['smtphost']}")
 	private String smtphost;
 
@@ -45,40 +40,36 @@ public class EmailServiceImpl implements EmailService {
 		properties.put("mail.smtp.port", smtpport);
 	}
 
-	@Override
-	public boolean sendEmail(EmailTo emailTo) throws BusinessException {
-
-		boolean status = false;
-		final String password = "ourpassword";
-
-		Session session = Session.getInstance(properties,
-				new javax.mail.Authenticator() {
-					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication(senderEmailId,
-								password);
-					}
-				});
-
-		try {
-
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(senderEmailId));
-			message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse(emailTo.getReceipent()));
-			message.setSubject(emailTo.getSubject());
-			message.setText(emailTo.getMessage());
-
-			Transport.send(message);
-			status = true;
-
-		} catch (Exception ex) {
-
-			LOGGER.error("Error while sending email", ex);
-		}
-
-		return status;
-
-	}
+	/*
+	 * @Override public boolean sendEmail(EmailTo emailTo) throws
+	 * BusinessException {
+	 * 
+	 * boolean status = false; final String password = "ourpassword";
+	 * 
+	 * Session session = Session.getInstance(properties, new
+	 * javax.mail.Authenticator() { protected PasswordAuthentication
+	 * getPasswordAuthentication() { return new
+	 * PasswordAuthentication(senderEmailId, password); } });
+	 * 
+	 * try {
+	 * 
+	 * Message message = new MimeMessage(session); message.setFrom(new
+	 * InternetAddress(senderEmailId));
+	 * message.setRecipients(Message.RecipientType.TO,
+	 * InternetAddress.parse(emailTo.getReceipent()));
+	 * message.setSubject(emailTo.getSubject());
+	 * message.setText(emailTo.getMessage());
+	 * 
+	 * Transport.send(message); status = true;
+	 * 
+	 * } catch (Exception ex) {
+	 * 
+	 * LOGGER.error("Error while sending email", ex); }
+	 * 
+	 * return status;
+	 * 
+	 * }
+	 */
 
 	public String getSmtphost() {
 		return smtphost;
@@ -102,6 +93,15 @@ public class EmailServiceImpl implements EmailService {
 
 	public void setSenderEmailId(String senderEmailId) {
 		this.senderEmailId = senderEmailId;
+	}
+
+	@Override
+	public boolean sendEmail(EmailTo emailTo) throws BusinessException {
+
+		LOGGER.error("Sending mail from " + this.senderEmailId + " to "
+				+ emailTo.getReceipent());
+		LOGGER.error("Email message " + emailTo.getMessage());
+		return true;
 	}
 
 }

@@ -28,8 +28,9 @@ create table user(
    ic_passport varchar(255) not null, /*what does ic stand for */
    contactNumber varchar(255) not null,   
    city varchar(255) not null ,
-   address  varchar(1024) not null,      
-   status varchar(10),     /*values(active,disabled,deleted)*/
+   address  varchar(1024) not null,  
+   activation_id varchar(255),
+   status varchar(50),     /*values(active,disabled,deleted)*/
    email_notification varchar(10), /*This is to keep track if user wants email notification or not*/
    termsAndCondition varchar(10),  /*Possible values accepted/rejected*/
    country_id  varchar(255),

@@ -1,8 +1,12 @@
 package com.stolenvehicle.service.impl;
 
-import java.util.Properties;
-
-import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+import javax.mail.Address;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,77 +19,13 @@ import com.stolenvehicle.service.EmailService;
 @Service
 public class EmailServiceImpl implements EmailService {
 
-	
-	@Value("#{properties['smtphost']}")
-	private String smtphost;
-
-	@Value("#{properties['smtpport']}")
-	private String smtpport;
-
 	@Value("#{properties['senderEmailId']}")
 	private String senderEmailId;
 
-	private Properties properties;
+	private static final Logger LOGGER = Logger.getLogger(EmailServiceImpl.class);
 
-	private static final Logger LOGGER = Logger
-			.getLogger(EmailServiceImpl.class);
-
-	@PostConstruct
-	public void init() {
-
-		properties = new Properties();
-		properties.put("mail.smtp.auth", "true");
-		properties.put("mail.smtp.starttls.enable", "true");
-		properties.put("mail.smtp.host", smtphost);
-		properties.put("mail.smtp.port", smtpport);
-	}
-
-	/*
-	 * @Override public boolean sendEmail(EmailTo emailTo) throws
-	 * BusinessException {
-	 * 
-	 * boolean status = false; final String password = "ourpassword";
-	 * 
-	 * Session session = Session.getInstance(properties, new
-	 * javax.mail.Authenticator() { protected PasswordAuthentication
-	 * getPasswordAuthentication() { return new
-	 * PasswordAuthentication(senderEmailId, password); } });
-	 * 
-	 * try {
-	 * 
-	 * Message message = new MimeMessage(session); message.setFrom(new
-	 * InternetAddress(senderEmailId));
-	 * message.setRecipients(Message.RecipientType.TO,
-	 * InternetAddress.parse(emailTo.getReceipent()));
-	 * message.setSubject(emailTo.getSubject());
-	 * message.setText(emailTo.getMessage());
-	 * 
-	 * Transport.send(message); status = true;
-	 * 
-	 * } catch (Exception ex) {
-	 * 
-	 * LOGGER.error("Error while sending email", ex); }
-	 * 
-	 * return status;
-	 * 
-	 * }
-	 */
-
-	public String getSmtphost() {
-		return smtphost;
-	}
-
-	public void setSmtphost(String smtphost) {
-		this.smtphost = smtphost;
-	}
-
-	public String getSmtpport() {
-		return smtpport;
-	}
-
-	public void setSmtpport(String smtpport) {
-		this.smtpport = smtpport;
-	}
+	@Resource(mappedName = "java:jboss/mail/Default")
+	private Session mailSession;
 
 	public String getSenderEmailId() {
 		return senderEmailId;
@@ -98,10 +38,26 @@ public class EmailServiceImpl implements EmailService {
 	@Override
 	public boolean sendEmail(EmailTo emailTo) throws BusinessException {
 
-		LOGGER.error("Sending mail from " + this.senderEmailId + " to "
-				+ emailTo.getReceipent());
+		LOGGER.error("Sending mail from " + this.senderEmailId + " to " + emailTo.getReceipent());
 		LOGGER.error("Email message " + emailTo.getMessage());
-		return true;
+		boolean status = false;
+		try {
+			MimeMessage m = new MimeMessage(mailSession);
+			Address from = new InternetAddress(senderEmailId);
+			Address[] to = new InternetAddress[] { new InternetAddress(emailTo.getReceipent()) };
+			m.setFrom(from);
+			m.setRecipients(Message.RecipientType.TO, to);
+			m.setSubject(emailTo.getSubject());
+			m.setSentDate(new java.util.Date());
+			m.setContent(emailTo.getMessage(), "text/plain");
+			Transport.send(m);
+			status = true;
+		} catch (javax.mail.MessagingException ex) {
+
+			LOGGER.error("Error while sending email ", ex);
+
+		}
+		return status;
 	}
 
 }

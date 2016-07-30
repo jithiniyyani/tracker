@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.stolenvehicle.constants.Constants;
+import com.stolenvehicle.dto.EmailTo;
 import com.stolenvehicle.dto.UserTo;
 import com.stolenvehicle.exception.ExceptionProcessor;
+import com.stolenvehicle.service.EmailService;
 import com.stolenvehicle.service.TemplateService;
 import com.stolenvehicle.util.AppUtil;
 import com.stolenvehicle.util.JsonUtil;
@@ -25,9 +27,17 @@ public class UserController {
 	@Autowired
 	private TemplateService templateService;
 
+	@Autowired
+	private EmailService mailService;
+
 	@RequestMapping(method = RequestMethod.GET, path = "/ping")
 	public ResponseEntity<String> ping() {
 		LOGGER.debug("Entering ping");
+		try {
+			mailService.sendEmail(new EmailTo("jitsonfire@gmail.com", "test mail", "this is test mail"));
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 		LOGGER.debug("Done with ping");
 		return new ResponseEntity<String>("Test ", HttpStatus.OK);
 
@@ -41,8 +51,7 @@ public class UserController {
 
 			AppUtil.checkIfUserHasSession(request);
 			UserTo user = AppUtil.getUserFromSession(request);
-			response = new ResponseEntity<String>(JsonUtil.toJson(
-					Constants.USER, user), HttpStatus.OK);
+			response = new ResponseEntity<String>(JsonUtil.toJson(Constants.USER, user), HttpStatus.OK);
 		} catch (Exception ex) {
 
 			LOGGER.error("Error while getting user ", ex);

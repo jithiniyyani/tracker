@@ -8,7 +8,7 @@ public enum ErrorEnum {
 	INVALID_SESSION(
 			"403", "Invalid session. Kindly login"),
 	INVALID_JSON("400",
-			"Invalid json kindly corrrect"),
+			"Invalid json kindly correct"),
 	INTERNAL_SERVICE_ERROR("500","Opps something went wrong. Kindly contact customer service"),
 	ENTITY_ALREADY_EXIST_IN_DB("400", "Entity already exists in db"),
 	EMPTY_INPUT("400","Empty input"),

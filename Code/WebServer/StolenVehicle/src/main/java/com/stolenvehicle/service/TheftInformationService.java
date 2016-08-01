@@ -15,7 +15,7 @@ public interface TheftInformationService {
 	public TheftInformationTo getTheftInformationByVehicleRegistrationNumber(
 			String registrationNUmber) throws BusinessException;
 
-	public boolean updateTheftInformation(String theftId,TheftStatus theftStatus)
-			throws BusinessException;
+	public boolean updateTheftInformation(String theftId, String findId,
+			TheftStatus theftStatus) throws BusinessException;
 
 }

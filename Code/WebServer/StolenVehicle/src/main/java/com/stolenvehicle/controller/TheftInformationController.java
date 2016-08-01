@@ -26,6 +26,7 @@ import com.stolenvehicle.constants.AttachmentTypeEnum;
 import com.stolenvehicle.constants.Constants;
 import com.stolenvehicle.constants.ErrorEnum;
 import com.stolenvehicle.constants.ExceptionConstants;
+import com.stolenvehicle.constants.FindStatusEnum;
 import com.stolenvehicle.constants.TheftStatus;
 import com.stolenvehicle.dto.AttachmentTo;
 import com.stolenvehicle.dto.ErrorTo;
@@ -35,6 +36,7 @@ import com.stolenvehicle.dto.UserTo;
 import com.stolenvehicle.exception.ExceptionProcessor;
 import com.stolenvehicle.service.AttachmentService;
 import com.stolenvehicle.service.FileService;
+import com.stolenvehicle.service.FindInformationService;
 import com.stolenvehicle.service.TheftInformationService;
 import com.stolenvehicle.service.VehicleService;
 import com.stolenvehicle.util.AppUtil;
@@ -53,6 +55,9 @@ public class TheftInformationController {
 	private TheftInformationService theftInformationService;
 
 	@Autowired
+	private FindInformationService findInformationService;
+
+	@Autowired
 	private FileService fileService;
 
 	@Autowired
@@ -60,6 +65,9 @@ public class TheftInformationController {
 
 	@Value("#{properties['base_path']}")
 	private String basePath;
+
+	@Value("#{properties['web_server_url']}")
+	private String web_server_url;
 
 	@RequestMapping(method = RequestMethod.POST, path = "/registerTheft")
 	public ResponseEntity<String> reportTheft(@RequestBody String jsonRequest,
@@ -77,9 +85,11 @@ public class TheftInformationController {
 			theftInformationTo.setVehicle_id(theftInformationTo.getVehicle()
 					.getId());
 			theftInformationService.saveTheftInformation(theftInformationTo);
-			attachmentService.saveAttachments(
-					AppUtil.getAttachmentListForTheft(request),
-					theftInformationTo.getVehicle_id(), null);
+			List<AttachmentTo> saveAttachments = attachmentService
+					.saveAttachments(
+							AppUtil.getAttachmentListForTheft(request),
+							theftInformationTo.getVehicle_id(), null);
+			theftInformationTo.getVehicle().setAttachments(saveAttachments);
 			response = new ResponseEntity<String>(JsonUtil.toJson(
 					Constants.THEFT_INFO, theftInformationTo), HttpStatus.OK);
 		} catch (Exception ex) {
@@ -125,8 +135,19 @@ public class TheftInformationController {
 			AppUtil.checkIfUserHasSession(request);
 			RewardTo reward = JsonUtil.toObject(jsonRequest, Constants.REWARD,
 					RewardTo.class);
-			theftInformationService.updateTheftInformation(reward.getTheftId(),
-					TheftStatus.REWARDED);
+			String findId = reward.getFindInformationId();
+			boolean updateTheftInformation = theftInformationService
+					.updateTheftInformation(reward.getTheftId(),
+							reward.getFindInformationId(), TheftStatus.REWARDED);
+			boolean updateFindInformationStatus = findInformationService
+					.updateFindInformationStatus(findId,
+							FindStatusEnum.REWARDED);
+			if (updateTheftInformation == true
+					&& updateFindInformationStatus == true) {
+				response = new ResponseEntity<String>(HttpStatus.OK);
+			} else {
+				response = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			}
 
 		} catch (IllegalArgumentException ex) {
 
@@ -189,8 +210,8 @@ public class TheftInformationController {
 			byte[] bytes;
 
 			String baseFolderForUser = basePath + "/" + user.getId();
-			String folder = baseFolderForUser + "/"
-					+ UUID.randomUUID().toString();
+			String tnxId = UUID.randomUUID().toString();
+			String folder = baseFolderForUser + "/" + tnxId;
 
 			Set<String> keySet = fileMap.keySet();
 			for (String fileName : keySet) {
@@ -198,11 +219,64 @@ public class TheftInformationController {
 				MultipartFile file = fileMap.get(fileName);
 				if (!file.isEmpty()) {
 					bytes = file.getBytes();
-					fileService.writeToFile(folder, file.getOriginalFilename(),
-							bytes);
+					fileName = file.getOriginalFilename();
+					fileService.writeToFile(folder, fileName, bytes);
 					attachmentList.add(new AttachmentTo(file
-							.getOriginalFilename(), folder,
+							.getOriginalFilename(), folder, web_server_url
+							+ user.getId() + "/" + tnxId + "/" + fileName,
 							AttachmentTypeEnum.THEFT));
+				}
+			}
+
+			response = new ResponseEntity<String>(HttpStatus.OK);
+		} catch (Exception ex) {
+
+			LOGGER.error("Error while saving attachments ", ex);
+			response = ExceptionProcessor.handleException(ex);
+
+		} finally {
+
+		}
+		return response;
+	}
+
+	@RequestMapping(value = "/uploadAttachmentsForAnonymousTheft", headers = ("content-type=multipart/*"), method = RequestMethod.POST)
+	public ResponseEntity<String> uploadAttachmentsForAnonTheft(
+			HttpServletRequest request) {
+
+		ResponseEntity<String> response = null;
+		DefaultMultipartHttpServletRequest defaultMultipartHttpServletRequest = null;
+		try {
+			if (request instanceof DefaultMultipartHttpServletRequest) {
+				defaultMultipartHttpServletRequest = (DefaultMultipartHttpServletRequest) request;
+			}
+			Map<String, MultipartFile> fileMap = defaultMultipartHttpServletRequest
+					.getFileMap();
+			HttpSession session = request.getSession();
+			List<AttachmentTo> attachmentList = null;
+			Object attribute = session.getAttribute(Constants.ATTACHMENTS);
+			if (attribute == null) {
+				attachmentList = new ArrayList<>();
+				session.setAttribute(Constants.ATTACHMENTS, attachmentList);
+			} else {
+				attachmentList = (ArrayList<AttachmentTo>) attribute;
+			}
+			UserTo user = AppUtil.getUserFromSession(request);
+			byte[] bytes;
+			String tnxId = UUID.randomUUID().toString();
+			String folder = basePath + "/" + tnxId;
+
+			Set<String> keySet = fileMap.keySet();
+			for (String fileName : keySet) {
+
+				MultipartFile file = fileMap.get(fileName);
+				if (!file.isEmpty()) {
+					bytes = file.getBytes();
+					fileName = file.getOriginalFilename();
+					fileService.writeToFile(folder, fileName, bytes);
+					attachmentList.add(new AttachmentTo(file
+							.getOriginalFilename(), folder, web_server_url
+							+ tnxId + "/" + fileName, AttachmentTypeEnum.FIND));
 				}
 			}
 

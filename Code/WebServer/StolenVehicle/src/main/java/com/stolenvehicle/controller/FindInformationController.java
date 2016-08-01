@@ -35,9 +35,10 @@ import com.stolenvehicle.service.NotificationService;
 import com.stolenvehicle.util.JsonUtil;
 
 @Controller
-public class FindController {
+public class FindInformationController {
 
-	private static final Logger LOGGER = Logger.getLogger(FindController.class);
+	private static final Logger LOGGER = Logger
+			.getLogger(FindInformationController.class);
 
 	@Autowired
 	private FileService fileService;
@@ -51,7 +52,10 @@ public class FindController {
 	@Autowired
 	private NotificationService notificationService;
 
-	@RequestMapping(method=RequestMethod.GET,value="findInformationForUser")
+	@Value("#{properties['web_server_url']}")
+	private String web_server_url;
+
+	@RequestMapping(method = RequestMethod.GET, value = "findInformationForUser")
 	public ResponseEntity<String> getFindInformationForUser(
 			HttpServletRequest request,
 			@RequestParam(name = "user_id") String user_id) {
@@ -67,6 +71,30 @@ public class FindController {
 			LOGGER.error("Error while fetching find info list request id "
 					+ user_id, ex);
 			response = ExceptionProcessor.handleException(ex);
+		} finally {
+
+		}
+		return response;
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "updateFindInformationStatus")
+	public ResponseEntity<String> updateFindInformationStatus(
+			HttpServletRequest request, @RequestBody String jsonRequest) {
+		ResponseEntity<String> response = null;
+		try {
+
+			FindInformationTo findInformationTo = JsonUtil.toObject(
+					jsonRequest, Constants.FIND_INFO, FindInformationTo.class);
+			boolean updateFindInformationStatus = findInformationService
+					.updateFindInformationStatus(findInformationTo.getId(),
+							findInformationTo.getFindStatus());
+			response = updateFindInformationStatus ? new ResponseEntity<String>(
+					HttpStatus.OK) : new ResponseEntity<String>(
+					HttpStatus.BAD_REQUEST);
+		} catch (Exception ex) {
+
+			response = ExceptionProcessor.handleException(ex);
+
 		} finally {
 
 		}
@@ -93,6 +121,7 @@ public class FindController {
 			} else {
 
 				// we expect file upload to complete by this stage
+				// #TODO: handle transaction here
 				HttpSession session = request.getSession(false);
 				List<AttachmentTo> attachmentList = (List<AttachmentTo>) session
 						.getAttribute(Constants.ATTACHMENTS);
@@ -138,7 +167,8 @@ public class FindController {
 			}
 
 			byte[] bytes;
-			String folder = basePath + "/" + UUID.randomUUID().toString();
+			String tnxId = UUID.randomUUID().toString();
+			String folder = basePath + "/" + tnxId;
 
 			Set<String> keySet = fileMap.keySet();
 			for (String fileName : keySet) {
@@ -146,11 +176,11 @@ public class FindController {
 				MultipartFile file = fileMap.get(fileName);
 				if (!file.isEmpty()) {
 					bytes = file.getBytes();
-					fileService.writeToFile(folder, file.getOriginalFilename(),
-							bytes);
+					fileName = file.getOriginalFilename();
+					fileService.writeToFile(folder, fileName, bytes);
 					attachmentList.add(new AttachmentTo(file
-							.getOriginalFilename(), folder,
-							AttachmentTypeEnum.FIND));
+							.getOriginalFilename(), folder, web_server_url
+							+ tnxId + "/" + fileName, AttachmentTypeEnum.FIND));
 				}
 			}
 
@@ -165,4 +195,35 @@ public class FindController {
 		}
 		return response;
 	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/reportAnonymousFind")
+	public ResponseEntity<String> reportAnonymousFind(
+			HttpServletRequest request, @RequestBody String jsonRequest) {
+
+		ResponseEntity<String> response = null;
+		try {
+
+			FindInformationTo findInformationTo = JsonUtil.toObject(
+					jsonRequest, Constants.FIND_INFO, FindInformationTo.class);
+			// we expect file upload to complete by this stage
+			// #TODO: handle transaction here
+			HttpSession session = request.getSession(false);
+			List<AttachmentTo> attachmentList = (List<AttachmentTo>) session
+					.getAttribute(Constants.ATTACHMENTS);
+			findInformationTo.setAttachments(attachmentList);
+			FindInformationTo saveFindInformation = findInformationService
+					.saveFindInformation(findInformationTo);
+			response = new ResponseEntity<String>(HttpStatus.OK);
+
+		} catch (Exception ex) {
+
+			LOGGER.error("Error while saving find", ex);
+			response = ExceptionProcessor.handleException(ex);
+
+		} finally {
+
+		}
+		return response;
+	}
+
 }

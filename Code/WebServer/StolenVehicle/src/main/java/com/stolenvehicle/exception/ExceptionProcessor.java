@@ -81,6 +81,16 @@ public class ExceptionProcessor {
 								ErrorEnum.ENTITY_ALREADY_EXIST_IN_DB
 										.getMessage())), HttpStatus.BAD_REQUEST);
 				break;
+			case ExceptionConstants.EMAIL_ID_NOT_FOUND_FOR_RESET:
+
+				response = new ResponseEntity<String>(JsonUtil.toJson(
+						Constants.ERROR,
+						new ErrorTo(ErrorEnum.EMAIL_ID_NOT_FOUND_FOR_RESET
+								.getCode(),
+								ErrorEnum.EMAIL_ID_NOT_FOUND_FOR_RESET
+										.getMessage())), HttpStatus.BAD_REQUEST);
+
+				break;
 			default:
 
 				response = new ResponseEntity<String>(

@@ -29,14 +29,20 @@ public class AttachmentServiceImpl implements AttachmentService {
 			List<AttachmentTo> attachmentToList, String vehilceId,
 			String findInformationId) throws BusinessException {
 
+		// bad code improve this
 		List<Attachment> attachmentList = new ArrayList<Attachment>();
 		for (AttachmentTo attachmentTo : attachmentToList) {
 			attachmentList
 					.add(ConversionUtil.convertAttachmentTo(attachmentTo));
 		}
-		attachmentDao.saveAttachmentList(attachmentList, vehilceId,
-				findInformationId);
+		List<Attachment> saveAttachmentList = attachmentDao.saveAttachmentList(
+				attachmentList, vehilceId, findInformationId);
+		attachmentToList = new ArrayList<AttachmentTo>();
+		for (Attachment attachment : saveAttachmentList) {
 
+			attachmentToList.add(ConversionUtil
+					.convertAttachmentEntity(attachment));
+		}
 		return attachmentToList;
 	}
 

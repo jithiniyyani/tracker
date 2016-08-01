@@ -12,10 +12,11 @@ public class UserTo {
 	private String emailaddress;
 	private String password;
 	private GenderEnum gender;
-	private String ic_password;
+	private String ic_passport;
 	private String contactNumber;
 	private String city;
 	private String address;
+	private String addressCordinates;
 	private String activationId;
 	private UserStatusEnum userStatus;
 	private boolean email_notification;
@@ -60,14 +61,6 @@ public class UserTo {
 
 	public void setGender(GenderEnum gender) {
 		this.gender = gender;
-	}
-
-	public String getIc_password() {
-		return ic_password;
-	}
-
-	public void setIc_password(String ic_password) {
-		this.ic_password = ic_password;
 	}
 
 	public String getContactNumber() {
@@ -132,6 +125,22 @@ public class UserTo {
 
 	public void setActivationId(String activationId) {
 		this.activationId = activationId;
+	}
+
+	public String getIc_passport() {
+		return ic_passport;
+	}
+
+	public void setIc_passport(String ic_passport) {
+		this.ic_passport = ic_passport;
+	}
+
+	public String getAddressCordinates() {
+		return addressCordinates;
+	}
+
+	public void setAddressCordinates(String addressCordinates) {
+		this.addressCordinates = addressCordinates;
 	}
 
 }

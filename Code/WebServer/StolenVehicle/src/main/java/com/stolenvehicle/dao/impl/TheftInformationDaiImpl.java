@@ -9,6 +9,7 @@ import java.util.UUID;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Service;
 
+import com.stolenvehicle.constants.AttachmentTypeEnum;
 import com.stolenvehicle.constants.Constants;
 import com.stolenvehicle.constants.ExceptionConstants;
 import com.stolenvehicle.constants.Query;
@@ -43,6 +44,8 @@ public class TheftInformationDaiImpl extends AbstractDao implements
 				theftInformation.setTheft_location_cordinates(resultSet
 						.getString("ti.theft_location_cordinates"));
 
+				theftInformation.setStatus(TheftStatus.valueOf(resultSet
+						.getString("ti.status")));
 				User user = new User();
 				user.setName(resultSet.getString("u.name"));
 				user.setId(resultSet.getString("u.id"));
@@ -73,11 +76,17 @@ public class TheftInformationDaiImpl extends AbstractDao implements
 			if (resultSet.next()) {
 
 				Attachment attachment = new Attachment();
+				attachment.setId(resultSet.getString("id"));
 				attachment.setAttachment_name(resultSet
 						.getString("attachment_name"));
 				attachment.setAttachment_path(resultSet
 						.getString("attachment_path"));
-
+				attachment.setAttachmentEnum(AttachmentTypeEnum
+						.valueOf(resultSet.getString("attachment_type")));
+				attachment.setVehicle_id(resultSet.getString("vehicle_id"));
+				attachment.setPublicUrl(resultSet.getString("publicUrl"));
+				attachment.setFind_information_id(resultSet
+						.getString("find_information_id"));
 				attachments.add(attachment);
 			}
 			return attachments;
@@ -153,14 +162,12 @@ public class TheftInformationDaiImpl extends AbstractDao implements
 	}
 
 	@Override
-	public boolean updateTheftInformationStatus(String theftId,
+	public boolean updateTheftInformationStatus(String theftId, String findId,
 			TheftStatus theftStatus) throws BusinessException {
 
-		boolean status = false;
-		this.save(Query.UPDATE_THEFT_INFO_STATUS, new Object[] { theftId,
-				theftStatus.toString() });
-		status = true;
-		return status;
+		int count = this.save(Query.UPDATE_THEFT_INFO_STATUS, new Object[] {
+				theftStatus.toString(), findId, theftId });
+		return count > 0 ? true : false;
 	}
 
 }

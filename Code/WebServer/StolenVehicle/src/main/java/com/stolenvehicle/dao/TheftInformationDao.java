@@ -15,7 +15,7 @@ public interface TheftInformationDao extends GenericDao {
 	public TheftInformation getTheftInformationByVehicleRegistrationNumber(
 			String registrationNumber) throws BusinessException;
 
-	public boolean updateTheftInformationStatus(String theftId,
+	public boolean updateTheftInformationStatus(String theftId,String findId,
 			TheftStatus theftStatus) throws BusinessException;
 
 }

@@ -1,5 +1,7 @@
 package com.stolenvehicle.entity;
 
+import java.util.List;
+
 import com.stolenvehicle.constants.FindStatusEnum;
 
 public class FindInformation {
@@ -11,6 +13,9 @@ public class FindInformation {
 	private String locators_email;
 	private String locators_contactNumber;
 	private String theft_information_id;
+	private String vehilce_id;
+	private List<Attachment> attachments;
+
 	private FindStatusEnum findStatus;
 
 	public String getId() {
@@ -75,6 +80,22 @@ public class FindInformation {
 
 	public void setFindStatus(FindStatusEnum findStatus) {
 		this.findStatus = findStatus;
+	}
+
+	public String getVehilce_id() {
+		return vehilce_id;
+	}
+
+	public void setVehilce_id(String vehilce_id) {
+		this.vehilce_id = vehilce_id;
+	}
+
+	public List<Attachment> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(List<Attachment> attachments) {
+		this.attachments = attachments;
 	}
 
 }

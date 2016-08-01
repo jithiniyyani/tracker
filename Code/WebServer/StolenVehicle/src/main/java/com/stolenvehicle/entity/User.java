@@ -10,10 +10,11 @@ public class User {
 	private String emailaddress;
 	private String password;
 	private GenderEnum gender;
-	private String ic_password;
+	private String ic_passport;
 	private String contactNumber;
 	private String city;
 	private String address;
+	private String addressCordinates;
 	private String activation_id;
 	private UserStatusEnum userStatus;
 	private boolean email_notification;
@@ -32,8 +33,9 @@ public class User {
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
-		
+
 		this.name = name;
 	}
 
@@ -59,14 +61,6 @@ public class User {
 
 	public void setGender(GenderEnum gender) {
 		this.gender = gender;
-	}
-
-	public String getIc_password() {
-		return ic_password;
-	}
-
-	public void setIc_password(String ic_password) {
-		this.ic_password = ic_password;
 	}
 
 	public String getContactNumber() {
@@ -140,5 +134,21 @@ public class User {
 	public void setActivation_id(String activation_id) {
 		this.activation_id = activation_id;
 	}
-	
+
+	public String getIc_passport() {
+		return ic_passport;
+	}
+
+	public void setIc_passport(String ic_passport) {
+		this.ic_passport = ic_passport;
+	}
+
+	public String getAddressCordinates() {
+		return addressCordinates;
+	}
+
+	public void setAddressCordinates(String addressCordinates) {
+		this.addressCordinates = addressCordinates;
+	}
+
 }

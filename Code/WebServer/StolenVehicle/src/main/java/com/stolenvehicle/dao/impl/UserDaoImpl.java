@@ -38,10 +38,11 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 				user.setEmailaddress(resultSet.getString("emailaddress"));
 				user.setPassword(resultSet.getString("password"));
 				user.setGender(GenderEnum.valueOf(resultSet.getString("gender")));
-				user.setIc_password(resultSet.getString("ic_passport"));
+				user.setIc_passport(resultSet.getString("ic_passport"));
 				user.setContactNumber(resultSet.getString("contactNumber"));
 				user.setCity(resultSet.getString("city"));
 				user.setAddress(resultSet.getString("address"));
+				user.setAddressCordinates(resultSet.getString("addressCordinates"));
 				user.setUserStatus(UserStatusEnum.valueOf(resultSet
 						.getString("status")));
 				user.setEmail_notification(resultSet.getString(
@@ -98,9 +99,9 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 				Query.SAVE_USER,
 				new Object[] { user.getId(), user.getName(),
 						user.getEmailaddress(), user.getPassword(),
-						user.getGender().toString(), user.getIc_password(),
+						user.getGender().toString(), user.getIc_passport(),
 						user.getContactNumber(), user.getCity(),
-						user.getAddress(), user.getActivation_id(),
+						user.getAddress(), user.getAddressCordinates(),user.getActivation_id(),
 						user.getUserStatus().toString(),
 						user.isEmail_notification() ? "true" : "false",
 						user.isTermsAndCondition() ? "true" : "false",
@@ -122,8 +123,14 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 	public String resetUserPassword(String emailId) throws BusinessException {
 
 		String activationCode = UUID.randomUUID().toString();
-		this.save(Query.RESET_USER_PASSWORD, new Object[] { activationCode,
-				emailId });
+		int count = this.save(Query.RESET_USER_PASSWORD, new Object[] {
+				activationCode, emailId });
+		if (count != 1) {
+
+			throw new BusinessException(
+					ExceptionConstants.EMAIL_ID_NOT_FOUND_FOR_RESET);
+
+		}
 		return activationCode;
 	}
 

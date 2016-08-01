@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stolenvehicle.constants.AttachmentTypeEnum;
+import com.stolenvehicle.constants.FindStatusEnum;
 import com.stolenvehicle.dao.AttachmentDao;
 import com.stolenvehicle.dao.FindInformationDao;
 import com.stolenvehicle.dto.AttachmentTo;
@@ -40,9 +41,9 @@ public class FindInformationServiceImpl implements FindInformationService {
 
 			attachmentList.add(new Attachment(
 					attachmentTo.getAttachment_name(), attachmentTo
-							.getAttachment_path(), AttachmentTypeEnum.FIND,
-					findInformationTo.getVehicle_id(), findInformationTo
-							.getId()));
+							.getAttachment_path(), attachmentTo.getPublicUrl(),
+					AttachmentTypeEnum.FIND, findInformationTo.getVehicle_id(),
+					findInformationTo.getId()));
 
 		}
 		attachmentDao.saveAttachmentList(attachmentList,
@@ -60,6 +61,14 @@ public class FindInformationServiceImpl implements FindInformationService {
 		return ConversionUtil
 				.convertFindInformationEntityList(findInforamtionForUser);
 
+	}
+
+	@Override
+	public boolean updateFindInformationStatus(String find_id,
+			FindStatusEnum findStatus) throws BusinessException {
+
+		return findInformationDao.updateFindInformatoinStatus(find_id,
+				findStatus);
 	}
 
 }

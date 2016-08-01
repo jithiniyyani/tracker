@@ -11,5 +11,6 @@ public class ExceptionConstants {
 	public static final String SQL_EXCEPTION = "Sql exception";
 	public static final String EMPTY_INPUT = "Empty input";
 	public static final String INVALID_THEFT_ID = "Invalid theft id";
+	public static final String EMAIL_ID_NOT_FOUND_FOR_RESET = "Email id not found for reset";
 	
 }

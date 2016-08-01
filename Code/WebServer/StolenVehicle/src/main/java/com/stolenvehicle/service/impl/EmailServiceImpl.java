@@ -41,7 +41,7 @@ public class EmailServiceImpl implements EmailService {
 		LOGGER.error("Sending mail from " + this.senderEmailId + " to " + emailTo.getReceipent());
 		LOGGER.error("Email message " + emailTo.getMessage());
 		boolean status = false;
-		try {
+		/*try {
 			MimeMessage m = new MimeMessage(mailSession);
 			Address from = new InternetAddress(senderEmailId);
 			Address[] to = new InternetAddress[] { new InternetAddress(emailTo.getReceipent()) };
@@ -56,7 +56,8 @@ public class EmailServiceImpl implements EmailService {
 
 			LOGGER.error("Error while sending email ", ex);
 
-		}
+		}*/
+		status = true;
 		return status;
 	}
 

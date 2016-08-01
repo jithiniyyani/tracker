@@ -10,16 +10,27 @@ public class AttachmentTo {
 
 	private String attachment_path;
 
+	private String publicUrl;
+
 	private AttachmentTypeEnum attachmentTypeEnum;
 
 	public AttachmentTo() {
 
 	}
 
-	public AttachmentTo(String attachment_name, String attachment_path,
+	public AttachmentTo(String id, String attachment_name,
+			String attachment_path, String publicUrl,
 			AttachmentTypeEnum attachmentTypeEnum) {
+		this(attachment_name, attachment_path, publicUrl, attachmentTypeEnum);
+		this.id = id;
+
+	}
+
+	public AttachmentTo(String attachment_name, String attachment_path,
+			String publicUrl, AttachmentTypeEnum attachmentTypeEnum) {
 		this.attachment_name = attachment_name;
 		this.attachment_path = attachment_path;
+		this.publicUrl = publicUrl;
 		this.attachmentTypeEnum = attachmentTypeEnum;
 	}
 
@@ -53,6 +64,14 @@ public class AttachmentTo {
 
 	public void setAttachmentTypeEnum(AttachmentTypeEnum attachmentTypeEnum) {
 		this.attachmentTypeEnum = attachmentTypeEnum;
+	}
+
+	public String getPublicUrl() {
+		return publicUrl;
+	}
+
+	public void setPublicUrl(String publicUrl) {
+		this.publicUrl = publicUrl;
 	}
 
 }

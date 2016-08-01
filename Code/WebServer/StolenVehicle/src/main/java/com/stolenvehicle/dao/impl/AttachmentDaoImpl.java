@@ -26,7 +26,7 @@ public class AttachmentDaoImpl extends AbstractDao implements AttachmentDao {
 					Query.SAVE_ATTACHMENT,
 					new Object[] { attachmendId,
 							attachment.getAttachment_name(),
-							attachment.getAttachment_path(), vehilceId,
+							attachment.getAttachment_path(),attachment.getPublicUrl(), vehilceId,
 							findInformationId,
 							attachment.getAttachmentEnum().toString(),
 							Constants.APP_NAME });

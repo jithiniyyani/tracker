@@ -18,6 +18,9 @@ public class FindInformationTo {
 	private FindStatusEnum findStatus;
 	private List<AttachmentTo> attachments;
 
+	public FindInformationTo(){
+		
+	}
 	public FindInformationTo(String id, String locators_name,
 			String locators_email, String locator_contactNumber,String find_location_cordinates) {
 		this.id = id;

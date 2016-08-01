@@ -65,7 +65,7 @@
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="register" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="register" enabled="false">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
@@ -73,14 +73,15 @@
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
 	&quot;user&quot; : {&#xd;
-		&quot;name&quot; : &quot;rafa&quot;,&#xd;
-		&quot;emailaddress&quot; : &quot;rafa@gmail.com&quot;,&#xd;
+		&quot;name&quot; : &quot;mamba&quot;,&#xd;
+		&quot;emailaddress&quot; : &quot;mamba@gmai1l.com1&quot;,&#xd;
 		&quot;password&quot; : &quot;rafa&quot;,&#xd;
 		&quot;gender&quot; : &quot;MALE&quot;,&#xd;
-		&quot;ic_password&quot; : &quot;passport123&quot;,&#xd;
-     	&quot;contactNumber&quot; : &quot;123456789&quot;,&#xd;
+		&quot;ic_passport&quot; : &quot;passport123&quot;,&#xd;
+		&quot;contactNumber&quot; : &quot;123456789&quot;,&#xd;
      	&quot;city&quot; : &quot;mumbai&quot;,&#xd;
      	&quot;address&quot; : &quot;india somewhere&quot;,&#xd;
+     	&quot;addressCordinates&quot; : &quot;[19.100202, 72.912493]&quot;,&#xd;
          	&quot;email_notification&quot; : true,&#xd;
      	&quot;termsAndCondition&quot; : true,&#xd;
      	&quot;country_id&quot; : &quot;1&quot;&#xd;
@@ -118,7 +119,7 @@
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="login" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="login" enabled="false">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
@@ -126,7 +127,7 @@
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
 	&quot;user&quot; : {&#xd;
-		&quot;emailaddress&quot; : &quot;rafa@gmail.com&quot;,&#xd;
+		&quot;emailaddress&quot; : &quot;mamba@gmai1l.com1&quot;,&#xd;
 		&quot;password&quot; : &quot;rafa&quot;&#xd;
 	}&#xd;
 }&#xd;
@@ -178,7 +179,7 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">StolenVehicle/activateUser?id=6bc0b99c-64f8-42bc-8be5-4f84e12a4665</stringProp>
+          <stringProp name="HTTPSampler.path">StolenVehicle/activateUser?id=1b0bc167-f30a-4e61-9f14-17c110b99926</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -270,8 +271,17 @@
             <stringProp name="RegexExtractor.match_number">1</stringProp>
           </RegexExtractor>
           <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="get country id" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">country_id</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;country_id&quot;:&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default">test</stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="restPassword" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="restPassword" enabled="false">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
@@ -279,9 +289,7 @@
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
 	&quot;resetPassword&quot; : {&#xd;
-&#xd;
-		&quot;emailAddress&quot; : &quot;rafa@gmail.co1m&quot;&#xd;
-		&#xd;
+		&quot;emailAddress&quot; : &quot;rafa@gmail.com&quot;&#xd;
 	}	&#xd;
 }&#xd;
 </stringProp>
@@ -324,9 +332,9 @@
                 <stringProp name="Argument.value">{&#xd;
 	&quot;setPassword&quot; : {&#xd;
 &#xd;
-		&quot;activiationId&quot; : &quot;cfcac8bb-f1e0-481f-9ccc-1da770303e81&quot;,&#xd;
+		&quot;activiationId&quot; : &quot;71db48a5-ef87-4df1-891a-17d8a82b5795&quot;,&#xd;
 		&quot;emailAddress&quot; : &quot;rafa@gmail.com&quot;,&#xd;
-		&quot;password&quot; : &quot;roger1&quot;&#xd;
+		&quot;password&quot; : &quot;rafa&quot;&#xd;
 		&#xd;
 	}	&#xd;
 }&#xd;
@@ -408,7 +416,7 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">StolenVehicle/getTheftInfo?theftId=dcdc1db0-7029-411a-b4b1-b22f62f4dfb2</stringProp>
+          <stringProp name="HTTPSampler.path">StolenVehicle/getTheftInfo?theftId=f155daf2-faac-41a7-9a24-b209960e509c</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -465,6 +473,24 @@
             </collectionProp>
           </HeaderManager>
           <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="gettheftInfo" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">theft_id</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;theft_information_id&quot;:&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default">test</stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="getFindInfo" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">find_id</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;id&quot;:&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default">test</stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="getTheftInfoByRegistrationNumber" enabled="false">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
@@ -484,7 +510,7 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">StolenVehicle/searchForTheft?regNumber=5111</stringProp>
+          <stringProp name="HTTPSampler.path">StolenVehicle/searchForTheft?regNumber=511</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -531,6 +557,92 @@
           </RegexExtractor>
           <hashTree/>
         </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="updateFindInformationStatus" enabled="false">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+   &quot;find_info&quot;: {&#xd;
+         &quot;id&quot;:&quot;e1658c60-1d95-4387-976d-2188c18f3caa&quot;,&#xd;
+         &quot;findStatus&quot;: &quot;ACCEPTED&quot;&#xd;
+    }&#xd;
+   &#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">StolenVehicle/updateFindInformationStatus</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="updateFindInformationStatusrRejcted" enabled="false">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+   &quot;find_info&quot;: {&#xd;
+         &quot;id&quot;:&quot;e1658c60-1d95-4387-976d-2188c18f3caa&quot;,&#xd;
+         &quot;findStatus&quot;: &quot;REJECTED&quot;&#xd;
+    }&#xd;
+   &#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">StolenVehicle/updateFindInformationStatus</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="uploadAttachmentsForFind" enabled="false">
           <elementProp name="HTTPsampler.Files" elementType="HTTPFileArgs">
             <collectionProp name="HTTPFileArgs.files">
@@ -560,6 +672,82 @@
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="uploadAttachmentsForAnonymousTheft" enabled="true">
+          <elementProp name="HTTPsampler.Files" elementType="HTTPFileArgs">
+            <collectionProp name="HTTPFileArgs.files">
+              <elementProp name="D:\ProjectX\webserver\stolenVehicle\StolenVehicle\src\test\resources\car1.jpg" elementType="HTTPFileArg">
+                <stringProp name="File.path">D:\ProjectX\webserver\stolenVehicle\StolenVehicle\src\test\resources\car1.jpg</stringProp>
+                <stringProp name="File.paramname">car1</stringProp>
+                <stringProp name="File.mimetype">image/jpeg</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">StolenVehicle/uploadAttachmentsForAnonymousTheft</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="reportAnonymousFind" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+	&quot;find_info&quot; : {&#xd;
+		&quot;find_location_cordinates&quot; : &quot;[23,23]&quot;,&#xd;
+		&quot;find_dateTime&quot; : &quot;2016-07-27 14:31:39&quot;,&#xd;
+		&quot;locators_name&quot; : &quot;Roger&quot;,&#xd;
+		&quot;locators_email&quot; : &quot;Federr&quot;,&#xd;
+		&quot;locators_contactNumber&quot; : &quot;893484345&quot;,&#xd;
+		&quot;findStatus&quot; : &quot;REPORTED&quot;		&#xd;
+	}&#xd;
+}&#xd;
+</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">StolenVehicle/reportAnonymousFind</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="reportFindForTheft" enabled="false">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
@@ -568,7 +756,7 @@
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
 	&quot;find_info&quot; : {&#xd;
-		&quot;find_location_cordinates&quot; : &quot;23,23&quot;,&#xd;
+		&quot;find_location_cordinates&quot; : &quot;[23,23]&quot;,&#xd;
 		&quot;find_dateTime&quot; : &quot;2016-07-27 14:31:39&quot;,&#xd;
 		&quot;locators_name&quot; : &quot;Roger&quot;,&#xd;
 		&quot;locators_email&quot; : &quot;Federr&quot;,&#xd;
@@ -618,7 +806,7 @@
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
 	&quot;theft_info&quot; : {&#xd;
-		&quot;theft_location_cordinates&quot; : &quot;234,234&quot;,&#xd;
+		&quot;theft_location_cordinates&quot; : &quot;[234,234]&quot;,&#xd;
 		&quot;country_id&quot; : &quot;1&quot;,&#xd;
 		&quot;rewards&quot; : &quot;201$&quot;,&#xd;
 		&quot;theft_dateTime&quot; : &quot;2016-07-24 16:12:12&quot;,&#xd;
@@ -633,7 +821,7 @@
 			&quot;extra_info&quot; : &quot;please help me&quot;,&#xd;
 			&quot;stolen&quot; : true,&#xd;
 			&quot;user_id&quot; : &quot;${user_id}&quot;,&#xd;
-			&quot;country_id&quot; : &quot;1&quot;	&#xd;
+			&quot;country_id&quot; : &quot;${country_id}&quot;	&#xd;
 			&#xd;
 		}&#xd;
      	&#xd;
@@ -678,7 +866,8 @@
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
 	&quot;reward&quot; : {&#xd;
-		&quot;theftId&quot; : &quot;&quot;&#xd;
+		&quot;theftId&quot; : &quot;${theft_id}&quot;,&#xd;
+		&quot;findInformationId&quot; : &quot;${find_id}&quot;&#xd;
 	}&#xd;
 }&#xd;
 </stringProp>

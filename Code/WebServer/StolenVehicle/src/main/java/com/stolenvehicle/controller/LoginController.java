@@ -69,13 +69,14 @@ public class LoginController {
 		}
 		return response;
 	}
-
+	
 	@RequestMapping(method = RequestMethod.POST, path = "/register")
 	public ResponseEntity<String> register(@RequestBody String requestBody) {
 
 		ResponseEntity<String> response;
 		try {
 
+			//#TODO: handle trasaction here as well
 			UserTo user = JsonUtil.toObject(requestBody, Constants.USER,
 					UserTo.class);
 			user.setUserStatus(UserStatusEnum.EMAIL_VERIFICATION_PENDING);
@@ -149,6 +150,8 @@ public class LoginController {
 					.resetUserPassword(passwordResetTo.getEmailAddress());
 			passwordResetTo.setActivationCode(activationCode);
 
+			// #TODO: to handle corner case when db gets updated but mailing
+			// fails we need to have transaction
 			String emailContent = templateService.generateContent(
 					Constants.VM_RESET_EMAIL, Constants.RESET_PASSWORD,
 					passwordResetTo,

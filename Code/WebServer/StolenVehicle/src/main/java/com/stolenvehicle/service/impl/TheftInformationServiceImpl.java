@@ -53,10 +53,10 @@ public class TheftInformationServiceImpl implements TheftInformationService {
 	}
 
 	@Override
-	public boolean updateTheftInformation(String theftId,
+	public boolean updateTheftInformation(String theftId,String findId,
 			TheftStatus theftStatus) throws BusinessException {
 
-		return theftInformationDao.updateTheftInformationStatus(theftId, theftStatus);
+		return theftInformationDao.updateTheftInformationStatus(theftId,findId, theftStatus);
 
 	}
 

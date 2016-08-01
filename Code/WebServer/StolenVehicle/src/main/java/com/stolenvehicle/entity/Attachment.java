@@ -11,19 +11,23 @@ public class Attachment {
 	private String find_information_id;
 	private AttachmentTypeEnum attachmentEnum;
 	private AuditToken auditToken;
+	private String publicUrl;
 
-	public Attachment(){
-		
+	public Attachment() {
+
 	}
+
 	public Attachment(String attachment_name, String attachment_path,
-			AttachmentTypeEnum attachmentTypeEnum, String vehicle_id,
-			String find_information_id) {
+			String publicUrl, AttachmentTypeEnum attachmentTypeEnum,
+			String vehicle_id, String find_information_id) {
 		this.attachment_name = attachment_name;
 		this.attachment_path = attachment_path;
+		this.publicUrl = publicUrl;
 		this.attachmentEnum = attachmentTypeEnum;
 		this.vehicle_id = vehicle_id;
 		this.find_information_id = find_information_id;
 	}
+
 	public String getId() {
 		return id;
 	}
@@ -78,6 +82,14 @@ public class Attachment {
 
 	public void setAuditToken(AuditToken auditToken) {
 		this.auditToken = auditToken;
+	}
+
+	public String getPublicUrl() {
+		return publicUrl;
+	}
+
+	public void setPublicUrl(String publicUrl) {
+		this.publicUrl = publicUrl;
 	}
 
 }

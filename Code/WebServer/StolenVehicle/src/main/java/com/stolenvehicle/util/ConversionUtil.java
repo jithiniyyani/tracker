@@ -22,13 +22,14 @@ public class ConversionUtil {
 
 		User user = new User();
 		user.setAddress(userTo.getAddress());
+		user.setAddressCordinates(userTo.getAddressCordinates());
 		user.setCity(userTo.getCity());
 		user.setContactNumber(userTo.getContactNumber());
 		user.setCountry_id(userTo.getCountry_id());
 		user.setEmail_notification(userTo.isEmail_notification());
 		user.setEmailaddress(userTo.getEmailaddress());
 		user.setGender(userTo.getGender());
-		user.setIc_password(userTo.getIc_password());
+		user.setIc_passport(userTo.getIc_passport());
 		user.setName(userTo.getName());
 		user.setPassword(userTo.getPassword());
 		user.setTermsAndCondition(userTo.isTermsAndCondition());
@@ -42,14 +43,14 @@ public class ConversionUtil {
 		UserTo user = new UserTo();
 		user.setId(userEntity.getId());
 		user.setAddress(userEntity.getAddress());
+		user.setAddressCordinates(userEntity.getAddressCordinates());
 		user.setCity(userEntity.getCity());
 		user.setContactNumber(userEntity.getContactNumber());
-		// Think of this
-		// user.setCountry_id(userTo.getCountry_id());
+		user.setCountry_id(userEntity.getCountry_id());
 		user.setEmail_notification(userEntity.isEmail_notification());
 		user.setEmailaddress(userEntity.getEmailaddress());
 		user.setGender(userEntity.getGender());
-		user.setIc_password(userEntity.getIc_password());
+		user.setIc_passport(userEntity.getIc_passport());
 		user.setName(userEntity.getName());
 		user.setPassword(userEntity.getPassword());
 		user.setTermsAndCondition(userEntity.isTermsAndCondition());
@@ -95,9 +96,10 @@ public class ConversionUtil {
 			vehicleTo.setAttachments(attachmentToList);
 			for (Attachment attachment : attachments) {
 
-				attachmentToList.add(new AttachmentTo(attachment
-						.getAttachment_name(), attachment.getAttachment_path(),
-						attachment.getAttachmentEnum()));
+				attachmentToList
+						.add(new AttachmentTo(attachment.getId(), attachment
+								.getAttachment_name(), null, attachment
+								.getPublicUrl(), attachment.getAttachmentEnum()));
 
 			}
 		}
@@ -150,6 +152,7 @@ public class ConversionUtil {
 		Attachment attachment = new Attachment();
 		attachment.setAttachment_name(attachmentTo.getAttachment_name());
 		attachment.setAttachment_path(attachmentTo.getAttachment_path());
+		attachment.setPublicUrl(attachmentTo.getPublicUrl());
 		attachment.setAttachmentEnum(attachmentTo.getAttachmentTypeEnum());
 		return attachment;
 	}
@@ -157,7 +160,10 @@ public class ConversionUtil {
 	public static AttachmentTo convertAttachmentEntity(Attachment attachment) {
 		AttachmentTo attachmentTo = new AttachmentTo();
 		attachmentTo.setAttachment_name(attachment.getAttachment_name());
-		attachmentTo.setAttachment_path(attachment.getAttachment_path());
+		// attachmentTo.setAttachment_path(attachment.getAttachment_path());
+		attachmentTo.setId(attachment.getId());
+		attachmentTo.setPublicUrl(attachment.getPublicUrl());
+		attachmentTo.setAttachmentTypeEnum(attachment.getAttachmentEnum());
 		return attachmentTo;
 	}
 
@@ -192,7 +198,14 @@ public class ConversionUtil {
 					findInformation.getLocators_email(),
 					findInformation.getLocators_contactNumber(),
 					findInformation.getFind_location_cordinates());
+			findInformationTo.setTheft_information_id(findInformation.getTheft_information_id());
+			List<AttachmentTo> attachmentList = new ArrayList<>();
+			findInformationTo.setAttachments(attachmentList);
+			for (Attachment attachment : findInformation.getAttachments()) {
 
+				attachmentList.add(ConversionUtil
+						.convertAttachmentEntity(attachment));
+			}
 			findInformationToList.add(findInformationTo);
 
 		}

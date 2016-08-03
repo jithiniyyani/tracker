@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="https://maps.google.com/maps/api/js?libraries=placeses,visualization,drawing,geometry,places"></script>
+    <script src="Scripts/angular/angular.js"></script>
+    <script src="Scripts/angular/angular-ui-router.js"></script>
+    <script src="Scripts/angular/ui-bootstrap.js"></script>
+    <script src="Scripts/angular/ng-map.js"></script>
+    <script src="Scripts/app.js"></script>
+    <!--Add controllers-->
+    <script src="Scripts/controller/MainController.js"></script>
+    <script src="Scripts/controller/LoginController.js"></script>
+        <!--Add controllers-->
+</head>
+<body class="full" ng-controller="MainController">
+  <!-- NAVIGATION -->
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+          <a class="navbar-brand" ui-sref="landing">{{homePageLabel}}</a>
+      </div>
+      <ul class="nav navbar-nav">
+          <li><a ui-sref="profile">{{profileLabel}}</a></li>
+          <li><a ui-sref="vehicle">{{vehiclesLabel}}</a></li>
+          <li><a ui-sref="alerts">{{alertsLabel}}</a></li>
+          <li><a ui-sref="disclaimer">{{disclaimerLabel}}</a></li>
+          <li><a ui-sref="termsAndConditions">{{termsAndConditionsLabel}}</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a ui-sref="signup"><span class="glyphicon glyphicon-user"></span>{{signUpLabel}}</a></li>
+          <li><a ui-sref="login"><span class="glyphicon glyphicon-log-in"></span>{{loginLabel}}</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <div class="container">
+      <div ui-view></div>
+  </div>
+</body>
+</html>

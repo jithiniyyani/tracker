@@ -1,0 +1,13 @@
+.verticalspace{
+ margin-top : 10px;
+}
+
+
+.full{
+   background: url('../images/background.jpeg') no-repeat center center fixed;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   background-size: cover;
+   -o-background-size: cover;
+   height:100%;
+}

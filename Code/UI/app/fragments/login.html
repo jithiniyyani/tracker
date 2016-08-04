@@ -1,20 +1,21 @@
 <div class="container" ng-controller="LoginController">
   <div class="col-md-12">
       <div class="alert alert-info">
-        {{lc_mainMessage}}
+        {{lc_mainMessage}}12
       </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6" class="ModalController">
     <form name="login">
       <div class="form-group">
           <label for="email">{{lc_emailAddressLabel}}</label>
-          <input type="email" name="email" class="form-control" ng-model="emailAddress">
+          <input type="email" name="email" class="form-control" ng-model="user.emailAddress">
       </div>
       <div class="form-group">
           <label for="pwd">{{lc_passowrd}}</label>
-          <input type="password" class="form-control" name="pwd" ng-model="password">
+          <input type="password" class="form-control" name="pwd" ng-model="user.password">
       </div>
-      <button type="submit" class="btn btn-primary" ng-click="login()">{{lc_submit}}</button>
+      <!--<button type="submit" class="btn btn-primary" ng-click="appLogin(user)">{{lc_submit}}</button>-->
+      <button type="submit" class="btn btn-primary" ng-click="open('md','fragments/signup.html','LoginController')">{{lc_submit}}</button>
     </form>
   </div>
   <div class="col-md-6">
@@ -22,12 +23,17 @@
   </div>
   <div class="col-md-12" style="min-height: 15px;">
     <div class="verticalspace">
-    <button ui-sref="signup" class="btn btn-primary">{{lc_register}}</button>
+    <button ui-sref="signup" class="btn">{{lc_register}}</button>
     </div>
   </div>
   <div class="col-md-12">
     <div class="verticalspace">
-        <button ui-sref="forgotPassword" class="btn btn-primary">{{lc_forgotPassword}}</button>
+        <button ui-sref="forgotPassword" class="btn">{{lc_forgotPassword}}</button>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="verticalspace" ng-controller="ModalController">
+        <button class="btn" ng-click="test()">Click to open modal</button>
     </div>
   </div>
 </div>

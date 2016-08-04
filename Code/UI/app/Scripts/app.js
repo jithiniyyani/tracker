@@ -1,5 +1,5 @@
 // app.js
-var app = angular.module('app', ['ui.router','ngMap','ui.bootstrap']);
+var app = angular.module('app', ['ui.router','ngMap','ui.bootstrap','ngAnimate']);
 
 //to split in different files latter
 app.config(function($stateProvider, $urlRouterProvider) {

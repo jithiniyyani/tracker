@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link	href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/app.css">
+
+
     <script src="https://maps.google.com/maps/api/js?libraries=placeses,visualization,drawing,geometry,places"></script>
     <script src="Scripts/angular/angular.js"></script>
-    <script src="Scripts/angular/angular-ui-router.js"></script>
-    <script src="Scripts/angular/ui-bootstrap.js"></script>
+    <script	src="Scripts/angular/angular-animate.js"></script>
+    <script src="Scripts/angular/ng-file-upload.min.js"></script>
     <script src="Scripts/angular/ng-map.js"></script>
+    <script	src="Scripts/angular/ui-bootstrap-tpls-1.3.3.js"></script>
+    <script src="Scripts/angular/angular-ui-router.js"></script>
     <script src="Scripts/app.js"></script>
+
+    <!--Add services here-->
+    <script src="Scripts/service/LoginService.js"></script>
+    <script src="Scripts/service/UrlService.js"></script>
+        <!--done-->
+
+
+
     <!--Add controllers-->
     <script src="Scripts/controller/MainController.js"></script>
     <script src="Scripts/controller/LoginController.js"></script>
+    <script src="Scripts/controller/ModalController.js"></script>
         <!--Add controllers-->
 </head>
 <body class="full" ng-controller="MainController">

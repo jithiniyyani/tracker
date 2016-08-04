@@ -1,4 +1,4 @@
-app.controller('LoginController',function($scope){
+app.controller('LoginController',function($scope, $http,LoginService,UrlService){
 
 //all labels section go here
   $scope.lc_mainMessage = "Please login to repot your lost vehicle";
@@ -8,9 +8,27 @@ app.controller('LoginController',function($scope){
   $scope.lc_register = "Register";
   $scope.lc_forgotPassword = "Forgot Password";
 
-  $scope.emailAddress = "test@gmail.com";
-  $scope.password = "password";
+  $scope.emailaddress = "";
+  $scope.password = "";
 
-  
+  $scope.appLogin = function(user) {
+
+    $http.post(UrlService.loginUrl, {
+      "user" : user
+    }).then(function(data) {
+
+      LoginService.setUser(data.data.user);
+      LoginService.setLoginStatus(true);
+
+
+    }, function(data) {
+      LoginService.setUser(null);
+      LoginService.setLoginStatus(false);
+      $scope.errorMessageLabel = "Username or password is invalid";
+    }
+
+    );
+
+  };
 
 });

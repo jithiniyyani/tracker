@@ -1,95 +1,40 @@
-app.controller('ModalController', function ($rootScope,$scope, $uibModal, $log) {
+app.controller('ModalController', function ($rootScope,$scope, $uibModal, $log,$http,request,LoginService,$timeout) {
 
   $scope.animationsEnabled = true;
-
-  $scope.open = function (size,file,linked_controller,paramters) {
-
-	  //there should be some better than this
-	  $rootScope.data = paramters;
-	  //don not review
-	  var modalInstance = $uibModal.open({
-      animation: $scope.animationsEnabled,
-      templateUrl: file,
-      controller: linked_controller,
-      size: size,
-      resolve: {
-          items: function () {
-              return $scope.items;
-            }
-          }
-    });
-
+  $scope.request = request;
+  $scope.failure = true;
+  $scope.errorMessageLabel = "";
+  $scope.showLoader = true;
+  $scope.data = {};
+  $scope.ok = function (){
+      $scope.request.modalInstance.dismiss('cancel');
+  };
+  $scope.cancel = function(){
+      $scope.request.modalInstance.dismiss('cancel');
   };
 
+  $scope.operation = function() {
 
-  $scope.test = function(){
+    var requestObject = {};
+    requestObject[$scope.request.entityAttribute] = $scope.request.payLoad;
+    if($scope.request.method == "post"){
 
-        var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: 'dialog/loader.html',
-        controller: 'LoginController',
-        size: 'md',
-        resolve: {
-            items: function () {
-                return $scope.items;
-              }
-            }
-      });
-
-  }
-
-});
-
-
-/*
-app.controller('ModalDemoCtrl', function ($scope, $uibModal, $log) {
-
-  $scope.items = ['item1', 'item2', 'item3'];
-
-  $scope.animationsEnabled = true;
-
-  $scope.open = function (size,file) {
-
-	  var modalInstance = $uibModal.open({
-      animation: $scope.animationsEnabled,
-      templateUrl: file,
-      controller: 'ModalInstanceCtrl',
-      size: size,
-      resolve: {
-        items: function () {
-          return $scope.items;
-        }
+      $http.post($scope.request.url, requestObject).then(function(data) {
+        $scope.data = data.data;
+        $scope.showLoader = false;
+        $scope.errorMessageLabel = "Welcome";
+        $timeout(function() {
+            $scope.request.modalInstance.close($scope.data);
+        }, 500);
+        $scope.failure = false;
+      }, function(data) {
+        $scope.showLoader = false;
+        $scope.errorMessageLabel = data.data.error.message;
       }
-    });
 
-    modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
-    }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
+      );
+    }
+	};
 
-  $scope.toggleAnimation = function () {
-    $scope.animationsEnabled = !$scope.animationsEnabled;
-  };
-
+  $scope.operation();
 });
-
-// Please note that $uibModalInstance represents a modal window (instance) dependency.
-// It is not the same as the $uibModal service used above.
-
-app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
-
-  $scope.items = items;
-  $scope.selected = {
-    item: $scope.items[0]
-  };
-
-  $scope.ok = function () {
-    $uibModalInstance.close($scope.selected.item);
-  };
-
-  $scope.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
-});*/

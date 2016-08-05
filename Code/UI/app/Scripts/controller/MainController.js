@@ -1,4 +1,4 @@
-app.controller('MainController',function($scope,LoginService,$http){
+app.controller('MainController',function($scope,LoginService,$http,$window){
 
 //all labels section go here
   $scope.homePageLabel = "Find My Stolen Vehicle";
@@ -20,8 +20,10 @@ app.controller('MainController',function($scope,LoginService,$http){
   	$http.post("http://localhost/StolenVehicle/logout").then(
 				function(data) {
 					LoginService.setLoginStatus(false);
+          $window.location='/app/#/landing';
 				}, function(data) {
 					LoginService.setLoginStatus(false);
+          $window.location='/app/#/landing';
 				}
 	  );
 	};

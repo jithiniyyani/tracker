@@ -2,5 +2,5 @@ package com.stolenvehicle.constants;
 
 public enum VehicleEnum {
 
-	TWO_WHEELER, THREE_WHLEELER, QUAD, TRUCK, TANK;
+	TWO_WHEELER, THREE_WHLEELER,FOUR_WHEELER, QUAD, TRUCK, TANK;
 }

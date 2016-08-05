@@ -1,11 +1,58 @@
 <div class="container" ng-controller="ProfileController">
-  <div class="panel panel-info">
+  <div class="panel panel-info" ng-if="loginStatus()">
     <div class="panel-heading">
                  <h3 class="panel-title">{{user.name}}</h3>
     </div>
      <div class="panel-body">
+       <div class="row">
+              <div class="col-md-3 col-lg-3 " align="center">
+                 <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive">
+               </div>
+                <div class=" col-md-9 col-lg-9 ">
+                  <table class="table table-user-information">
+                      <tbody>
+                        <tr>
+                            <td>Name:</td>
+                            <td>{{user.name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email Address:</td>
+                            <td>{{user.emailaddress}}</td>
+                        </tr>
+                        <tr>
+                            <td>Gender :</td>
+                            <td>{{user.gender}}</td>
+                        </tr>
+                        <tr>
+                            <td>Passport :</td>
+                            <td>{{user.ic_passport}}</td>
+                        </tr>
+                        <tr>
+                            <td>Contact Number :</td>
+                            <td>{{user.contactNumber}}</td>
+                        </tr>
+                        <tr>
+                            <td>City :</td>
+                            <td>{{user.city}}</td>
+                        </tr>
+                        <tr>
+                            <td>Address :</td>
+                            <td>{{user.address}}</td>
+                        </tr>                        
+                        <tr>
+                            <td>Email Notification :</td>
+                            <td>{{user.email_notification}}</td>
+                        </tr>
+                        <tr>
+                            <td>Country :</td>
+                            <td>{{user.country_id}}</td>
+                        </tr>
+                      </tbody>
+                  </table>
+                </div>
+            </div>
      </div>
-     <div class="panel-footer">              
+     <div class="panel-footer">
     </div>
   </div>
 

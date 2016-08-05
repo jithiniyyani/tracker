@@ -1,1 +1,19 @@
-status
+<div class="container" ng-controller="TheftInformationController">
+<h2>Status</h2>
+<p>
+  Check status of your vehicle.
+</p>
+<div class="row">
+  <div class="col-md-4">
+
+    <form name="searchVehicleTheftStatus">
+    <div class="form-group">
+        <label for="email">Vehcile Registration Number :</label>
+        <input type="text" id="registrationNumber" class="form-control" ng-model="registrationNumber">
+    </div>
+    <button type="submit" class="btn btn-primary" ng-click="getTheftStatusByVehicleRegNumber(registrationNumber)">Submit</button>
+    </form>
+    </div>
+
+</div>
+</div>

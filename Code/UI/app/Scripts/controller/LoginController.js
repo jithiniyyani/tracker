@@ -5,7 +5,7 @@ app.controller('LoginController', function($scope, $http, $uibModal,LoginService
     $scope.lc_emailAddressLabel = "Email Address";
     $scope.lc_passowrd = "Password";
     $scope.lc_submit = "Login";
-    $scope.lc_register = "Register";
+    $scope.lc_register = "Sign Up";
     $scope.lc_forgotPassword = "Forgot Password";
     $scope.request = {};
     $scope.user = {};

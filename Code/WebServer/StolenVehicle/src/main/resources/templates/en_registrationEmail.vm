@@ -1,9 +1,5 @@
-All the email content goes here
-if you want dynamic content then user dollar and variables namee like activiation id which can 
-be seen below
-
 Thank you for using our service.
 
 We want you to click on this link so that you can activate your account with us
 
- http://localhost:8080/StolenVehicle/activateUser?id=$user.activationId
+ http://localhost/app/#/activateUser?id=$user.activationId

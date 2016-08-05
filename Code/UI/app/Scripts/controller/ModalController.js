@@ -32,6 +32,23 @@ app.controller('ModalController', function ($rootScope,$scope, $uibModal, $log,$
       }
 
       );
+    }else if($scope.request.method == "get"){
+
+      $http.get($scope.request.url).then(function(data) {
+        $scope.data = data.data;
+        $scope.showLoader = false;
+        $timeout(function() {
+            $scope.request.modalInstance.close($scope.data);
+        }, 500);
+        $scope.errorMessageLabel = "Success";
+        $scope.failure = false;
+        }, function(data) {
+        $scope.showLoader = false;
+        $scope.errorMessageLabel = data.data.error.message;
+        }
+
+      );
+
     }
 	};
   $scope.operation();

@@ -8,6 +8,8 @@ app.controller('SignUpController', function($scope, $http, $uibModal) {
         $scope.request = {};
         $scope.request.method = 'post';
         $scope.request.url = 'http://localhost/StolenVehicle/register';
+        $scope.user.email_notification = true;
+        $scope.user.termsAndCondition = true;
         $scope.request.payLoad = $scope.user;
         $scope.request.entityAttribute = 'user';
         $scope.modalInstance = $uibModal.open({

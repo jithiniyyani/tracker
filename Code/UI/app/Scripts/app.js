@@ -65,6 +65,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
             url: '/viewtheft',
             templateUrl: 'fragments/viewtheft.html'
         })
+        .state('activateAccount', {
+            url: '/activateUser',
+            templateUrl: 'fragments/activateUser.html'
+        })
         .state('login',{
           url : '/login',
           templateUrl: 'fragments/login.html'

@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.stolenvehicle.constants.Constants;
+import com.stolenvehicle.constants.ErrorEnum;
 import com.stolenvehicle.constants.ExceptionConstants;
 import com.stolenvehicle.constants.UserStatusEnum;
 import com.stolenvehicle.dto.EmailTo;
+import com.stolenvehicle.dto.ErrorTo;
 import com.stolenvehicle.dto.ResetPasswordTo;
 import com.stolenvehicle.dto.SetPasswordTo;
 import com.stolenvehicle.dto.UserTo;
@@ -124,8 +126,11 @@ public class LoginController {
 
 				boolean activateUser = userService.activateUser(activationId);
 				response = activateUser ? new ResponseEntity<String>(
-						HttpStatus.OK) : new ResponseEntity<String>(
-						HttpStatus.BAD_REQUEST);
+						HttpStatus.OK) : new ResponseEntity<String>(JsonUtil.toJson(
+								Constants.ERROR,
+								new ErrorTo(ErrorEnum.ACTIVATE_USER_ID_NOT_FOUND.getCode(),
+										ErrorEnum.ACTIVATE_USER_ID_NOT_FOUND.getMessage())),
+								HttpStatus.BAD_REQUEST);
 			}
 		} catch (Exception ex) {
 

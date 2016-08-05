@@ -1,4 +1,4 @@
-app.controller('LoginController', function($scope, $http, $uibModal,LoginService) {
+app.controller('LoginController', function($scope, $http, $uibModal,LoginService,$window) {
 
     //all labels section go here
     $scope.lc_mainMessage = "Please login to repot your lost vehicle";
@@ -32,6 +32,7 @@ app.controller('LoginController', function($scope, $http, $uibModal,LoginService
         $scope.request.modalInstance = $scope.modalInstance;
         $scope.modalInstance.result.then(function(result) {
             LoginService.setLoginStatus(true);
+            $window.location='/app/#/landing';
             //LoginService.setUser(result);
         }, function() {
           LoginService.setLoginStatus(false);

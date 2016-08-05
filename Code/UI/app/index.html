@@ -17,12 +17,15 @@
     <!--Add services here-->
     <script src="Scripts/service/LoginService.js"></script>
     <!--done-->
+    <script src="Scripts/init/run.js"></script>
     <!--Add controllers-->
     <script src="Scripts/controller/MainController.js"></script>
     <script src="Scripts/controller/LoginController.js"></script>
     <script src="Scripts/controller/SignUpController.js"></script>
+    <script src="Scripts/controller/LandingPageController.js"></script>
     <script src="Scripts/controller/ResetPasswordController.js"></script>
     <script src="Scripts/controller/TheftInformationController.js"></script>
+    <script src="Scripts/controller/AttachmentUploadController.js"></script>
     <script src="Scripts/controller/ModalController.js"></script>
         <!--Add controllers-->
 </head>
@@ -34,15 +37,16 @@
           <a class="navbar-brand" ui-sref="landing">{{homePageLabel}}</a>
       </div>
       <ul class="nav navbar-nav">
-          <li><a ui-sref="profile">{{profileLabel}}</a></li>
-          <li><a ui-sref="vehicle">{{vehiclesLabel}}</a></li>
-          <li><a ui-sref="alerts">{{alertsLabel}}</a></li>
+          <li ng-if="loginStatus()"><a ui-sref="profile">{{profileLabel}}</a></li>
+          <li ng-if="loginStatus()"><a ui-sref="vehicle">{{vehiclesLabel}}</a></li>
+          <li ng-if="loginStatus()"><a ui-sref="alerts">{{alertsLabel}}</a></li>
           <li><a ui-sref="disclaimer">{{disclaimerLabel}}</a></li>
           <li><a ui-sref="termsAndConditions">{{termsAndConditionsLabel}}</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-          <li><a ui-sref="signup"><span class="glyphicon glyphicon-user"></span>{{signUpLabel}}</a></li>
-          <li><a ui-sref="login"><span class="glyphicon glyphicon-log-in"></span>{{loginLabel}}</a></li>
+          <li ng-if="!loginStatus()"><a ui-sref="signup"><span class="glyphicon glyphicon-user"></span>{{signUpLabel}}</a></li>
+          <li ng-if="!loginStatus()"><a ui-sref="login"><span class="glyphicon glyphicon-log-in"></span>{{loginLabel}}</a></li>
+          <li ng-if="loginStatus()"><a ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span>{{logoutLabel}}</a></li>
       </ul>
     </div>
   </nav>

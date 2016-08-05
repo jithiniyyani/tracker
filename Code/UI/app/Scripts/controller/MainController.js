@@ -1,4 +1,4 @@
-app.controller('MainController',function($scope){
+app.controller('MainController',function($scope,LoginService,$http){
 
 //all labels section go here
   $scope.homePageLabel = "Find My Stolen Vehicle";
@@ -9,5 +9,20 @@ app.controller('MainController',function($scope){
   $scope.termsAndConditionsLabel = "Terms and Conditions";
   $scope.signUpLabel = "Sign Up";
   $scope.loginLabel = "Login";
+  $scope.logoutLabel = "Logout";
 
+
+  $scope.loginStatus = function() {
+  		return LoginService.loginStatus();
+  };
+
+  $scope.logout = function() {
+  	$http.post("http://localhost/StolenVehicle/logout").then(
+				function(data) {
+					LoginService.setLoginStatus(false);
+				}, function(data) {
+					LoginService.setLoginStatus(false);
+				}
+	  );
+	};
 });

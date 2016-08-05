@@ -12,7 +12,6 @@ app.controller('ModalController', function ($rootScope,$scope, $uibModal, $log,$
   $scope.cancel = function(){
       $scope.request.modalInstance.dismiss('cancel');
   };
-
   $scope.operation = function() {
 
     var requestObject = {};
@@ -35,6 +34,5 @@ app.controller('ModalController', function ($rootScope,$scope, $uibModal, $log,$
       );
     }
 	};
-
   $scope.operation();
 });

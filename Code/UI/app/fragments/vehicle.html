@@ -40,6 +40,16 @@
                   <td>Stolen :</td>
                   <td>{{vehicle.stolen}}</td>
               </tr>
+              <tr>
+                  <td>Images :</td>
+                  <td>
+
+                        <div ng-repeat="attachment in vehicle.attachments">
+                              <p>{{attachment.attachment_name}}</p>
+                              <img ng-src="{{attachment.publicUrl}}" class="img-thumbnail" alt="{{attachment.attachment_name}}" width="304" height="236">
+                        </div>
+                  </td>
+              </tr>
             </tbody>
           </table>
       </div>

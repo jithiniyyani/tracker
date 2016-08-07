@@ -1,41 +1,40 @@
+<div ng-controller="TheftInformationController">
+<div ng-init="getTheftInfoById()">
 <p>
-<span>Name</span> has lost her his car
-<span>Registration No</span> on
-<span>Date</span> at
-<span>Time</span> at
-<span>Location</span>
+<span>{{theft_info_view.user.name}}</span> has lost her/his car
+<span>{{theft_info_view.vehicle.registrationNo}}</span> on
+<span>Date & Time</span> at {{theft_info_view.theft_dateTime}}
+<span>Location</span>{{theft_info_view.theft_location_cordinates}}
 Appreciate if you could report
 </p>
 <div class="container">
 
   <div>
-    Type <span>Type</span>
+    Type <span>{{theft_info_view.vehicle.type}}</span>
   </div>
   <div>
     Make <span>Make</span>
   </div>
   <div>
-      Model <span>Model</span>
+      Model <span>{{theft_info_view.vehicle.model}}</span>
   </div>
   <div>
-    YOM <span>YOM</span>
+    YOM <span>{{theft_info_view.vehicle.year_of_make}}</span>
   </div>
   <div class="container">
     <div class="row">
-      <div class="col-md-4">
-          <img src="\attachments\0b45dbe0-e4ec-4e3e-ab80-c5264365683b\car1.jpg" class="img-thumbnail" alt="Cinque Terre" width="304" height="236">
-      </div>
-      <div class="col-md-4">
-          <img src="\attachments\0b45dbe0-e4ec-4e3e-ab80-c5264365683b\car1.jpg" class="img-thumbnail" alt="Cinque Terre" width="304" height="236">
-      </div>
-      <div class="col-md-4">
-          <img src="\attachments\0b45dbe0-e4ec-4e3e-ab80-c5264365683b\car1.jpg" class="img-thumbnail" alt="Cinque Terre" width="304" height="236">
+      <div ng-repeat = "attachment in theft_info_view.vehicle.attachments" class="col-md-4">
+          <img ng-src="{{attachment.publicUrl}}" class="img-thumbnail" alt="Cinque Terre" width="304" height="236">
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
-          <ng-map center="[40.74, -74.18]"></ng-map>
-      </div>
+      <div class="col-md-3">
+      <ng-map center="{{theft_info_view.theft_location_cordinates}}" zoom="16">
+           <marker position="{{theft_info_view.theft_location_cordinates}}" title="Lost here"></marker>
+      </ng-map>
     </div>
-  </div>
+   </div>
+</div>
+</div>
+</div>
 </div>

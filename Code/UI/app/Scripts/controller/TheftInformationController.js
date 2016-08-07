@@ -1,16 +1,20 @@
-app.controller('TheftInformationController', function($scope, $http, $uibModal) {
+app.controller('TheftInformationController', function($scope, $http, $uibModal,LoginService) {
 
      $scope.theft_info = {};
      $scope.theft_info.vehicle = {};
      $scope.request={};
      $scope.registrationNumber = null;
+     $scope.user = LoginService.getUser();
      $scope.registerTheft = function(theft_info) {
 
        //do init here
         $scope.theft_info.vehicle.stolen = true;
         $scope.theft_info.status = 'LOST';
+        $scope.theft_info.vehicle.user_id = $scope.user.id;
+        $scope.theft_info.vehicle.country_id = $scope.user.country_id;
         $scope.request.method = 'post';
         $scope.request.url = 'http://localhost/StolenVehicle/registerTheft';
+
         $scope.request.payLoad = $scope.theft_info;
         $scope.request.entityAttribute = 'theft_info';
         $scope.modalInstance = $uibModal.open({
@@ -26,7 +30,11 @@ app.controller('TheftInformationController', function($scope, $http, $uibModal) 
         $scope.request.modalInstance = $scope.modalInstance;
         $scope.modalInstance.result.then(function(result) {
 
+
+
         }, function() {
+
+          
 
         });
     };

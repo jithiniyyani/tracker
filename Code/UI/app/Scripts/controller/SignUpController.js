@@ -1,4 +1,4 @@
-app.controller('SignUpController', function($scope, $http, $uibModal) {
+app.controller('SignUpController', function($scope, $http, $uibModal,$window,LoginService) {
 
 
     $scope.user = {};

@@ -1,4 +1,4 @@
-app.controller('UserActivationController', function($scope, $http, $uibModal,$location) {
+app.controller('UserActivationController', function($scope, $http, $uibModal,$location,$window) {
 
 
      $scope.activationId = $location.search().id;
@@ -23,6 +23,8 @@ app.controller('UserActivationController', function($scope, $http, $uibModal,$lo
         }, function() {
 
         });
+
+            $window.location='/app/#/login';
     };
 
 });

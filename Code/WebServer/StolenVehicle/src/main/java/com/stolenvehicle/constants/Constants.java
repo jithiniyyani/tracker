@@ -10,6 +10,7 @@ public class Constants {
 	public static final String THEFT_INFO = "theft_info";
 	public static final String FIND_INFO = "find_info";
 	public static final String FIND_INFO_LIST = "find_info_list";
+	public static final String VEHICLES = "vehicles";
 	public static final String REWARD = "reward";
 	public static final String WELCOME_EMAIL_SUBJECT = "Welcome to find my stolen vehicle";
 	public static final String NOTIFICATION_EMAIL_SUBJECT = "Some one found your car";

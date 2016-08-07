@@ -57,7 +57,10 @@ public class LoginController {
 			user = userService.authenticateUser(user);
 			HttpSession session = request.getSession(true);
 			session.setAttribute(Constants.USER, user);
-			response = new ResponseEntity<String>(HttpStatus.OK);
+			response = new ResponseEntity<String>(
+					JsonUtil.toJson(Constants.SUCCESS,
+							new ErrorTo(SuccessEnum.LOGIN_SUCCESS.getCode(), SuccessEnum.LOGIN_SUCCESS.getMessage())),
+					HttpStatus.OK);
 
 		} catch (Exception ex) {
 

@@ -4,7 +4,6 @@ app.run(function(LoginService,$http){
        LoginService.setLoginStatus(true);
        LoginService.setUser(data.data.user);
    }, function(data) {
-     console.log(data);
       LoginService.setLoginStatus(false);
       LoginService.setUser(null);
 

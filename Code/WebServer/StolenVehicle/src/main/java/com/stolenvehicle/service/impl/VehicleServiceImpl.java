@@ -1,5 +1,8 @@
 package com.stolenvehicle.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +17,7 @@ import com.stolenvehicle.util.ConversionUtil;
 @Service
 public class VehicleServiceImpl implements VehicleService {
 
-	private static final Logger LOGGER = Logger
-			.getLogger(VehicleServiceImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(VehicleServiceImpl.class);
 
 	@Autowired
 	private VehicleDao vehicleDao;
@@ -27,5 +29,17 @@ public class VehicleServiceImpl implements VehicleService {
 		vehicleDao.saveVehicle(vehicle);
 		vehicleTo.setId(vehicle.getId());
 		return vehicleTo;
+	}
+
+	@Override
+	public List<VehicleTo> getRegisteredVehicleForUser(String userId) throws BusinessException {
+
+		List<VehicleTo> vehicles = new ArrayList<>();
+		List<Vehicle> registeredVehicleForUser = vehicleDao.getRegisteredVehicleForUser(userId);
+		for (Vehicle vehicle : registeredVehicleForUser) {
+
+			vehicles.add(ConversionUtil.convertVehicleEntity(vehicle));
+		}
+		return vehicles;
 	}
 }

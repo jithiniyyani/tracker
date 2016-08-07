@@ -2,8 +2,9 @@ package com.stolenvehicle.constants;
 
 public enum SuccessEnum {
 
-	ACTIVATE_ACCOUNT("200",
-			"Kindly activate you account by clicking on the activation link in your mail box");
+	ACTIVATE_ACCOUNT("200", "Kindly activate you account by clicking on the activation link in your mail box"),
+
+	LOGIN_SUCCESS("200", "Welcome");
 
 	private String code;
 	private String message;

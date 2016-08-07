@@ -73,7 +73,7 @@ public class TheftInformationDaiImpl extends AbstractDao implements
 				throws SQLException {
 
 			List<Attachment> attachments = new ArrayList<Attachment>();
-			if (resultSet.next()) {
+			while (resultSet.next()) {
 
 				Attachment attachment = new Attachment();
 				attachment.setId(resultSet.getString("id"));

@@ -21,10 +21,18 @@ app.controller('ModalController', function ($rootScope,$scope, $uibModal, $log,$
       $http.post($scope.request.url, requestObject).then(function(data) {
         $scope.data = data.data;
         $scope.showLoader = false;
-        $scope.errorMessageLabel = data.data.message;
+        if (typeof $scope.data.success === "undefined"){
+
+            $scope.errorMessageLabel = "Success"
+
+        }else{
+
+            $scope.errorMessageLabel = $scope.data.success.message;
+
+        }
         $timeout(function() {
             $scope.request.modalInstance.close($scope.data);
-        }, 500);
+        }, 2000);
         $scope.failure = false;
       }, function(data) {
         $scope.showLoader = false;
@@ -39,7 +47,7 @@ app.controller('ModalController', function ($rootScope,$scope, $uibModal, $log,$
         $scope.showLoader = false;
         $timeout(function() {
             $scope.request.modalInstance.close($scope.data);
-        }, 500);
+        }, 2000);
         $scope.errorMessageLabel = "Success";
         $scope.failure = false;
         }, function(data) {
@@ -48,6 +56,13 @@ app.controller('ModalController', function ($rootScope,$scope, $uibModal, $log,$
         }
 
       );
+
+    }else if($scope.request.method == "show"){
+        $scope.showLoader = false;
+        $scope.errorMessageLabel  = $scope.request.message;
+        $timeout(function() {
+          $scope.request.modalInstance.close($scope.data);
+        }, 2000);
 
     }
 	};

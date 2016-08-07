@@ -21,7 +21,7 @@ app.controller('ModalController', function ($rootScope,$scope, $uibModal, $log,$
       $http.post($scope.request.url, requestObject).then(function(data) {
         $scope.data = data.data;
         $scope.showLoader = false;
-        $scope.errorMessageLabel = "Welcome";
+        $scope.errorMessageLabel = data.data.message;
         $timeout(function() {
             $scope.request.modalInstance.close($scope.data);
         }, 500);

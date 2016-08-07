@@ -25,9 +25,13 @@ app.controller('SignUpController', function($scope, $http, $uibModal) {
         $scope.request.modalInstance = $scope.modalInstance;
         $scope.modalInstance.result.then(function(result) {
 
+          LoginService.setLoginStatus(false);
+          $window.location='/app/#/landing';
 
         }, function() {
-
+          LoginService.setLoginStatus(false);
+          LoginService.setUser(null);
+          $window.location='/app/#/landing';
 
         });
     };

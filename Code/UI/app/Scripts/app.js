@@ -47,12 +47,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
             url: '/lost',
             templateUrl: 'fragments/lost.html'
         })
-
         .state('found', {
             url: '/found',
             templateUrl: 'fragments/found.html'
         })
-
+        .state('found.search', {
+            url: '/search',
+            templateUrl: 'fragments/find_search.html'
+        })
+        .state('found.upload', {
+            url: '/upload',
+            templateUrl: 'fragments/find_upload.html'
+        })
         .state('status', {
             url: '/status',
             templateUrl: 'fragments/status.html'

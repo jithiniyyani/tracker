@@ -1,20 +1,15 @@
-<div class="container">
 <h2>Report a found car</h2>
 <p>
   Found an aboundaned or suspicious vehicle ?
   Find if it is lost
+
+  Follow our 3 simple steps and stand a chance to win :
 </p>
 <div class="row">
-  <div class="col-md-4">
-
-    <form>
-    <div class="form-group">
-        <label for="email">Vehcile Registration Number :</label>
-        <input type="text" id="registrationNumber" class="form-control">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-      </div>
-
+  <ul class="nav nav-pills">
+    <li role="presentation"><a  ui-sref=".search">Search</a></li>
+    <li role="presentation"><a ui-sref=".upload">Upload</a></li>
+  </ul>
 </div>
+<div ui-view>
 </div>

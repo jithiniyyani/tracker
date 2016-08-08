@@ -33,8 +33,6 @@ public class TheftInformationDaiImpl extends AbstractDao implements
 		public TheftInformation extractData(final ResultSet resultSet)
 				throws SQLException {
 
-			// ti.id,u.name,
-			// v.registrationNo,ti.theft_dateTime,ti.theft_location_cordinates,v.type,v.make,v.model,v.year_of_make
 			TheftInformation theftInformation = null;
 			if (resultSet.next()) {
 				theftInformation = new TheftInformation();
@@ -46,6 +44,8 @@ public class TheftInformationDaiImpl extends AbstractDao implements
 
 				theftInformation.setStatus(TheftStatus.valueOf(resultSet
 						.getString("ti.status")));
+				theftInformation.setRewards(resultSet
+						.getString("ti.rewards"));
 				User user = new User();
 				user.setName(resultSet.getString("u.name"));
 				user.setId(resultSet.getString("u.id"));
@@ -55,6 +55,8 @@ public class TheftInformationDaiImpl extends AbstractDao implements
 						.getString("v.type")));
 				vehicle.setId(resultSet.getString("v.id"));
 				vehicle.setModel(resultSet.getString("v.model"));
+				vehicle.setMake(resultSet.getString("v.make"));
+				vehicle.setColor(resultSet.getString("v.color"));
 				vehicle.setYear_of_make((resultSet.getString("v.year_of_make")));
 				vehicle.setRegistrationNo(resultSet
 						.getString("v.registrationNo"));

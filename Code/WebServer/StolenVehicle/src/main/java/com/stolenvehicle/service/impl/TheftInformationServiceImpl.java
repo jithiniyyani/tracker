@@ -1,10 +1,13 @@
 package com.stolenvehicle.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stolenvehicle.constants.TheftStatus;
 import com.stolenvehicle.dao.TheftInformationDao;
+import com.stolenvehicle.dto.SearchTo;
 import com.stolenvehicle.dto.TheftInformationTo;
 import com.stolenvehicle.entity.TheftInformation;
 import com.stolenvehicle.exception.BusinessException;
@@ -58,6 +61,12 @@ public class TheftInformationServiceImpl implements TheftInformationService {
 
 		return theftInformationDao.updateTheftInformationStatus(theftId,findId, theftStatus);
 
+	}
+
+	@Override
+	public List<TheftInformationTo> getTheftInformationBySearchTo(SearchTo searchTo) {
+		
+		return null;
 	}
 
 }

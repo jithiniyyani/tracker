@@ -47,8 +47,8 @@ app.controller('ModalController', function ($rootScope,$scope, $uibModal, $log,$
         $scope.showLoader = false;
         $timeout(function() {
             $scope.request.modalInstance.close($scope.data);
-        }, 2000);
-        $scope.errorMessageLabel = "Success";
+        }, $scope.request.modalTime);
+        $scope.errorMessageLabel = $scope.request.message;
         $scope.failure = false;
         }, function(data) {
         $scope.showLoader = false;

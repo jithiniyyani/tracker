@@ -19,5 +19,6 @@ public class Query {
 	public static final String GET_FIND_INFOLIST_BY_USER_ID = "select fi.id,fi.locators_name ,fi.find_location_cordinates,fi.locators_contactNumber,v.id,ti.id from user u, vehicle v,theft_information ti,find_information fi where v.user_id = ? and ti.vehicle_id = v.id and ti.status = 'lost' and ti.id = fi.theft_information_id;";
 	public static final String UPDATE_FIND_INFORMATION_STATUS_BY_ID = "update find_information set status = ? where id = ?;";
 	public static final String GET_VEHICLE_BY_USER_ID = "select * from vehicle where user_id = ?;";
-	public static final String GET_ATTACHMENTS_BY_VEHICLE_ID="select * from attachment where vehicle_id = ?;";
+	public static final String GET_ATTACHMENTS_BY_VEHICLE_ID = "select * from attachment where vehicle_id = ?;";
+	public static final String GET_COUNTRY_LIST = "select * from country;";
 }

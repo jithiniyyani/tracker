@@ -6,6 +6,7 @@ public class Constants {
 	public static final String APP_NAME = "APP";
 	public static final String ERROR = "error";
 	public static final String SUCCESS = "success"; 
+	public static final String SEARCH = "search";
 	public static final String USER = "user";
 	public static final String THEFT_INFO = "theft_info";
 	public static final String FIND_INFO = "find_info";

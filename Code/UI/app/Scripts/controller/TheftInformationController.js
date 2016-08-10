@@ -2,10 +2,16 @@ app.controller('TheftInformationController', function($scope, $http, $uibModal,L
 
      $scope.theft_info = {};
      $scope.theft_info.vehicle = {};
+     $scope.search = {};
      $scope.request={};
      $scope.registrationNumber = null;
      $scope.user = LoginService.getUser();
      $scope.theft_info_view = {};
+     $http.get("http://localhost/StolenVehicle/countries").then(function(response) {
+             $scope.countryList = response.data;
+         }, function(data) {
+
+       });
      $scope.registerTheft = function(theft_info) {
 
        //do init here
@@ -52,6 +58,8 @@ app.controller('TheftInformationController', function($scope, $http, $uibModal,L
 
     $scope.request = {};
     $scope.request.method = 'get';
+    $scope.request.message = "Please wait as we search for a match";
+    $scope.request.modalTime = 2000;
     $scope.request.url = 'http://localhost/StolenVehicle/searchForTheft?regNumber=' + registrationNumber;
     $scope.modalInstance = $uibModal.open({
            animation: true,
@@ -72,7 +80,7 @@ app.controller('TheftInformationController', function($scope, $http, $uibModal,L
 
        });
 
- }
+ };
 
  $scope.getTheftInfoById = function(){
    //assign it here
@@ -84,5 +92,33 @@ app.controller('TheftInformationController', function($scope, $http, $uibModal,L
 
           });
  };
+
+ $scope.searchForStolenVehicle = function(search){
+
+    $scope.request = {};
+    $scope.request.method = 'post';
+    $scope.request.message = "Please wait as we search for a match";
+    $scope.request.modalTime = 2000;
+    $scope.request.payLoad = search;
+    $scope.request.entityAttribute = 'search';
+    $scope.request.url = 'http://localhost/StolenVehicle/searchForTheft';
+    $scope.modalInstance = $uibModal.open({
+           animation: true,
+           templateUrl: 'dialog/loader.html',
+           controller: 'ModalController',
+           size: 'md',
+           resolve: {
+               request: $scope.request
+           }
+
+       });
+       $scope.request.modalInstance = $scope.modalInstance;
+       $scope.modalInstance.result.then(function(result) {
+
+       }, function() {
+
+       });
+
+ }
 
 });

@@ -11,4 +11,11 @@ public interface VehicleService {
 
 	public List<VehicleTo> getRegisteredVehicleForUser(String userId) throws BusinessException;
 
+	public List<String> getVehicleTypes(String countryId) throws BusinessException;
+
+	public List<String> getVehicleMakeList(String countryId, String vehicleType) throws BusinessException;
+
+	public List<String> getVehicleModelList(String countryId, String vehicleType, String makeType)
+			throws BusinessException;
+
 }

@@ -21,4 +21,7 @@ public class Query {
 	public static final String GET_VEHICLE_BY_USER_ID = "select * from vehicle where user_id = ?;";
 	public static final String GET_ATTACHMENTS_BY_VEHICLE_ID = "select * from attachment where vehicle_id = ?;";
 	public static final String GET_COUNTRY_LIST = "select * from country;";
+	public static final String GET_VEHICLE_TYPE_LIST = "select distinct type from vehicle where country_id = ?;";
+	public static final String GET_VEHICLE_MAKE_LIST = "select distinct make from vehicle where country_id = ? and type= ?;";
+	public static final String GET_VEHICLE_MODEL_LIST = "select distinct model from vehicle where country_id = ? and type= ? and make = ?;";
 }

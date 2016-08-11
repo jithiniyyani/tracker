@@ -49,6 +49,26 @@ public class VehicleDaoImpl extends AbstractDao implements VehicleDao {
 		}
 	};
 
+	private static final class VehicleTypeResultSetExtractor implements ResultSetExtractor<List<String>> {
+
+		private String attributeName;
+
+		public VehicleTypeResultSetExtractor(String attributeName) {
+			this.attributeName = attributeName;
+		}
+
+		@Override
+		public List<String> extractData(final ResultSet resultSet) throws SQLException {
+
+			List<String> vehicleType = new ArrayList<String>();
+			while (resultSet.next()) {
+
+				vehicleType.add(resultSet.getString(attributeName));
+			}
+			return vehicleType;
+		}
+	};
+
 	private static final class AttachmentResultSetExtractor implements ResultSetExtractor<List<Attachment>> {
 
 		@Override
@@ -100,6 +120,31 @@ public class VehicleDaoImpl extends AbstractDao implements VehicleDao {
 
 		}
 		return vehicleList;
+	}
+
+	@Override
+	public List<String> getVehicleTypes(String countryId) throws BusinessException {
+
+		final Object vehicleTypeListOjbect = this.fetch(Query.GET_VEHICLE_TYPE_LIST, new Object[] { countryId },
+				new VehicleTypeResultSetExtractor("type"));
+		return (List<String>) vehicleTypeListOjbect;
+	}
+
+	@Override
+	public List<String> getVehicleMakeList(String countryId, String vehicleType) throws BusinessException {
+
+		final Object vehicleMakeListOjbect = this.fetch(Query.GET_VEHICLE_MAKE_LIST,
+				new Object[] { countryId, vehicleType }, new VehicleTypeResultSetExtractor("make"));
+		return (List<String>) vehicleMakeListOjbect;
+	}
+
+	@Override
+	public List<String> getVehicleModelList(String countryId, String vehicleType, String vehicleMake)
+			throws BusinessException {
+
+		final Object vehicleModelListOjbect = this.fetch(Query.GET_VEHICLE_MODEL_LIST,
+				new Object[] { countryId, vehicleType, vehicleMake }, new VehicleTypeResultSetExtractor("model"));
+		return (List<String>) vehicleModelListOjbect;
 	}
 
 }

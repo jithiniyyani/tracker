@@ -18,6 +18,8 @@ select * from vehicle;
 update theft_information
 set status = 'LOST';
 
+select distinct type from vehicle where country_id = ?;
+select * from vehicle where country_id = ? and type= ?;
 select * from country;
 select * from vehicle where user_id = 'c49108ca-614a-4009-a662-6b07206407f9'
 select * from attachment where vehicle_id = 'dd69eda5-0592-41a6-bdef-c664ff06fc34'

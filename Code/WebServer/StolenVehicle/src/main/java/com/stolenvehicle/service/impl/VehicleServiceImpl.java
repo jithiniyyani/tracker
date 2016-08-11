@@ -42,4 +42,21 @@ public class VehicleServiceImpl implements VehicleService {
 		}
 		return vehicles;
 	}
+
+	@Override
+	public List<String> getVehicleTypes(String countryId) throws BusinessException {
+		return vehicleDao.getVehicleTypes(countryId);
+	}
+
+	@Override
+	public List<String> getVehicleMakeList(String countryId, String vehicleType) throws BusinessException {
+		return vehicleDao.getVehicleMakeList(countryId, vehicleType);
+	}
+
+	@Override
+	public List<String> getVehicleModelList(String countryId, String vehicleType, String makeType)
+			throws BusinessException {
+
+		return vehicleDao.getVehicleModelList(countryId, vehicleType, makeType);
+	}
 }

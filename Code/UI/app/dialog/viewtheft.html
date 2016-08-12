@@ -1,0 +1,42 @@
+<div class="modal-body modal_theme">
+<div class="container">
+  <p>
+  <span>{{theft_info_view.user.name}}</span> has lost her/his car
+  <span>{{theft_info_view.vehicle.registrationNo}}</span> on
+  <span>Date & Time</span> at {{theft_info_view.theft_dateTime}}
+  <span>Location</span>{{theft_info_view.theft_location_cordinates}}
+  Appreciate if you could report
+  </p>
+  <div class="container">
+
+    <div>
+      Type <span>{{theft_info_view.vehicle.type}}</span>
+    </div>
+    <div>
+      Make <span>Make</span>
+    </div>
+    <div>
+        Model <span>{{theft_info_view.vehicle.model}}</span>
+    </div>
+    <div>
+      YOM <span>{{theft_info_view.vehicle.year_of_make}}</span>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div ng-repeat = "attachment in theft_info_view.vehicle.attachments" class="col-md-4">
+            <img ng-src="{{attachment.publicUrl}}" class="img-thumbnail" alt="Cinque Terre" width="304" height="236">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+        <ng-map center="{{theft_info_view.theft_location_cordinates}}" zoom="16">
+             <marker position="{{theft_info_view.theft_location_cordinates}}" title="Lost here"></marker>
+        </ng-map>
+      </div>
+     </div>
+  </div>
+  <button ng-click="confirm()">Confirm</button>
+  <button ng-click="cancel()">Dismiss</button>
+  </div>
+</div>
+</div>

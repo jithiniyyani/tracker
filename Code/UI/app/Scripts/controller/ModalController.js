@@ -60,10 +60,12 @@ app.controller('ModalController', function ($rootScope,$scope, $uibModal, $log,$
     }else if($scope.request.method == "show"){
         $scope.showLoader = false;
         $scope.errorMessageLabel  = $scope.request.message;
-        $timeout(function() {
-          $scope.request.modalInstance.close($scope.data);
-        }, 2000);
+        if($scope.request.modalTime != -1){
+          $timeout(function() {
+            $scope.request.modalInstance.close($scope.data);
+          }, 2000);
 
+        }
     }
 	};
   $scope.operation();

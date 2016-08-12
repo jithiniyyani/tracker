@@ -1,36 +1,40 @@
-<div class="row" ng-controller="TheftInformationController">
+<div class="row" ng-controller="FindController">
   <div class="col-md-4">
     <form>
       <div class="form-group">
           <label for="country">Country :</label>
-          <select class="form-control">
-            <option ng-repeat="country in countryList" value="{{country.country_code}}">{{country.country}}</option>
+          <select class="form-control" ng-model="countryCode" ng-change="getVehicleTypes()">
+            <option ng-repeat="country in countryList" value="{{country.country_code}}" >{{country.country}}</option>
           </select>
       </div>
       <div class="form-group">
           <label for="type">Vehicle Type :</label>
-          <select name="type" class="form-control" ng-model="search.type">
-            <option value="TWO_WHEELER">Two Wheeler</option>
-            <option value="THREE_WHLEELER">Three Wheeler</option>
-            <option value="QUAD">Quad</option>
-            <option value="TRUCK">Truck</option>
-            <option value="TANK">Tank</option>
-            <option value="FOUR_WHEELER">Four Wheeler</option>
+          <select name="vehicleType" class="form-control" ng-model="vehicleType" ng-change="getVehicleMakeList()">
+            <option ng-repeat="vehicleTypeElement in vehicleTypeList" value="{{vehicleTypeElement}}" >{{vehicleTypeElement}}</option>
           </select>
       </div>
       <div class="form-group">
           <label for="make">Make :</label>
-          <input type="text" name="make" class="form-control" ng-model="search.make">
+          <select name="vehicleMake" class="form-control" ng-model="vehicleMake" ng-change="getVehicleModelList()">
+              <option ng-repeat="vehicleMakeElement in vehicleMakeList" value="{{vehicleMakeElement}}" >{{vehicleMakeElement}}</option>
+          </select>
       </div>
       <div class="form-group">
-          <label for="model">Model :</label>
-          <input type="text" class="form-control" name="model" ng-model="search.model">
+          <label for="make">Model :</label>
+          <select name="vehicleModel" class="form-control" ng-model="vehicleModel">
+              <option ng-repeat="vehicleModelElement in vehicleModelList" value="{{vehicleModelElement}}" >{{vehicleModelElement}}</option>
+          </select>
       </div>
-     <div class="form-group">
-          <label for="registrationNumber">Registration Number :</label>
-          <input type="text" class="form-control" name="registrationNumber" ng-model="search.registrationNo">
-      </div>
-      <button type="submit" class="btn btn-primary" ng-click="searchForStolenVehicle(search)">Submit</button>
+      <button type="submit" class="btn btn-primary" ng-click="searchForStolenVehicles()">Search</button>
     </form>
-</div>
+  </div>
+  <div class="col-md-8">
+          <div class="row">
+          <div class="col-md-4">
+            <div>Stolen on {{theftInfo.theft_info.theft_dateTime}}</div>
+            <img ng-src="{{theftInfo.theft_info.vehicle.attachments[0].publicUrl}}" class="img-thumbnail" alt="{{attachment.attachment_name}}" width="304" height="236">
+            <button ng-click="showTheftInfo()">Get Moore Info</button>
+          </div>
+          <div>
+  </div>
 </div>

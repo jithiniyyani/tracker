@@ -7,11 +7,7 @@ app.controller('TheftInformationController', function($scope, $http, $uibModal,L
      $scope.registrationNumber = null;
      $scope.user = LoginService.getUser();
      $scope.theft_info_view = {};
-     $http.get("http://localhost/StolenVehicle/countries").then(function(response) {
-             $scope.countryList = response.data;
-         }, function(data) {
-
-       });
+    
      $scope.registerTheft = function(theft_info) {
 
        //do init here

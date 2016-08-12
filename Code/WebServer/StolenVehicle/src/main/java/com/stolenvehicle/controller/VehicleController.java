@@ -60,32 +60,30 @@ public class VehicleController {
 		return response;
 	}
 
-	/*
-	 * @RequestMapping(method = RequestMethod.POST, value = "/searchForTheft")
-	 * public ResponseEntity<String> searchForStolenVehicle(@RequestBody String
-	 * request) {
-	 * 
-	 * ResponseEntity<String> response = null; try {
-	 * 
-	 * SearchTo searchTo = JsonUtil.toObject(request, Constants.SEARCH,
-	 * SearchTo.class);
-	 * 
-	 * TheftInformationTo theftInformationTo = theftInformationService
-	 * .getTheftInformationByVehicleRegistrationNumber(regNumber);
-	 * 
-	 * response = new
-	 * ResponseEntity<String>(JsonUtil.toJson(Constants.THEFT_INFO,
-	 * theftInformationTo), HttpStatus.OK);
-	 * 
-	 * } catch (Exception ex) {
-	 * 
-	 * LOGGER.error("Error while find vehicle with id " + regNumber, ex);
-	 * response = ExceptionProcessor.handleException(ex);
-	 * 
-	 * } finally {
-	 * 
-	 * } return response; }
-	 */
+	@RequestMapping(method = RequestMethod.POST, value = "/searchForStolenVehicles")
+	public ResponseEntity<String> searchForStolenVehicle(@RequestBody String request) {
+
+		ResponseEntity<String> response = null;
+		try {
+
+		//	SearchTo searchTo = JsonUtil.toObject(request, Constants.SEARCH, SearchTo.class);
+
+			TheftInformationTo theftInformationTo = theftInformationService
+					.getTheftInformationByVehicleRegistrationNumber("");
+
+			response = new ResponseEntity<String>(JsonUtil.toJson(Constants.THEFT_INFO, theftInformationTo),
+					HttpStatus.OK);
+
+		} catch (Exception ex) {
+
+			LOGGER.error("Error while find vehicle with id " + "", ex);
+			response = ExceptionProcessor.handleException(ex);
+
+		} finally {
+
+		}
+		return response;
+	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/vehicles")
 	public ResponseEntity<String> getRegisteredVehicles(HttpServletRequest request) {

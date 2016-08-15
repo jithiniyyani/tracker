@@ -60,6 +60,7 @@ app.controller('ModalController', function($rootScope, $scope, $uibModal, $log, 
             );
         } else if (request.method == "get") {
 
+            $scope.errorMessageLabel = request.successMessage;
             $http.get(request.url).then(function(response) {
                     $scope.showLoader = false;
                     $scope.failure = false;

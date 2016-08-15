@@ -6,7 +6,7 @@ app.controller('UserActivationController', function($scope, $http, $uibModal,$lo
     $scope.request.method = 'get';
     $scope.request.url = 'http://localhost/StolenVehicle/activateUser?id=' + $scope.activationId;
     $scope.request.modalTime = 2000;
-    $scope.request.message = "Your account has been succesfully activated. Kindly login to user our service";
+    $scope.request.successMessage = "Your account has been succesfully activated. Kindly login to user our service";
     $scope.modalInstance = $uibModal.open({
             animation: true,
             templateUrl: 'dialog/loader.html',

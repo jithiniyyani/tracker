@@ -19,7 +19,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
 
@@ -28,10 +27,12 @@ import com.stolenvehicle.constants.Constants;
 import com.stolenvehicle.constants.ExceptionConstants;
 import com.stolenvehicle.dto.AttachmentTo;
 import com.stolenvehicle.dto.FindInformationTo;
+import com.stolenvehicle.dto.UserTo;
 import com.stolenvehicle.exception.ExceptionProcessor;
 import com.stolenvehicle.service.FileService;
 import com.stolenvehicle.service.FindInformationService;
 import com.stolenvehicle.service.NotificationService;
+import com.stolenvehicle.util.AppUtil;
 import com.stolenvehicle.util.JsonUtil;
 
 @Controller
@@ -57,19 +58,43 @@ public class FindInformationController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "findInformationForUser")
 	public ResponseEntity<String> getFindInformationForUser(
-			HttpServletRequest request,
-			@RequestParam(name = "user_id") String user_id) {
+			HttpServletRequest request) {
 		ResponseEntity<String> response = null;
 		try {
+
+			AppUtil.checkIfUserHasSession(request);
+			UserTo user = AppUtil.getUserFromSession(request);
 			List<FindInformationTo> findInformationListForUser = findInformationService
-					.getFindInformationListForUser(user_id);
+					.getFindInformationListForUser(user.getId());
 			response = new ResponseEntity<>(JsonUtil.toJson(
 					Constants.FIND_INFO_LIST, findInformationListForUser),
 					HttpStatus.OK);
 		} catch (Exception ex) {
 
-			LOGGER.error("Error while fetching find info list request id "
-					+ user_id, ex);
+			LOGGER.error("Error while fetching find info list ", ex);
+			response = ExceptionProcessor.handleException(ex);
+		} finally {
+
+		}
+		return response;
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "findInformationListReadyForReward")
+	public ResponseEntity<String> findInformationListReadyForReward(
+			HttpServletRequest request) {
+		ResponseEntity<String> response = null;
+		try {
+
+			AppUtil.checkIfUserHasSession(request);
+			UserTo user = AppUtil.getUserFromSession(request);
+			List<FindInformationTo> findInformationListForUser = findInformationService
+					.findInformationListReadyForReward(user.getId());
+			response = new ResponseEntity<>(JsonUtil.toJson(
+					Constants.FIND_INFO_LIST, findInformationListForUser),
+					HttpStatus.OK);
+		} catch (Exception ex) {
+
+			LOGGER.error("Error while fetching find info list ", ex);
 			response = ExceptionProcessor.handleException(ex);
 		} finally {
 

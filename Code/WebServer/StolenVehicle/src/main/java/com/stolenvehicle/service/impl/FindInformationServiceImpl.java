@@ -71,4 +71,13 @@ public class FindInformationServiceImpl implements FindInformationService {
 				findStatus);
 	}
 
+	@Override
+	public List<FindInformationTo> findInformationListReadyForReward(
+			String user_id) throws BusinessException {
+		List<FindInformation> findInforamtionForUser = findInformationDao
+				.findInformationListReadyForReward(user_id);
+		return ConversionUtil
+				.convertFindInformationEntityList(findInforamtionForUser);
+	}
+
 }

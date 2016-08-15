@@ -7,8 +7,8 @@
 </p>
 <div class="row">
   <ul class="nav nav-pills">
-    <li role="presentation"><a  ui-sref=".search">Search</a></li>
-    <li role="presentation"><a ui-sref=".upload">Upload</a></li>
+    <li  class="active" ng-class="{ active: isActive('/found/search') }" role="presentation"><a  ui-sref=".search">Search</a></li>
+    <li  ng-class="{ active: isActive('/found/upload') }" role="presentation"><a ui-sref=".upload">Upload</a></li>
   </ul>
 </div>
 <div ui-view>

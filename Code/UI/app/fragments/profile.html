@@ -1,59 +1,68 @@
 <div class="container" ng-controller="ProfileController">
-  <div class="panel panel-info" ng-if="loginStatus()">
-    <div class="panel-heading">
-                 <h3 class="panel-title">{{user.name}}</h3>
-    </div>
-     <div class="panel-body">
-       <div class="row">
-              <div class="col-md-3 col-lg-3 " align="center">
-                 <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive">
-               </div>
-                <div class=" col-md-9 col-lg-9 ">
-                  <table class="table table-user-information">
-                      <tbody>
-                        <tr>
-                            <td>Name:</td>
-                            <td>{{user.name}}</td>
-                        </tr>
-                        <tr>
-                            <td>Email Address:</td>
-                            <td>{{user.emailaddress}}</td>
-                        </tr>
-                        <tr>
-                            <td>Gender :</td>
-                            <td>{{user.gender}}</td>
-                        </tr>
-                        <tr>
-                            <td>Passport :</td>
-                            <td>{{user.ic_passport}}</td>
-                        </tr>
-                        <tr>
-                            <td>Contact Number :</td>
-                            <td>{{user.contactNumber}}</td>
-                        </tr>
-                        <tr>
-                            <td>City :</td>
-                            <td>{{user.city}}</td>
-                        </tr>
-                        <tr>
-                            <td>Address :</td>
-                            <td>{{user.address}}</td>
-                        </tr>                        
-                        <tr>
-                            <td>Email Notification :</td>
-                            <td>{{user.email_notification}}</td>
-                        </tr>
-                        <tr>
-                            <td>Country :</td>
-                            <td>{{user.country_id}}</td>
-                        </tr>
-                      </tbody>
-                  </table>
-                </div>
-            </div>
-     </div>
-     <div class="panel-footer">
-    </div>
-  </div>
-
+ <div class="row ">
+   <div class="col-md-4">
+      <img src="/app/images/icons/profileLogo.png" class="img-rounded img-responsive" />
+      <div class="form-group col-md-8">
+                        <h3>Change YOur Password</h3>
+                        <br />
+                        <label>Enter Old Password</label>
+                        <input type="password" class="form-control" ng-model="user.password">
+                        <label>Enter New Password</label>
+                        <input type="password" class="form-control" ng-model="user.newPassword">
+                        <label>Confirm New Password</label>
+                        <input type="password" class="form-control" ng-model="user.newPpassword">
+                        <br>
+                        <a href="#" class="btn btn-warning" ng-click="updatePassword(user)">Change Password</a>
+        </div>
+   </div>
+   <div class="col-md-4">
+     <form>
+       <div class="form-group">
+           <label for="name">Name :</label>
+           <input type="text" class="form-control" name="name" ng-model="user.name">
+       </div>
+       <div class="form-group">
+           <label for="email">Email Address :</label>
+           <input type="email" name="email" class="form-control" ng-model="user.emailaddress" readonly>
+       </div>
+       <div class="form-group">
+           <label for="name">Gender :</label>
+           <select class="form-control" ng-model="user.gender">
+             <option value="MALE">Male</option>
+             <option value="FEMALE">Female</option>
+             <option value="OTHER">Other</option>
+           </select>
+       </div>
+       <div class="form-group">
+           <label for="passport">Ic/Passport :</label>
+           <input type="text" class="form-control" name="passport" ng-model="user.ic_passport">
+       </div>
+       <div class="form-group">
+           <label for="mobile">ContactNumber :</label>
+           <input type="text" class="form-control" name="mobile" ng-model="user.contactNumber">
+       </div>
+       <div class="form-group">
+           <label for="country">Country :</label>
+           <select class="form-control" ng-model="user.country_id">
+             <option ng-repeat="country in countryList" value="{{country.country_code}}" >{{country.country}}</option>
+           </select>
+       </div>
+       <div class="form-group">
+           <label for="city">City :</label>
+           <input type="text" class="form-control" name="city" ng-model="user.city">
+       </div>
+       <div class="form-group">
+           <label for="address">Address :</label>
+           <textarea class="form-control" name="address" ng-model="user.address"></textarea
+       </div>
+       <div class="form-group">
+           <label for="addressCordinates">Address in map (If you want to provide us with) :</label>
+           <ng-map  zoom="16" center="current-location" geo-fallback-center="4.672585, -74.059525" on-click="placeMarker()">
+               <marker ng-repeat="pos in positions" position="{{pos.lat}}, {{pos.lng}}"></marker>
+           </ng-map>
+       </div>
+       <button type="submit" class="btn btn-success" ng-click="updateProfile(user)">Update</button>
+     </form>
+   </div>
+ </div>
 </div>

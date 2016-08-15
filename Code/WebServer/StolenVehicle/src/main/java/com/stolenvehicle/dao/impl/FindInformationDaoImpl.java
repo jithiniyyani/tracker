@@ -32,17 +32,20 @@ public class FindInformationDaoImpl extends AbstractDao implements
 
 			List<FindInformation> findInformationList = new ArrayList<FindInformation>();
 			FindInformation findInformation;
-			if (resultSet.next()) {
+			while (resultSet.next()) {
 				findInformation = new FindInformation();
 				findInformationList.add(findInformation);
 				findInformation.setId(resultSet.getString("fi.id"));
-				findInformation.setTheft_information_id(resultSet.getString("ti.id"));
+				findInformation.setTheft_information_id(resultSet
+						.getString("ti.id"));
 				findInformation.setLocators_name(resultSet
 						.getString("fi.locators_name"));
 				findInformation.setFind_location_cordinates(resultSet
 						.getString("fi.find_location_cordinates"));
 				findInformation.setLocators_contactNumber(resultSet
-						.getString("fi.find_location_cordinates"));
+						.getString("fi.locators_contactNumber"));
+				findInformation.setLocators_email(resultSet
+						.getString("fi.locators_email"));
 				findInformation.setVehilce_id(resultSet.getString("v.id"));
 
 			}
@@ -112,8 +115,9 @@ public class FindInformationDaoImpl extends AbstractDao implements
 		for (FindInformation findInformation : findInformationList) {
 
 			final Object attachmentList = this.fetch(
-					Query.GET_VEHICLE_ATTACHMENTS,
-					new Object[] { findInformation.getVehilce_id() },
+					Query.GET_VEHICLE_ATTACHMENTS_FOR_FIND,
+					new Object[] { findInformation.getVehilce_id(),
+							findInformation.getId() },
 					new FindInformationAttachmentsResultSetExtractor());
 
 			List<Attachment> attachments = (List<Attachment>) attachmentList;
@@ -128,7 +132,33 @@ public class FindInformationDaoImpl extends AbstractDao implements
 	public boolean updateFindInformatoinStatus(String find_id,
 			FindStatusEnum findStatus) throws BusinessException {
 		int save = this.save(Query.UPDATE_FIND_INFORMATION_STATUS_BY_ID,
-				new Object[] { findStatus.toString() ,find_id, });
+				new Object[] { findStatus.toString(), find_id, });
 		return save > 0 ? true : false;
+	}
+
+	@Override
+	public List<FindInformation> findInformationListReadyForReward(
+			String user_id) throws BusinessException {
+		final Object findInfoOjbectList = this.fetch(
+				Query.GET_FIND_INFOLIST_BY_USER_ID_FOR_REWARD,
+				new Object[] { user_id },
+				new FindInformationResultSetExtractor());
+
+		List<FindInformation> findInformationList = (List<FindInformation>) findInfoOjbectList;
+
+		for (FindInformation findInformation : findInformationList) {
+
+			final Object attachmentList = this.fetch(
+					Query.GET_VEHICLE_ATTACHMENTS_FOR_FIND,
+					new Object[] { findInformation.getVehilce_id(),
+							findInformation.getId() },
+					new FindInformationAttachmentsResultSetExtractor());
+
+			List<Attachment> attachments = (List<Attachment>) attachmentList;
+			findInformation.setAttachments(attachments);
+
+		}
+
+		return findInformationList;
 	}
 }

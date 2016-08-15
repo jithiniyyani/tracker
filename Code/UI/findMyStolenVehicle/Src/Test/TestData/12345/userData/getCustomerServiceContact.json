@@ -1,9 +1,0 @@
-{
-    "customerServiceContactResponse": {
-        "phoneNumber": "81500701",
-        "openingHourStart": "08:00",
-        "openingHourEnd": "18:00",
-        "openingWeekDayStart": "Monday",
-        "openingWeekDayEnd": "Friday"
-    }
-}

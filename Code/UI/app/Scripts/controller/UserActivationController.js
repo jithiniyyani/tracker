@@ -1,12 +1,12 @@
 app.controller('UserActivationController', function($scope, $http, $uibModal,$location,$window) {
 
-
-     $scope.activationId = $location.search().id;
-
-     $scope.activateUser = function() {
+    $scope.activationId = $location.search().id;
+    $scope.activateUser = function() {
     $scope.request = {};
-     $scope.request.method = 'get';
-     $scope.request.url = 'http://localhost/StolenVehicle/activateUser?id=' + $scope.activationId;
+    $scope.request.method = 'get';
+    $scope.request.url = 'http://localhost/StolenVehicle/activateUser?id=' + $scope.activationId;
+    $scope.request.modalTime = 2000;
+    $scope.request.message = "Your account has been succesfully activated. Kindly login to user our service";
     $scope.modalInstance = $uibModal.open({
             animation: true,
             templateUrl: 'dialog/loader.html',
@@ -20,11 +20,12 @@ app.controller('UserActivationController', function($scope, $http, $uibModal,$lo
         $scope.request.modalInstance = $scope.modalInstance;
         $scope.modalInstance.result.then(function(result) {
 
+
         }, function() {
 
         });
 
-            $window.location='/app/#/login';
+        $window.location='/app/#/login';
     };
 
 });

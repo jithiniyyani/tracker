@@ -1,17 +1,21 @@
-app.controller('VehicleViewController',function($scope,request){
+app.controller('VehicleViewController',function($scope,$window,request){
 
-    $scope.theft_info_view = request.theft_info;
+
+    $scope.request = request;
+    $scope.theft_info_view = request.theftInfo;
+    $scope.modalInstance = request.modalInstance;
 
     $scope.confirm = function(){
 
-        alert("I confirm the find");
-        
+        $scope.request.modalInstance.dismiss('cancel');
+        $window.location='/app/#/found/upload';
+
     }
 
 
     $scope.cancel = function(){
 
-            alert("I cancel the find");
+        $scope.request.modalInstance.dismiss('cancel');
 
     }
 });

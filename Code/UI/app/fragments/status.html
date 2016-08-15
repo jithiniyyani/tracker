@@ -1,34 +1,44 @@
-<div class="container" ng-controller="TheftInformationController">
-<h2>Status</h2>
-<p>
-  Check status of your vehicle.
-</p>
-<div class="row">
-  <div class="col-md-4">
-
-    <form name="searchVehicleTheftStatus">
-    <div class="form-group">
-        <label for="email">Vehcile Registration Number :</label>
-        <input type="text" id="registrationNumber" class="form-control" ng-model="registrationNumber">
+<div class="container" ng-controller="VehicleStatusController">
+    <div class="alert alert-info">
+        <h2>Status</h2> Check status of your vehicle.
     </div>
-    <button type="submit" class="btn btn-primary" ng-click="getTheftStatusByVehicleRegNumber(registrationNumber)">Submit</button>
-    </form>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="email">Exact Vehcile Registration Number :</label>
+                <input type="text" id="registrationNumber" class="form-control" ng-model="registrationNumber">
+            </div>
+            <button type="submit" class="btn btn-primary" ng-click="getTheftStatusByVehicleRegNumber(registrationNumber)">Submit</button>
+            <div ng-show="theft_info != null">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img ng-src="{{theft_info.vehicle.attachments[0].publicUrl}}" class="img-thumbnail" alt="{{theft_info.vehicle.attachments[0].attachment_name}}" width="304" height="236">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-12">
+                                Theft Id: <span>{{theft_info.id}}</span>
+                            </div>
+                            <div class="col-md-12">
+                                Theft Status: <span>{{theft_info.status}}</span>
+                            </div>
+                            <div class="col-md-12">
+                                URL you can share with your friends
+                                <input type="text" readonly value="http://localhost/app/#/viewtheft?theftId={{theft_info.id}}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="theft_info == null">
+                Please enter registration number and search
+            </div>
 
-    <div>
-      <div>
-        Type <span>{{theft_info_view.vehicle.type}}</span>
-      </div>
-      <div>
-        Make <span>Make</span>
-      </div>
-      <div>
-          Model <span>{{theft_info_view.vehicle.model}}</span>
-      </div>
-      <div>
-        YOM <span>{{theft_info_view.vehicle.year_of_make}}</span>
-      </div>
+        </div>
+        <div class="col-md-6">
+            <div class="alert alert-info">
+                Some marketing info goes here
+            </div>
+        </div>
     </div>
-    </div>
-
-</div>
 </div>

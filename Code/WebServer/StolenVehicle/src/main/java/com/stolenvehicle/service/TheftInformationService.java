@@ -9,16 +9,19 @@ import com.stolenvehicle.exception.BusinessException;
 
 public interface TheftInformationService {
 
-	public TheftInformationTo saveTheftInformation(TheftInformationTo theftInformation) throws BusinessException;
+	public TheftInformationTo saveTheftInformation(
+			TheftInformationTo theftInformation) throws BusinessException;
 
-	public TheftInformationTo getTheftInformation(String theftId) throws BusinessException;
-
-	public TheftInformationTo getTheftInformationByVehicleRegistrationNumber(String registrationNUmber)
+	public TheftInformationTo getTheftInformation(String theftId)
 			throws BusinessException;
 
-	public List<TheftInformationTo> getTheftInformationBySearchTo(SearchTo searchTo);
+	public TheftInformationTo getTheftInformationByVehicleRegistrationNumber(
+			String registrationNUmber) throws BusinessException;
 
-	public boolean updateTheftInformation(String theftId, String findId, TheftStatus theftStatus)
-			throws BusinessException;
+	public List<TheftInformationTo> getTheftInformationBySearchTo(
+			SearchTo searchTo) throws BusinessException;
+
+	public boolean updateTheftInformation(String theftId, String findId,
+			TheftStatus theftStatus) throws BusinessException;
 
 }

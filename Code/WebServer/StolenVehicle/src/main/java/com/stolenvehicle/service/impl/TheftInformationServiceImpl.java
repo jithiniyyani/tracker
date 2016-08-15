@@ -1,10 +1,12 @@
 package com.stolenvehicle.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.stolenvehicle.constants.ExceptionConstants;
 import com.stolenvehicle.constants.TheftStatus;
 import com.stolenvehicle.dao.TheftInformationDao;
 import com.stolenvehicle.dto.SearchTo;
@@ -48,7 +50,7 @@ public class TheftInformationServiceImpl implements TheftInformationService {
 		TheftInformation theftInformation = theftInformationDao
 				.getTheftInformationByVehicleRegistrationNumber(registrationNumber);
 		if (theftInformation == null) {
-			throw new IllegalArgumentException("Not registered thefts");
+			throw new IllegalArgumentException(ExceptionConstants.VEHICLE_NOT_FOUND);
 		}
 		TheftInformationTo theftInformationTo = ConversionUtil
 				.convertTheftInformation(theftInformation);
@@ -56,17 +58,26 @@ public class TheftInformationServiceImpl implements TheftInformationService {
 	}
 
 	@Override
-	public boolean updateTheftInformation(String theftId,String findId,
+	public boolean updateTheftInformation(String theftId, String findId,
 			TheftStatus theftStatus) throws BusinessException {
 
-		return theftInformationDao.updateTheftInformationStatus(theftId,findId, theftStatus);
+		return theftInformationDao.updateTheftInformationStatus(theftId,
+				findId, theftStatus);
 
 	}
 
 	@Override
-	public List<TheftInformationTo> getTheftInformationBySearchTo(SearchTo searchTo) {
-		
-		return null;
+	public List<TheftInformationTo> getTheftInformationBySearchTo(
+			SearchTo searchTo) throws BusinessException {
+
+		List<TheftInformation> theftInformationList = theftInformationDao
+				.getTheftInformationBySearchTo(searchTo);
+		List<TheftInformationTo> theftInformationToList = new ArrayList<TheftInformationTo>();
+		for (TheftInformation theftInformation : theftInformationList) {
+			theftInformationToList.add(ConversionUtil
+					.convertTheftInformation(theftInformation));
+		}
+		return theftInformationToList;
 	}
 
 }

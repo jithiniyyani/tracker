@@ -12,5 +12,7 @@ public class ExceptionConstants {
 	public static final String EMPTY_INPUT = "Empty input";
 	public static final String INVALID_THEFT_ID = "Invalid theft id";
 	public static final String EMAIL_ID_NOT_FOUND_FOR_RESET = "Email id not found for reset";
-	
+	public static final String ILLEGAL_DATE = "Illegal date in request";
+	public static final String VEHICLE_NOT_FOUND = "No thefts have been registered with the vehicle number";
+
 }

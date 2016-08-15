@@ -7,7 +7,7 @@ app.controller('LoginController', function($scope, $http, $uibModal,LoginService
     $scope.lc_submit = "Login";
     $scope.lc_register = "Sign Up";
     $scope.lc_forgotPassword = "Forgot Password";
-    $scope.request = {};
+
     $scope.user = {};
     $scope.user.emailaddress = "";
     $scope.user.password = "";
@@ -15,25 +15,29 @@ app.controller('LoginController', function($scope, $http, $uibModal,LoginService
 
     $scope.appLogin = function(user) {
 
-        $scope.request.method = 'post';
-        $scope.request.url = 'http://localhost/StolenVehicle/login';
-        $scope.request.payLoad = $scope.user;
-        $scope.request.entityAttribute = 'user';
-        $scope.modalInstance = $uibModal.open({
+        var modalRequest = {};
+        modalRequest.method = 'post';
+        modalRequest.url = 'http://localhost/StolenVehicle/login';
+        modalRequest.entityAttribute = 'user';
+        modalRequest.payLoad = $scope.user;
+        modalRequest.successMessage = 'Welcome';
+        modalRequest.modalTime = 2000;
+
+        modalRequest.modalInstance = $uibModal.open({
             animation: true,
             templateUrl: 'dialog/loader.html',
             controller: 'ModalController',
             size: 'md',
             resolve: {
-                request: $scope.request
+                request: modalRequest
             }
 
         });
-        $scope.request.modalInstance = $scope.modalInstance;
-        $scope.modalInstance.result.then(function(result) {
+
+        //Check the response
+        modalRequest.modalInstance.result.then(function(result) {
             LoginService.setLoginStatus(true);
             $window.location='/app/#/landing';
-            //LoginService.setUser(result);
         }, function() {
           LoginService.setLoginStatus(false);
           LoginService.setUser(null);

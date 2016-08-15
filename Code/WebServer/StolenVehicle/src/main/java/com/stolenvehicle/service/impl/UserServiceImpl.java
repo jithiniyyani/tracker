@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stolenvehicle.dao.UserDao;
+import com.stolenvehicle.dto.PasswordTo;
 import com.stolenvehicle.dto.SetPasswordTo;
 import com.stolenvehicle.dto.UserTo;
 import com.stolenvehicle.entity.User;
@@ -56,5 +57,19 @@ public class UserServiceImpl implements UserService {
 	public boolean setUserPassword(SetPasswordTo setPasswordTo)
 			throws BusinessException {
 		return userDao.setUserPassword(setPasswordTo);
+	}
+
+	@Override
+	public boolean updateUser(UserTo userTo) throws BusinessException {
+
+		User user = ConversionUtil.covertUserTo(userTo);
+		return userDao.updateUser(user);
+	}
+
+	@Override
+	public boolean setPassword(PasswordTo passwordTo) throws BusinessException {
+
+		return userDao.setPassword(passwordTo.getOldPassword(),
+				passwordTo.getNewPassword(), passwordTo.getUserId());
 	}
 }

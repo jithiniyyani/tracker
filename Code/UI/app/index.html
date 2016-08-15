@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-    <link	href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link	href="http:///netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="css/app.css">
 
 
@@ -12,6 +14,7 @@
     <script src="Scripts/angular/ng-map.js"></script>
     <script	src="Scripts/angular/ui-bootstrap-tpls-1.3.3.js"></script>
     <script src="Scripts/angular/angular-ui-router.js"></script>
+    <script src="Scripts/angular/datetime-picker.js"></script>
     <script src="Scripts/app.js"></script>
 
     <!--Add services here-->
@@ -21,6 +24,9 @@
     <!--Add controllers-->
     <script src="Scripts/controller/MainController.js"></script>
     <script src="Scripts/controller/LoginController.js"></script>
+    <script src="Scripts/controller/UploadController.js"></script>
+    <script src="Scripts/controller/AlertController.js"></script>
+    <script src="Scripts/controller/RewardsController.js"></script>
     <script src="Scripts/controller/SignUpController.js"></script>
     <script src="Scripts/controller/LandingPageController.js"></script>
     <script src="Scripts/controller/ResetPasswordController.js"></script>
@@ -31,7 +37,9 @@
     <script src="Scripts/controller/AttachmentUploadController.js"></script>
     <script src="Scripts/controller/FindController.js"></script>
     <script src="Scripts/controller/VehicleViewController.js"></script>
+    <script src="Scripts/controller/VehicleStatusController.js"></script>
     <script src="Scripts/controller/ModalController.js"></script>
+  
         <!--Add controllers-->
 </head>
 <body class="full" ng-controller="MainController">
@@ -45,6 +53,7 @@
           <li ng-if="loginStatus()"><a ui-sref="profile">{{profileLabel}}</a></li>
           <li ng-if="loginStatus()"><a ui-sref="vehicle">{{vehiclesLabel}}</a></li>
           <li ng-if="loginStatus()"><a ui-sref="alerts">{{alertsLabel}}</a></li>
+          <li ng-if="loginStatus()"><a ui-sref="rewards">{{rewards}}</a></li>
           <li><a ui-sref="disclaimer">{{disclaimerLabel}}</a></li>
           <li><a ui-sref="termsAndConditions">{{termsAndConditionsLabel}}</a></li>
       </ul>

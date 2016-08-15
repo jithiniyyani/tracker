@@ -1,16 +1,16 @@
-app.controller('MainController',function($scope,LoginService,$http,$window){
+app.controller('MainController',function($scope,LoginService,$http,$window,$location){
 
 //all labels section go here
   $scope.homePageLabel = "Find My Stolen Vehicle";
   $scope.profileLabel = "My Profile";
   $scope.vehiclesLabel = "My Vehicles";
   $scope.alertsLabel = "Alerts";
+  $scope.rewards = "Rewards";
   $scope.disclaimerLabel = "Disclaimer";
   $scope.termsAndConditionsLabel = "Terms and Conditions";
   $scope.signUpLabel = "Sign Up";
   $scope.loginLabel = "Login";
   $scope.logoutLabel = "Logout";
-
 
   $scope.loginStatus = function() {
   		return LoginService.loginStatus();
@@ -27,4 +27,9 @@ app.controller('MainController',function($scope,LoginService,$http,$window){
 				}
 	  );
 	};
+
+  $scope.isActive = function (viewLocation) {
+     var active = (viewLocation === $location.path());
+     return active;
+   };
 });

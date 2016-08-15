@@ -14,7 +14,10 @@ public interface FindInformationService {
 	public List<FindInformationTo> getFindInformationListForUser(String user_id)
 			throws BusinessException;
 
-	public boolean updateFindInformationStatus(String find_id,FindStatusEnum findStatus)
-			throws BusinessException;
+	public List<FindInformationTo> findInformationListReadyForReward(
+			String user_id) throws BusinessException;
+
+	public boolean updateFindInformationStatus(String find_id,
+			FindStatusEnum findStatus) throws BusinessException;
 
 }

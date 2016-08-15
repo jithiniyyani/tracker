@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -29,7 +28,8 @@ import com.stolenvehicle.util.JsonUtil;
 @Controller
 public class VehicleController {
 
-	private static final Logger LOGGER = Logger.getLogger(VehicleController.class);
+	private static final Logger LOGGER = Logger
+			.getLogger(VehicleController.class);
 
 	@Autowired
 	private TheftInformationService theftInformationService;
@@ -38,7 +38,8 @@ public class VehicleController {
 	private VehicleService vehicleService;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/searchForTheft")
-	public ResponseEntity<String> searchForStolenVehicleByNumber(@RequestParam(name = "regNumber") String regNumber) {
+	public ResponseEntity<String> searchForStolenVehicleByNumber(
+			@RequestParam(name = "regNumber") String regNumber) {
 
 		ResponseEntity<String> response = null;
 		try {
@@ -46,8 +47,8 @@ public class VehicleController {
 			TheftInformationTo theftInformationTo = theftInformationService
 					.getTheftInformationByVehicleRegistrationNumber(regNumber);
 
-			response = new ResponseEntity<String>(JsonUtil.toJson(Constants.THEFT_INFO, theftInformationTo),
-					HttpStatus.OK);
+			response = new ResponseEntity<String>(JsonUtil.toJson(
+					Constants.THEFT_INFO, theftInformationTo), HttpStatus.OK);
 
 		} catch (Exception ex) {
 
@@ -61,17 +62,20 @@ public class VehicleController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/searchForStolenVehicles")
-	public ResponseEntity<String> searchForStolenVehicle(@RequestBody String request) {
+	public ResponseEntity<String> searchForStolenVehicle(
+			@RequestBody String request) {
 
 		ResponseEntity<String> response = null;
 		try {
 
-		//	SearchTo searchTo = JsonUtil.toObject(request, Constants.SEARCH, SearchTo.class);
+			SearchTo searchTo = JsonUtil.toObject(request, Constants.SEARCH,
+					SearchTo.class);
 
-			TheftInformationTo theftInformationTo = theftInformationService
-					.getTheftInformationByVehicleRegistrationNumber("");
+			List<TheftInformationTo> theftInformationToList = theftInformationService
+					.getTheftInformationBySearchTo(searchTo);
 
-			response = new ResponseEntity<String>(JsonUtil.toJson(Constants.THEFT_INFO, theftInformationTo),
+			response = new ResponseEntity<String>(JsonUtil.toJson(
+					Constants.THEFT_INFO_LIST, theftInformationToList),
 					HttpStatus.OK);
 
 		} catch (Exception ex) {
@@ -86,15 +90,17 @@ public class VehicleController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/vehicles")
-	public ResponseEntity<String> getRegisteredVehicles(HttpServletRequest request) {
+	public ResponseEntity<String> getRegisteredVehicles(
+			HttpServletRequest request) {
 		ResponseEntity<String> response = null;
 		try {
 
 			AppUtil.checkIfUserHasSession(request);
 			UserTo user = AppUtil.getUserFromSession(request);
-			List<VehicleTo> registeredVehicleForUser = vehicleService.getRegisteredVehicleForUser(user.getId());
-			response = new ResponseEntity<>(JsonUtil.toJson(Constants.VEHICLES, registeredVehicleForUser),
-					HttpStatus.OK);
+			List<VehicleTo> registeredVehicleForUser = vehicleService
+					.getRegisteredVehicleForUser(user.getId());
+			response = new ResponseEntity<>(JsonUtil.toJson(Constants.VEHICLES,
+					registeredVehicleForUser), HttpStatus.OK);
 		} catch (Exception ex) {
 
 			LOGGER.error("Error while finding vehicles for user ", ex);
@@ -106,13 +112,16 @@ public class VehicleController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/vehiclesTypes")
-	public ResponseEntity<String> getVehicleTypes(@RequestParam(name = "countryId") String countryId,
+	public ResponseEntity<String> getVehicleTypes(
+			@RequestParam(name = "countryId") String countryId,
 			HttpServletRequest request) {
 		ResponseEntity<String> response = null;
 		try {
 
-			List<String> vehicleTypes = vehicleService.getVehicleTypes(countryId);
-			response = new ResponseEntity<>(JsonUtil.toJson(vehicleTypes), HttpStatus.OK);
+			List<String> vehicleTypes = vehicleService
+					.getVehicleTypes(countryId);
+			response = new ResponseEntity<>(JsonUtil.toJson(vehicleTypes),
+					HttpStatus.OK);
 
 		} catch (Exception ex) {
 
@@ -125,13 +134,17 @@ public class VehicleController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/vehicleMake")
-	public ResponseEntity<String> getVehicleMakeTypes(@RequestParam(name = "countryId") String countryId,
-			@RequestParam(name = "vehicleType") String vehicleType, HttpServletRequest request) {
+	public ResponseEntity<String> getVehicleMakeTypes(
+			@RequestParam(name = "countryId") String countryId,
+			@RequestParam(name = "vehicleType") String vehicleType,
+			HttpServletRequest request) {
 		ResponseEntity<String> response = null;
 		try {
 
-			List<String> makeList = vehicleService.getVehicleMakeList(countryId, vehicleType);
-			response = new ResponseEntity<>(JsonUtil.toJson(makeList), HttpStatus.OK);
+			List<String> makeList = vehicleService.getVehicleMakeList(
+					countryId, vehicleType);
+			response = new ResponseEntity<>(JsonUtil.toJson(makeList),
+					HttpStatus.OK);
 
 		} catch (Exception ex) {
 
@@ -144,14 +157,18 @@ public class VehicleController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/vehicleModel")
-	public ResponseEntity<String> getVehicleModelTypes(@RequestParam(name = "countryId") String countryId,
+	public ResponseEntity<String> getVehicleModelTypes(
+			@RequestParam(name = "countryId") String countryId,
 			@RequestParam(name = "vehicleType") String vehicleType,
-			@RequestParam(name = "vehicleMake") String vehicleMake, HttpServletRequest request) {
+			@RequestParam(name = "vehicleMake") String vehicleMake,
+			HttpServletRequest request) {
 		ResponseEntity<String> response = null;
 		try {
 
-			List<String> makeList = vehicleService.getVehicleModelList(countryId, vehicleType, vehicleMake);
-			response = new ResponseEntity<>(JsonUtil.toJson(makeList), HttpStatus.OK);
+			List<String> makeList = vehicleService.getVehicleModelList(
+					countryId, vehicleType, vehicleMake);
+			response = new ResponseEntity<>(JsonUtil.toJson(makeList),
+					HttpStatus.OK);
 
 		} catch (Exception ex) {
 

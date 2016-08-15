@@ -1,19 +1,19 @@
 app.controller('LandingPageController', function($scope,LoginService, $http,$window,$uibModal) {
 
     $scope.request = {};
-    $scope.init = function() {
 
-        $http.get("http://localhost/StolenVehicle/user").then(function(data) {
+    //try to get the user details.
+    //After login we are redirecting the user to this page
+
+    $http.get("http://localhost/StolenVehicle/user").then(function(response) {
             LoginService.setLoginStatus(true);
-            LoginService.setUser(data.data.user);
+            LoginService.setUser(response.data.user);
         }, function(data) {
-            console.log(data);
             LoginService.setLoginStatus(false);
             LoginService.setUser(null);
 
-        });
-    };
-    $scope.init();
+    });
+
 
 
     $scope.registerTheft = function(){
@@ -25,15 +25,16 @@ app.controller('LandingPageController', function($scope,LoginService, $http,$win
         }else{
 
                 //show a dialog which states kindly login/register before registering a theft
-              $scope.request.method = 'show';
-              $scope.request.message = 'Kindly login/register with us before registering your theft';
-              $scope.request.modalInstance = $uibModal.open({
+              var modalRequest = {};
+              modalRequest.method = 'show';
+              modalRequest.message = 'Kindly login/register with us before registering your theft';
+              modalRequest.modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'dialog/loader.html',
                     controller: 'ModalController',
                     size: 'md',
                     resolve: {
-                        request: $scope.request
+                        request: modalRequest
                     }
 
                 });

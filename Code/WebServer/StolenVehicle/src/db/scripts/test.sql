@@ -1,7 +1,7 @@
 use findmystolenvehicle;
 
-
-
+select * from find_information;
+select * from vehicle
 select * from user;
 select * from attachment;
 select * from theft_information;
@@ -15,15 +15,9 @@ select * from find_information;
 select * from theft_information;
 select * from vehicle;
 
-update theft_information
-set status = 'LOST';
+select fi.id,fi.locators_name ,fi.find_location_cordinates,fi.locators_contactNumber,fi.locators_email,v.id,ti.id from user u, vehicle v,theft_information ti,find_information fi where v.user_id = '3e86fd6a-2006-407e-a384-7f8c39a7f104' and ti.vehicle_id = v.id and ti.status = 'lost' and ti.id = fi.theft_information_id;
 
-select distinct type from vehicle where country_id = ?;
-select * from vehicle where country_id = ? and type= ?;
-select * from country;
-select * from vehicle where user_id = 'c49108ca-614a-4009-a662-6b07206407f9'
-select * from attachment where vehicle_id = 'dd69eda5-0592-41a6-bdef-c664ff06fc34'
+select * from audit;
+delete from user;
 
-select * from attachment;
-
-select ti.id,ti.status,u.id,u.name, v.id,v.registrationNo,ti.theft_dateTime,ti.theft_location_cordinates,v.type,v.make,v.model,v.year_of_make from theft_information ti,vehicle v,user u where ti.status = 'LOST' and ti.vehicle_id = v.id and v.user_id = u.id and v.registrationNo  like '5110'
+select fi.id,fi.locators_name ,fi.find_location_cordinates,fi.locators_contactNumber,fi.locators_email,v.id,ti.id from user u, vehicle v,theft_information ti,find_information fi where v.user_id = '5bdfd348-db05-4ef9-a2a9-0a87192c2245' and ti.vehicle_id = v.id and ti.status = 'LOST' and ti.id = fi.theft_information_id order by fi.status;

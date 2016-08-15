@@ -13,7 +13,12 @@ public interface FindInformationDao extends GenericDao {
 
 	public List<FindInformation> getFindInforamtionForUser(String user_id)
 			throws BusinessException;
-
+	
+	
+	public List<FindInformation> findInformationListReadyForReward(String user_id)
+			throws BusinessException;
+	
+	
 	public boolean updateFindInformatoinStatus(String find_id,
 			FindStatusEnum findStatus) throws BusinessException;
 }

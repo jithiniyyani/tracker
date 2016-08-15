@@ -1,57 +1,58 @@
 <div class="container" ng-controller="VehicleController">
-
-  <div ng-if="hasVehilces">
-      <div ng-repeat="vehicle in vehicles">
-          <table class="table table-user-information">
-            <tbody>
-              <tr>
-                  <td>Id:</td>
-                  <td>{{vehicle.id}}</td>
-              </tr>
-              <tr>
-                  <td>Type :</td>
-                  <td>{{vehicle.type}}</td>
-              </tr>
-              <tr>
-                  <td>Make :</td>
-                  <td>{{vehicle.make}}</td>
-              </tr>
-              <tr>
-                  <td>Model:</td>
-                  <td>{{vehicle.model}}</td>
-              </tr>
-              <tr>
-                  <td>Year of Make :</td>
-                  <td>{{vehicle.year_of_make}}</td>
-              </tr>
-              <tr>
-                  <td>Color :</td>
-                  <td>{{vehicle.color}}</td>
-              </tr>
-              <tr>
-                  <td>Registration Number :</td>
-                  <td>{{vehicle.registrationNo}}</td>
-              </tr>
-              <tr>
-                  <td>Extra Info :</td>
-                  <td>{{vehicle.extra_info}}</td>
-              </tr>
-              <tr>
-                  <td>Stolen :</td>
-                  <td>{{vehicle.stolen}}</td>
-              </tr>
-              <tr>
-                  <td>Images :</td>
-                  <td>
-
-                        <div ng-repeat="attachment in vehicle.attachments">
-                              <p>{{attachment.attachment_name}}</p>
-                              <img ng-src="{{attachment.publicUrl}}" class="img-thumbnail" alt="{{attachment.attachment_name}}" width="304" height="236">
+    <div ng-if="hasVehilces">
+        <div ng-repeat="vehicle in vehicles" class="boxShadow">
+            <div class="row">
+                <div class="col-md-4">
+                    <img ng-src="{{vehicle.attachments[0].publicUrl}}" class="img-thumbnail" alt="{{vehicle.attachments[0].attachment_name}}" width="304" height="236">
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-12">
+                            Id: <span>{{vehicle.id}}</span>
                         </div>
-                  </td>
-              </tr>
-            </tbody>
-          </table>
-      </div>
-  </div>
+                        <div class="col-md-12">
+                            Type: <span>{{vehicle.type}}</span>
+                        </div>
+                        <div class="col-md-12">
+                            Make: <span>{{vehicle.make}}</span>
+                        </div>
+                        <div class="col-md-12">
+                            Model: <span>{{vehicle.model}}</span>
+                        </div>
+                        <div class="col-md-12">
+                            Year Of Make: <span>{{vehicle.year_of_make}}</span>
+                        </div>
+                        <div class="col-md-12">
+                            Color: <span>{{vehicle.color}}</span>
+                        </div>
+                        <div class="col-md-12">
+                            Registration Number: <span>{{vehicle.registrationNo}}</span>
+                        </div>
+                        <div class="col-md-12">
+                            Extra Info: <span>{{vehicle.extra_info}}</span>
+                        </div>
+                        <div class="col-md-12">
+                            Stolen: <span>{{vehicle.stolen}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                &nbsp;
+              </div>
+            <div class="row">
+                  <div class="col-md-1">
+                    <p>
+                      <strong>Images uploaded for theft :</strong>
+                    </p>
+                  </div>
+                  <div class="col-md-3" ng-repeat="attachment in vehicle.attachments">
+
+                    <a href="{{attachment.publicUrl}}" class="thumbnail">
+                        <img ng-src="{{attachment.publicUrl}}" alt="Pulpit Rock" style="width:100px;height:100px">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

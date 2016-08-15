@@ -1,40 +1,75 @@
 <div ng-controller="TheftInformationController">
-<div ng-init="getTheftInfoById()">
-<p>
-<span>{{theft_info_view.user.name}}</span> has lost her/his car
-<span>{{theft_info_view.vehicle.registrationNo}}</span> on
-<span>Date & Time</span> at {{theft_info_view.theft_dateTime}}
-<span>Location</span>{{theft_info_view.theft_location_cordinates}}
-Appreciate if you could report
-</p>
-<div class="container">
+    <div ng-init="getTheftInfoById()">
+        <div class="container" ng-show="theft_info_view != null">
+            <div class="row">
+                <div class="alert alert-info">
+                    <span>{{theft_info_view.user.name}}</span> has lost her/his vehicle with number
+                    <span>{{theft_info_view.vehicle.registrationNo}}</span> on
+                    <span>Date & Time</span> at {{theft_info_view.theft_dateTime}} He was a declared a reward of <strong>{{theft_info_view.rewards}}</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3> Vehicle was lost at the following location</h3>
+                    <ng-map center="{{theft_info_view.theft_location_cordinates}}" zoom="16">
+                        <marker position="{{theft_info_view.theft_location_cordinates}}" title="Lost here"></marker>
+                    </ng-map>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <img ng-src="{{theft_info_view.vehicle.attachments[0].publicUrl}}" class="img-thumbnail" alt="{{vehicle.attachments[0].attachment_name}}" width="304" height="236">
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-12">
+                            Id: <span>{{theft_info_view.vehicle.id}}</span>
+                        </div>
+                        <div class="col-md-12">
+                            Type: <span>{{theft_info_view.vehicle.type}}</span>
+                        </div>
+                        <div class="col-md-12">
+                            Make: <span>{{theft_info_view.vehicle.make}}</span>
+                        </div>
+                        <div class="col-md-12">
+                            Model: <span>{{theft_info_view.vehicle.model}}</span>
+                        </div>
+                        <div class="col-md-12">
+                            Year Of Make: <span>{{theft_info_view.vehicle.year_of_make}}</span>
+                        </div>
+                        <div class="col-md-12">
+                            Color: <span>{{theft_info_view.vehicle.color}}</span>
+                        </div>
+                        <div class="col-md-12">
+                            Registration Number: <span>{{theft_info_view.vehicle.registrationNo}}</span>
+                        </div>
+                        <div class="col-md-12">
+                            Extra Info: <span>{{theft_info_view.vehicle.extra_info}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                &nbsp;
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                    <p>
+                        <strong>Images uploaded for theft :</strong>
+                    </p>
+                </div>
+                <div class="col-md-3" ng-repeat="attachment in theft_info_view.vehicle.attachments">
 
-  <div>
-    Type <span>{{theft_info_view.vehicle.type}}</span>
-  </div>
-  <div>
-    Make <span>Make</span>
-  </div>
-  <div>
-      Model <span>{{theft_info_view.vehicle.model}}</span>
-  </div>
-  <div>
-    YOM <span>{{theft_info_view.vehicle.year_of_make}}</span>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div ng-repeat = "attachment in theft_info_view.vehicle.attachments" class="col-md-4">
-          <img ng-src="{{attachment.publicUrl}}" class="img-thumbnail" alt="Cinque Terre" width="304" height="236">
-      </div>
+                    <a href="{{attachment.publicUrl}}" class="thumbnail">
+                        <img ng-src="{{attachment.publicUrl}}" alt="Pulpit Rock" style="width:100px;height:100px">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container" ng-show="theft_info_view == null">
+            <div class="alert alert-info">
+                Sorry looks to be wrong theft id. Kindly check with your friend again for the url or contact customer service
+            </div>
+        </div>
     </div>
-    <div class="row">
-      <div class="col-md-3">
-      <ng-map center="{{theft_info_view.theft_location_cordinates}}" zoom="16">
-           <marker position="{{theft_info_view.theft_location_cordinates}}" title="Lost here"></marker>
-      </ng-map>
-    </div>
-   </div>
-</div>
-</div>
-</div>
 </div>

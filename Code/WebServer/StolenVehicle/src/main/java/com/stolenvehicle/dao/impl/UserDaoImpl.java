@@ -42,7 +42,8 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 				user.setContactNumber(resultSet.getString("contactNumber"));
 				user.setCity(resultSet.getString("city"));
 				user.setAddress(resultSet.getString("address"));
-				user.setAddressCordinates(resultSet.getString("addressCordinates"));
+				user.setAddressCordinates(resultSet
+						.getString("addressCordinates"));
 				user.setUserStatus(UserStatusEnum.valueOf(resultSet
 						.getString("status")));
 				user.setEmail_notification(resultSet.getString(
@@ -101,7 +102,8 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 						user.getEmailaddress(), user.getPassword(),
 						user.getGender().toString(), user.getIc_passport(),
 						user.getContactNumber(), user.getCity(),
-						user.getAddress(), user.getAddressCordinates(),user.getActivation_id(),
+						user.getAddress(), user.getAddressCordinates(),
+						user.getActivation_id(),
 						user.getUserStatus().toString(),
 						user.isEmail_notification() ? "true" : "false",
 						user.isTermsAndCondition() ? "true" : "false",
@@ -153,5 +155,30 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 		final Object emailAddress = this.fetch(Query.GET_EMAIL_BY_USER_ID,
 				new Object[] { user_id }, new EmailAddressResultSetExtractor());
 		return (String) emailAddress;
+	}
+
+	@Override
+	public boolean updateUser(User user) throws BusinessException {
+
+		boolean status = false;
+		int rowUploadCount = this.save(
+				Query.UPDATE_USER,
+				new Object[] { user.getName(), user.getEmailaddress(),
+						user.getGender().toString(), user.getIc_passport(),
+						user.getContactNumber(), user.getCity(),
+						user.getAddress(), user.getAddressCordinates(),
+						user.getCountry_id(), user.getId() });
+		status = rowUploadCount == 0 ? false : true;
+		return status;
+	}
+
+	@Override
+	public boolean setPassword(String oldPassword, String newPassword,
+			String userId) throws BusinessException {
+		boolean status = false;
+		int rowUploadCount = this.save(Query.SET_PASSWORD, new Object[] {
+				newPassword, oldPassword, userId });
+		status = rowUploadCount == 0 ? false : true;
+		return status;
 	}
 }

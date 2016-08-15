@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -45,14 +46,15 @@ public class AppUtil {
 	public static Timestamp convertStringToTimestamp(String str_date) {
 		try {
 			DateFormat formatter;
-			formatter = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+			formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+			formatter.setTimeZone(TimeZone.getTimeZone("GMT"));
 			Date date = formatter.parse(str_date);
 			java.sql.Timestamp timeStampDate = new Timestamp(date.getTime());
-
 			return timeStampDate;
 		} catch (ParseException e) {
 
-			return null;
+			throw new IllegalArgumentException(ExceptionConstants.ILLEGAL_DATE,
+					e);
 		}
 	}
 

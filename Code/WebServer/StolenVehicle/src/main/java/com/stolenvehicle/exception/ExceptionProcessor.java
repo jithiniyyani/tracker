@@ -45,6 +45,24 @@ public class ExceptionProcessor {
 						new ErrorTo(ErrorEnum.EMPTY_INPUT.getCode(),
 								ErrorEnum.EMPTY_INPUT.getMessage())),
 						HttpStatus.BAD_REQUEST);
+			} else if (ex.getMessage().equalsIgnoreCase(
+					ExceptionConstants.ILLEGAL_DATE)) {
+
+				response = new ResponseEntity<String>(JsonUtil.toJson(
+						Constants.ERROR,
+						new ErrorTo(ErrorEnum.EMPTY_INPUT.getCode(),
+								ErrorEnum.EMPTY_INPUT.getMessage())),
+						HttpStatus.BAD_REQUEST);
+
+			} else if (ex.getMessage().equalsIgnoreCase(
+					ExceptionConstants.VEHICLE_NOT_FOUND)) {
+
+				response = new ResponseEntity<String>(JsonUtil.toJson(
+						Constants.ERROR, new ErrorTo(
+								ErrorEnum.NO_THEFTS_FOR_VEHICLE.getCode(),
+								ErrorEnum.NO_THEFTS_FOR_VEHICLE.getMessage())),
+						HttpStatus.BAD_REQUEST);
+
 			} else {
 
 				response = new ResponseEntity<>(

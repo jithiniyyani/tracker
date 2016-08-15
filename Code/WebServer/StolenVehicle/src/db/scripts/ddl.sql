@@ -129,4 +129,18 @@ create table find_information(
 );
 
 
+create table audit(
+	
+   user_id varchar(255),
+   operation varchar(255),
+   status varchar(10),
+   error varchar(255),
+   createdBy varchar(255),
+   createdAt DATETIME,
+   modifiedBy varchar(255),
+   modifiedAt DATETIME
+);
+
+
+
   

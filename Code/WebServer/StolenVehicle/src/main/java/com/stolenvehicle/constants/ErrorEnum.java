@@ -12,9 +12,10 @@ public enum ErrorEnum {
 	INTERNAL_SERVICE_ERROR("500","Opps something went wrong. Kindly contact customer service"),
 	ENTITY_ALREADY_EXIST_IN_DB("400", "Entity already exists in db"),
 	EMPTY_INPUT("400","Empty input"),
-	THEFT_INFO_NOT_FOUND("400","Theft Info not found"),
+	THEFT_INFO_NOT_FOUND("400","No thefts found for searched vehicle"),
 	EMAIL_ID_NOT_FOUND_FOR_RESET("400","Email id not found for password reset"),
-	ACTIVATE_USER_ID_NOT_FOUND("400","Activation id not valid");
+	ACTIVATE_USER_ID_NOT_FOUND("400","Activation id not valid"),
+	NO_THEFTS_FOR_VEHICLE("400","No thefts registered for this vehicle");
 
 	private String code;
 	private String message;

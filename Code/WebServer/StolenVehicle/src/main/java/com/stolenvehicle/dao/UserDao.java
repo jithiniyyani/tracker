@@ -11,9 +11,14 @@ public interface UserDao extends GenericDao {
 
 	public User saveUser(User user) throws BusinessException;
 
+	public boolean updateUser(User user) throws BusinessException;
+
 	public boolean activateUser(String activationId) throws BusinessException;
 
 	public String resetUserPassword(String emailId) throws BusinessException;
+
+	public boolean setPassword(String oldPassword, String newPassword,
+			String userId) throws BusinessException;
 
 	public boolean setUserPassword(SetPasswordTo setPasswordTo)
 			throws BusinessException;

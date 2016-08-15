@@ -25,6 +25,7 @@
 form .progress {
     line-height: 15px;
 }
+
 }
 .progress {
     display: inline-block;
@@ -33,6 +34,32 @@ form .progress {
 }
 .progress div {
     font-size: smaller;
-    background: orange;
+    background: #1A6882;
     width: 0;
+}
+
+.form-horizontal {
+    width:500px;
+}
+
+.datetime-picker-dropdown {
+
+}
+
+.datetime-picker-dropdown > li.date-picker-menu div > table .btn-default {
+    border: 0;
+}
+
+.datetime-picker-dropdown > li.time-picker-menu div > table {
+
+}
+
+.boxShadow{
+   box-shadow: 0 0 10px black;
+   margin-top : 10px;
+}
+
+.formBox{
+   border:solid 2px black;
+    padding: 5px;
 }

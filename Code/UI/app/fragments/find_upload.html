@@ -1,42 +1,59 @@
-<div class="row">
-<div class="col-md-4">
-  <div ng-controller="AttachmentUploadController">
-     <h4>Upload vehicle images</h4>
-     <button ngf-select="uploadFilesForFind($files, $invalidFiles)" multiple
-       accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
-       Select Files</button>
-     <br> <br> File Upload status:
-     <ul>
-       <li ng-repeat="f in files" style="font: smaller">
-         {{f.name}}	{{f.$errorParam}}
-         <span class="progress" ng-show="f.progress >= 0">
-           <div style="width: {{f.progress" ng-bind="f.progress + '%'"></div>
-         </span>
-       </li>
-       <li ng-repeat="f in errFiles" style="font: smaller">{{f.name}}
-         {{f.$error}} {{f.$errorParam}}</li>
-     </ul>
-     {{errorMsg}}
- </div>
-</div>
-</div>
-<div class="row">
-  <div class="col-md-4">
-    <form>
-    <div class="form-group">
-        <label for="finderName">Name :</label>
-        <input type="text" id="finderName" class="form-control">
+<div class="container" ng-controller="FindController">
+    <div class="row">
+        <div class="col-md-4">
+            <p class="alert alert-info">
+                Please upload find details to notifiy the owner
+            </p>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="email">Email :</label>
-        <input type="text" id="email" class="form-control">
+    <div class="row">
+        <div class="col-md-4">
+          <div class="formBox" ng-controller="UploadController" ng-init="setOperation('find')">
+              <h4>Upload on file select</h4>
+              <button class="btn btn-danger" type="file" ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+                  Select File</button>
+              <br>
+              <br>
+              <div class="row">
+                 <div class="col-md-4">
+                  File:
+                  <div style="font:smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+                      <span class="progress" ng-show="f.progress >= 0">
+                    <div style="width:{{f.progress}}%"
+                         ng-bind="f.progress + '%'"></div>
+                </span>
+                  </div>
+                  {{errorMsg}}
+                   </div>
+              </div>
+          </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="phone">Phone :</label>
-        <input type="text" id="phone" class="form-control">
+    <div class="row">
+        <div class="col-md-4">
+            <form>
+                Theft id for your reference : {{theftInfo.id}}
+                <div class="form-group">
+                    <label for="finderName">Name :</label>
+                    <input type="text" id="finderName" class="form-control" ng-model="findInfo.locators_name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email :</label>
+                    <input type="text" id="email" class="form-control" ng-model="findInfo.locators_email">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone :</label>
+                    <input type="text" id="phone" class="form-control" ng-model="findInfo.locators_contactNumber">
+                </div>
+                <div class="form-group">
+                    <label for="location">Location :</label>
+                    <ng-map zoom="16" center="current-location" geo-fallback-center="4.672585, -74.059525" on-click="placeMarker()">
+                        <marker ng-repeat="pos in positions" position="{{pos.lat}}, {{pos.lng}}"></marker>
+                    </ng-map>
+                </div>
+                <button type="submit" class="btn btn-primary" ng-click="reportFindForTheft(findInfo)">Submit</button>
+            </form>
+        </div>
     </div>
-      <button type="submit" class="btn btn-primary" ng-click="getTheftStatusByVehicleRegNumber(registrationNumber)">Submit</button>
-    </form>
-</div>
 </div>
 </div>

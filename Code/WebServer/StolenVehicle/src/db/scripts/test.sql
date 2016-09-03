@@ -25,3 +25,7 @@ select fi.id,fi.locators_name ,fi.find_location_cordinates,fi.locators_contactNu
 select * from user;
 update user set activation_id = '24c151f1-13f7-4d65-9ba3-c459cfc44e23';
 commit;
+
+CREATE USER 'webapp'@'localhost' IDENTIFIED BY 'test';
+GRANT ALL PRIVILEGES ON * . * TO 'webapp'@'localhost';
+FLUSH PRIVILEGES;

@@ -1,6 +1,6 @@
-drop database  if exists findMystolenVehicle;
-create database findMystolenVehicle;
-use findMystolenVehicle;
+drop database  if exists mylostcar;
+create database mylostcar;
+use mylostcar;
 
 create table country(
  

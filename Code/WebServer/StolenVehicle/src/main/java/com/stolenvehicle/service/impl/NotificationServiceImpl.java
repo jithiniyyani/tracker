@@ -27,16 +27,13 @@ public class NotificationServiceImpl implements NotificationService {
 	private UserDao userDao;
 
 	@Override
-	public boolean sendFindNotification(String user_id)
-			throws BusinessException {
+	public boolean sendFindNotification(String user_id) throws BusinessException {
 
 		boolean status = false;
 		String emailByUserId = userDao.getEmailByUserId(user_id);
-		String emailContent = templateService.generateContent(
-				Constants.VM_NOTIFICATOIN_EMAIL, Constants.USER, emailByUserId,
-				AppUtil.getResourceBundle(new Locale(Constants.US_LOCALE)));
-		emailService.sendEmail(new EmailTo(emailByUserId,
-				Constants.NOTIFICATION_EMAIL_SUBJECT, emailContent));
+		String emailContent = templateService.generateContent(Constants.VM_NOTIFICATOIN_EMAIL, Constants.USER,
+				emailByUserId, AppUtil.getResourceBundle(new Locale(Constants.US_LOCALE)));
+		emailService.sendEmail(new EmailTo(emailByUserId, Constants.NOTIFICATION_EMAIL_SUBJECT, emailContent));
 		status = true;
 		return status;
 	}

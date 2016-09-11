@@ -99,54 +99,41 @@ public class ConversionUtil {
 			vehicleTo.setAttachments(attachmentToList);
 			for (Attachment attachment : attachments) {
 
-				attachmentToList
-						.add(new AttachmentTo(attachment.getId(), attachment
-								.getAttachment_name(), null, attachment
-								.getPublicUrl(), attachment.getAttachmentEnum()));
+				attachmentToList.add(new AttachmentTo(attachment.getId(), attachment.getAttachment_name(), null,
+						attachment.getPublicUrl(), attachment.getAttachmentEnum()));
 
 			}
 		}
 		return vehicleTo;
 	}
 
-	public static TheftInformation convertTheftInformationTo(
-			TheftInformationTo theftInformationTo) {
+	public static TheftInformation convertTheftInformationTo(TheftInformationTo theftInformationTo) {
 
 		TheftInformation theftInformation = new TheftInformation();
 		theftInformation.setAuditToken(null);
 		theftInformation.setCountry_id(theftInformationTo.getCountry_id());
-		theftInformation.setFind_information_id(theftInformationTo
-				.getFind_information_id());
+		theftInformation.setFind_information_id(theftInformationTo.getFind_information_id());
 		theftInformation.setRewards(theftInformationTo.getRewards());
 		theftInformation.setStatus(theftInformationTo.getStatus());
-		theftInformation.setTheft_dateTime(AppUtil
-				.convertStringToTimestamp(theftInformationTo
-						.getTheft_dateTime()));
-		theftInformation.setTheft_location_cordinates(theftInformationTo
-				.getTheft_location_cordinates());
+		theftInformation.setTheft_dateTime(AppUtil.convertStringToTimestamp(theftInformationTo.getTheft_dateTime()));
+		theftInformation.setTheft_location_cordinates(theftInformationTo.getTheft_location_cordinates());
 		theftInformation.setVehicle_id(theftInformationTo.getVehicle_id());
 		return theftInformation;
 	}
 
-	public static TheftInformationTo convertTheftInformation(
-			TheftInformation theftInformation) {
+	public static TheftInformationTo convertTheftInformation(TheftInformation theftInformation) {
 
 		TheftInformationTo theftInformationTo = new TheftInformationTo();
 		theftInformationTo.setId(theftInformation.getId());
 		theftInformationTo.setCountry_id(theftInformation.getCountry_id());
-		theftInformationTo.setFind_information_id(theftInformation
-				.getFind_information_id());
+		theftInformationTo.setFind_information_id(theftInformation.getFind_information_id());
 		theftInformationTo.setRewards(theftInformation.getRewards());
 		theftInformationTo.setStatus(theftInformation.getStatus());
-		theftInformationTo.setTheft_dateTime(theftInformation
-				.getTheft_dateTime().toString());
-		theftInformationTo.setTheft_location_cordinates(theftInformation
-				.getTheft_location_cordinates());
+		theftInformationTo.setTheft_dateTime(theftInformation.getTheft_dateTime().toString());
+		theftInformationTo.setTheft_location_cordinates(theftInformation.getTheft_location_cordinates());
 		theftInformationTo.setVehicle_id(theftInformation.getVehicle_id());
-		theftInformationTo.setUser(ConversionUtil
-				.convertUserEntity(theftInformation.getUser()));
-		theftInformationTo.setVehicle(convertVehicleEntity(theftInformation
-				.getVehicle()));
+		theftInformationTo.setUser(ConversionUtil.convertUserEntity(theftInformation.getUser()));
+		theftInformationTo.setVehicle(convertVehicleEntity(theftInformation.getVehicle()));
 		return theftInformationTo;
 	}
 
@@ -170,22 +157,17 @@ public class ConversionUtil {
 		return attachmentTo;
 	}
 
-	public static FindInformation convertFindInformationTo(
-			FindInformationTo findInformationTo) {
+	public static FindInformation convertFindInformationTo(FindInformationTo findInformationTo) {
 
 		FindInformation findInformation = new FindInformation();
 		findInformation.setFind_dateTime(findInformationTo.getFind_dateTime());
-		findInformation.setFind_location_cordinates(findInformationTo
-				.getFind_location_cordinates());
+		findInformation.setFind_location_cordinates(findInformationTo.getFind_location_cordinates());
 		findInformation.setFindStatus(findInformationTo.getFindStatus());
 		findInformation.setId(findInformationTo.getId());
-		findInformation.setLocators_contactNumber(findInformationTo
-				.getLocators_contactNumber());
-		findInformation
-				.setLocators_email(findInformationTo.getLocators_email());
+		findInformation.setLocators_contactNumber(findInformationTo.getLocators_contactNumber());
+		findInformation.setLocators_email(findInformationTo.getLocators_email());
 		findInformation.setLocators_name(findInformationTo.getLocators_name());
-		findInformation.setTheft_information_id(findInformationTo
-				.getTheft_information_id());
+		findInformation.setTheft_information_id(findInformationTo.getTheft_information_id());
 		return findInformation;
 	}
 
@@ -195,20 +177,15 @@ public class ConversionUtil {
 		List<FindInformationTo> findInformationToList = new ArrayList<>();
 		for (FindInformation findInformation : findInfomtionEntityList) {
 
-			FindInformationTo findInformationTo = new FindInformationTo(
-					findInformation.getId(),
-					findInformation.getLocators_name(),
-					findInformation.getLocators_email(),
-					findInformation.getLocators_contactNumber(),
-					findInformation.getFind_location_cordinates());
-			findInformationTo.setTheft_information_id(findInformation
-					.getTheft_information_id());
+			FindInformationTo findInformationTo = new FindInformationTo(findInformation.getId(),
+					findInformation.getLocators_name(), findInformation.getLocators_email(),
+					findInformation.getLocators_contactNumber(), findInformation.getFind_location_cordinates());
+			findInformationTo.setTheft_information_id(findInformation.getTheft_information_id());
 			List<AttachmentTo> attachmentList = new ArrayList<>();
 			findInformationTo.setAttachments(attachmentList);
 			for (Attachment attachment : findInformation.getAttachments()) {
 
-				attachmentList.add(ConversionUtil
-						.convertAttachmentEntity(attachment));
+				attachmentList.add(ConversionUtil.convertAttachmentEntity(attachment));
 			}
 			findInformationToList.add(findInformationTo);
 
@@ -216,13 +193,11 @@ public class ConversionUtil {
 		return findInformationToList;
 	}
 
-	public static List<CountryTo> convertCountryEntityList(
-			List<Country> countryList) {
+	public static List<CountryTo> convertCountryEntityList(List<Country> countryList) {
 
 		List<CountryTo> countryToList = new ArrayList<>();
 		for (Country country : countryList) {
-			countryToList.add(new CountryTo(country.getCountry(), country
-					.getCountry_code()));
+			countryToList.add(new CountryTo(country.getCountry(), country.getCountry_code()));
 		}
 		return countryToList;
 	}

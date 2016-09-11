@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet Filter implementation class SecurityFilter
+ * Play with security here
  */
 public class SecurityFilter implements Filter {
 
@@ -33,6 +34,7 @@ public class SecurityFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+		//#TODO: remove this after it goes up
 		httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
 		chain.doFilter(request, response);
 		

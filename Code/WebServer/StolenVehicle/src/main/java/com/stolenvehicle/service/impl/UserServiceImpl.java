@@ -16,8 +16,7 @@ import com.stolenvehicle.util.ConversionUtil;
 @Service
 public class UserServiceImpl implements UserService {
 
-	private static final Logger LOGGER = Logger
-			.getLogger(UserServiceImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(UserServiceImpl.class);
 
 	@Autowired
 	private UserDao userDao;
@@ -25,8 +24,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserTo authenticateUser(UserTo userTo) throws BusinessException {
 
-		User userFromDb = userDao.getUser(userTo.getEmailaddress(),
-				userTo.getPassword());
+		User userFromDb = userDao.getUser(userTo.getEmailaddress(), userTo.getPassword());
 		userTo = ConversionUtil.convertUserEntity(userFromDb);
 		return userTo;
 	}
@@ -48,14 +46,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String resetUserPassword(String userEmailId)
-			throws BusinessException {
+	public String resetUserPassword(String userEmailId) throws BusinessException {
 		return userDao.resetUserPassword(userEmailId);
 	}
 
 	@Override
-	public boolean setUserPassword(SetPasswordTo setPasswordTo)
-			throws BusinessException {
+	public boolean setUserPassword(SetPasswordTo setPasswordTo) throws BusinessException {
 		return userDao.setUserPassword(setPasswordTo);
 	}
 
@@ -69,7 +65,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean setPassword(PasswordTo passwordTo) throws BusinessException {
 
-		return userDao.setPassword(passwordTo.getOldPassword(),
-				passwordTo.getNewPassword(), passwordTo.getUserId());
+		return userDao.setPassword(passwordTo.getOldPassword(), passwordTo.getNewPassword(), passwordTo.getUserId());
 	}
 }

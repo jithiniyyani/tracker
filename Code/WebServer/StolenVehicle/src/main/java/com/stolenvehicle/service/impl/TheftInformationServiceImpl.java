@@ -23,59 +23,49 @@ public class TheftInformationServiceImpl implements TheftInformationService {
 	private TheftInformationDao theftInformationDao;
 
 	@Override
-	public TheftInformationTo saveTheftInformation(
-			TheftInformationTo theftInformationTo) throws BusinessException {
+	public TheftInformationTo saveTheftInformation(TheftInformationTo theftInformationTo) throws BusinessException {
 
-		TheftInformation theftInformation = ConversionUtil
-				.convertTheftInformationTo(theftInformationTo);
+		TheftInformation theftInformation = ConversionUtil.convertTheftInformationTo(theftInformationTo);
 		theftInformationDao.saveTheftInformation(theftInformation);
 		theftInformationTo.setId(theftInformation.getId());
 		return theftInformationTo;
 	}
 
 	@Override
-	public TheftInformationTo getTheftInformation(String theftId)
-			throws BusinessException {
+	public TheftInformationTo getTheftInformation(String theftId) throws BusinessException {
 
-		TheftInformation theftInformation = theftInformationDao
-				.getTheftInformation(theftId);
-		TheftInformationTo theftInformationTo = ConversionUtil
-				.convertTheftInformation(theftInformation);
+		TheftInformation theftInformation = theftInformationDao.getTheftInformation(theftId);
+		TheftInformationTo theftInformationTo = ConversionUtil.convertTheftInformation(theftInformation);
 		return theftInformationTo;
 	}
 
 	@Override
-	public TheftInformationTo getTheftInformationByVehicleRegistrationNumber(
-			String registrationNumber) throws BusinessException {
+	public TheftInformationTo getTheftInformationByVehicleRegistrationNumber(String registrationNumber)
+			throws BusinessException {
 		TheftInformation theftInformation = theftInformationDao
 				.getTheftInformationByVehicleRegistrationNumber(registrationNumber);
 		if (theftInformation == null) {
 			throw new IllegalArgumentException(ExceptionConstants.VEHICLE_NOT_FOUND);
 		}
-		TheftInformationTo theftInformationTo = ConversionUtil
-				.convertTheftInformation(theftInformation);
+		TheftInformationTo theftInformationTo = ConversionUtil.convertTheftInformation(theftInformation);
 		return theftInformationTo;
 	}
 
 	@Override
-	public boolean updateTheftInformation(String theftId, String findId,
-			TheftStatus theftStatus) throws BusinessException {
+	public boolean updateTheftInformation(String theftId, String findId, TheftStatus theftStatus)
+			throws BusinessException {
 
-		return theftInformationDao.updateTheftInformationStatus(theftId,
-				findId, theftStatus);
+		return theftInformationDao.updateTheftInformationStatus(theftId, findId, theftStatus);
 
 	}
 
 	@Override
-	public List<TheftInformationTo> getTheftInformationBySearchTo(
-			SearchTo searchTo) throws BusinessException {
+	public List<TheftInformationTo> getTheftInformationBySearchTo(SearchTo searchTo) throws BusinessException {
 
-		List<TheftInformation> theftInformationList = theftInformationDao
-				.getTheftInformationBySearchTo(searchTo);
+		List<TheftInformation> theftInformationList = theftInformationDao.getTheftInformationBySearchTo(searchTo);
 		List<TheftInformationTo> theftInformationToList = new ArrayList<TheftInformationTo>();
 		for (TheftInformation theftInformation : theftInformationList) {
-			theftInformationToList.add(ConversionUtil
-					.convertTheftInformation(theftInformation));
+			theftInformationToList.add(ConversionUtil.convertTheftInformation(theftInformation));
 		}
 		return theftInformationToList;
 	}

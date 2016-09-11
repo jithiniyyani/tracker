@@ -28,56 +28,42 @@ public class FindInformationServiceImpl implements FindInformationService {
 	private AttachmentDao attachmentDao;
 
 	@Override
-	public FindInformationTo saveFindInformation(
-			FindInformationTo findInformationTo) throws BusinessException {
+	public FindInformationTo saveFindInformation(FindInformationTo findInformationTo) throws BusinessException {
 
-		FindInformation findInformation = ConversionUtil
-				.convertFindInformationTo(findInformationTo);
+		FindInformation findInformation = ConversionUtil.convertFindInformationTo(findInformationTo);
 		findInformationDao.saveFindInformation(findInformation);
-		List<AttachmentTo> attachmentToList = findInformationTo
-				.getAttachments();
+		List<AttachmentTo> attachmentToList = findInformationTo.getAttachments();
 		List<Attachment> attachmentList = new ArrayList<Attachment>();
 		for (AttachmentTo attachmentTo : attachmentToList) {
 
-			attachmentList.add(new Attachment(
-					attachmentTo.getAttachment_name(), attachmentTo
-							.getAttachment_path(), attachmentTo.getPublicUrl(),
-					AttachmentTypeEnum.FIND, findInformationTo.getVehicle_id(),
+			attachmentList.add(new Attachment(attachmentTo.getAttachment_name(), attachmentTo.getAttachment_path(),
+					attachmentTo.getPublicUrl(), AttachmentTypeEnum.FIND, findInformationTo.getVehicle_id(),
 					findInformationTo.getId()));
 
 		}
-		attachmentDao.saveAttachmentList(attachmentList,
-				findInformationTo.getVehicle_id(), findInformation.getId());
+		attachmentDao.saveAttachmentList(attachmentList, findInformationTo.getVehicle_id(), findInformation.getId());
 		findInformationTo.setId(findInformation.getId());
 		return findInformationTo;
 	}
 
 	@Override
-	public List<FindInformationTo> getFindInformationListForUser(String user_id)
-			throws BusinessException {
+	public List<FindInformationTo> getFindInformationListForUser(String user_id) throws BusinessException {
 
-		List<FindInformation> findInforamtionForUser = findInformationDao
-				.getFindInforamtionForUser(user_id);
-		return ConversionUtil
-				.convertFindInformationEntityList(findInforamtionForUser);
+		List<FindInformation> findInforamtionForUser = findInformationDao.getFindInforamtionForUser(user_id);
+		return ConversionUtil.convertFindInformationEntityList(findInforamtionForUser);
 
 	}
 
 	@Override
-	public boolean updateFindInformationStatus(String find_id,
-			FindStatusEnum findStatus) throws BusinessException {
+	public boolean updateFindInformationStatus(String find_id, FindStatusEnum findStatus) throws BusinessException {
 
-		return findInformationDao.updateFindInformatoinStatus(find_id,
-				findStatus);
+		return findInformationDao.updateFindInformatoinStatus(find_id, findStatus);
 	}
 
 	@Override
-	public List<FindInformationTo> findInformationListReadyForReward(
-			String user_id) throws BusinessException {
-		List<FindInformation> findInforamtionForUser = findInformationDao
-				.findInformationListReadyForReward(user_id);
-		return ConversionUtil
-				.convertFindInformationEntityList(findInforamtionForUser);
+	public List<FindInformationTo> findInformationListReadyForReward(String user_id) throws BusinessException {
+		List<FindInformation> findInforamtionForUser = findInformationDao.findInformationListReadyForReward(user_id);
+		return ConversionUtil.convertFindInformationEntityList(findInforamtionForUser);
 	}
 
 }

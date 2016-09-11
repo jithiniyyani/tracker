@@ -25,8 +25,7 @@ public class AppUtil {
 		HttpSession session = request.getSession(false);
 		if (session == null) {
 
-			throw new IllegalArgumentException(
-					ExceptionConstants.INVALID_SESSION);
+			throw new IllegalArgumentException(ExceptionConstants.INVALID_SESSION);
 		} else {
 			return true;
 		}
@@ -53,8 +52,7 @@ public class AppUtil {
 			return timeStampDate;
 		} catch (ParseException e) {
 
-			throw new IllegalArgumentException(ExceptionConstants.ILLEGAL_DATE,
-					e);
+			throw new IllegalArgumentException(ExceptionConstants.ILLEGAL_DATE, e);
 		}
 	}
 
@@ -64,8 +62,7 @@ public class AppUtil {
 		return (UserTo) session.getAttribute(Constants.USER);
 	}
 
-	public static List<AttachmentTo> getAttachmentListForTheft(
-			HttpServletRequest request) {
+	public static List<AttachmentTo> getAttachmentListForTheft(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		return (List<AttachmentTo>) session.getAttribute(Constants.ATTACHMENTS);
 	}

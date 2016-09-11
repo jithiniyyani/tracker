@@ -16,8 +16,7 @@ public class AuditServiceImpl implements AuditService {
 
 	@Override
 	@Async
-	public void audit(String userId, AuditEnum operation, String status,
-			String errorCause) {
+	public void audit(String userId, AuditEnum operation, String status, String errorCause) {
 
 		auditDao.audit(userId, operation, status, errorCause);
 

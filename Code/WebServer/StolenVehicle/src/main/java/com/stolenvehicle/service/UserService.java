@@ -17,10 +17,8 @@ public interface UserService {
 
 	public boolean setPassword(PasswordTo passwordTo) throws BusinessException;
 
-	public String resetUserPassword(String userEmailId)
-			throws BusinessException;
+	public String resetUserPassword(String userEmailId) throws BusinessException;
 
-	public boolean setUserPassword(SetPasswordTo setPasswordTo)
-			throws BusinessException;
+	public boolean setUserPassword(SetPasswordTo setPasswordTo) throws BusinessException;
 
 }

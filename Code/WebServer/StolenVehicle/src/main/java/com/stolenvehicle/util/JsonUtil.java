@@ -80,8 +80,7 @@ public class JsonUtil {
 		mapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
 		T jsonObject = null;
 		try {
-			jsonObject = (T) mapper.readValue(
-					jsonString.getBytes(Constants.UTF8), object);
+			jsonObject = (T) mapper.readValue(jsonString.getBytes(Constants.UTF8), object);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -103,12 +102,10 @@ public class JsonUtil {
 	 *            object
 	 * @return the t
 	 */
-	public static <T> T toObject(final String jsonString,
-			final String attributeName, final Class object) {
+	public static <T> T toObject(final String jsonString, final String attributeName, final Class object) {
 
 		final ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
-				false);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		T jsonObject = null;
 		try {
 			final JsonNode rootNode = mapper.readTree(jsonString);

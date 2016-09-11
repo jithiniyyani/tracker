@@ -35,8 +35,7 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public boolean writeToFile(String folderPath, String fileName, byte[] data)
-			throws BusinessException {
+	public boolean writeToFile(String folderPath, String fileName, byte[] data) throws BusinessException {
 
 		boolean status = false;
 		final File file = createFile(folderPath, fileName);
@@ -46,8 +45,7 @@ public class FileServiceImpl implements FileService {
 		} catch (IOException ex) {
 
 			LOGGER.error("Error while saving attachment", ex);
-			throw new BusinessException(
-					ExceptionConstants.ERROR_WHILE_SAVING_ATTACHMENT, ex);
+			throw new BusinessException(ExceptionConstants.ERROR_WHILE_SAVING_ATTACHMENT, ex);
 
 		}
 		return status;

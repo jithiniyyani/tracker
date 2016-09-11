@@ -13,8 +13,8 @@ import java.util.ResourceBundle.Control;
 public class UTF8Control extends Control {
 
 	@Override
-	public ResourceBundle newBundle(final String baseName, final Locale locale,
-			final String format, final ClassLoader loader, final boolean reload)
+	public ResourceBundle newBundle(final String baseName, final Locale locale, final String format,
+			final ClassLoader loader, final boolean reload)
 			throws IllegalAccessException, InstantiationException, IOException {
 
 		final String bundleName = toBundleName(baseName, locale);
@@ -36,8 +36,7 @@ public class UTF8Control extends Control {
 		if (stream != null) {
 			try {
 
-				bundle = new PropertyResourceBundle(new InputStreamReader(
-						stream, "UTF-8"));
+				bundle = new PropertyResourceBundle(new InputStreamReader(stream, "UTF-8"));
 			} finally {
 				stream.close();
 			}

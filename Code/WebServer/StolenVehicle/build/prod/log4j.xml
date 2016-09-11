@@ -4,7 +4,7 @@
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 	
 	<appender name="fileAppenderForApp" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="C:/logs/stolenVehicle.log" />
+		<param name="File" value="/var/log/mylostcar/app.log" />
 		<param name="Append" value="true" />
 		<param name="DatePattern" value="'.'yyyy-MM-dd" />	
 		<layout class="org.apache.log4j.PatternLayout">

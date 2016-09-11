@@ -40,12 +40,12 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.GET, path = "/ping")
 	public ResponseEntity<String> ping() {
 		LOGGER.debug("Entering ping");
-		try {
+		/*try {
 			mailService.sendEmail(new EmailTo("jitsonfire@gmail.com",
 					"test mail", "this is test mail"));
 		} catch (Exception ex) {
 			ex.printStackTrace();
-		}
+		}*/
 		LOGGER.debug("Done with ping");
 		return new ResponseEntity<String>("Test ", HttpStatus.OK);
 

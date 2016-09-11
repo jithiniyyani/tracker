@@ -2,4 +2,4 @@ Thank you for using our service.
 
 We want you to click on this link so that you can activate your account with us
 
- http://localhost/app/#/activateUser?id=$user.activationId
+http://mylostcar.com/#/activateUser?id=$user.activationId

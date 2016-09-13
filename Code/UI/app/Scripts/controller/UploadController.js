@@ -10,9 +10,9 @@ app.controller('UploadController', ['$scope', 'Upload', '$timeout', function($sc
 
         var postUrl = null;
         if($scope.operation  == "profile"){
-            postUrl = 'http://localhost/StolenVehicle/uploadAttachmentsForTheft';
+            postUrl = 'http://mylostcar.com/StolenVehicle/uploadAttachmentsForTheft';
         }else if($scope.operation  == "find"){
-            postUrl = 'http://localhost/StolenVehicle/uploadAttachmentsForFind';
+            postUrl = 'http://mylostcar.com/StolenVehicle/uploadAttachmentsForFind';
         }
         $scope.f = file;
         $scope.errFile = errFiles && errFiles[0];

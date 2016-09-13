@@ -5,7 +5,7 @@ app.controller('LandingPageController', function($scope,LoginService, $http,$win
     //try to get the user details.
     //After login we are redirecting the user to this page
 
-    $http.get("http://localhost/StolenVehicle/user").then(function(response) {
+    $http.get("http://mylostcar.com/StolenVehicle/user").then(function(response) {
             LoginService.setLoginStatus(true);
             LoginService.setUser(response.data.user);
         }, function(data) {
@@ -20,7 +20,7 @@ app.controller('LandingPageController', function($scope,LoginService, $http,$win
 
         if(LoginService.loginStatus()){
 
-                $window.location='/app/#/lost';
+                $window.location='/#/lost';
 
         }else{
 
@@ -38,7 +38,7 @@ app.controller('LandingPageController', function($scope,LoginService, $http,$win
                     }
 
                 });
-                $window.location='/app/#/login';
+                $window.location='/#/login';
         }
 
     }

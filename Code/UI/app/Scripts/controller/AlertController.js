@@ -2,7 +2,7 @@ app.controller('AlertController', function($scope, $http, $uibModal) {
 
     $scope.findInfoList = null;
     $scope.request = {};
-    $scope.findInfoList = $http.get("http://localhost/StolenVehicle/findInformationForUser").then(function(response) {
+    $scope.findInfoList = $http.get("http://mylostcar.com/StolenVehicle/findInformationForUser").then(function(response) {
         $scope.findInfoList = response.data.find_info_list;
     }, function(data) {
 
@@ -15,7 +15,7 @@ app.controller('AlertController', function($scope, $http, $uibModal) {
 
       };
       $scope.request.method = 'post';
-      $scope.request.url = 'http://localhost/StolenVehicle/updateFindInformationStatus';
+      $scope.request.url = 'http://mylostcar.com/StolenVehicle/updateFindInformationStatus';
       $scope.request.payLoad = $scope.find_info;
       $scope.request.entityAttribute = 'find_info';
       $scope.request.message = 'You have accpeted the find and finder has been notified for the same';
@@ -47,7 +47,7 @@ app.controller('AlertController', function($scope, $http, $uibModal) {
 
         };
         $scope.request.method = 'post';
-        $scope.request.url = 'http://localhost/StolenVehicle/updateFindInformationStatus';
+        $scope.request.url = 'http://mylostcar.com/StolenVehicle/updateFindInformationStatus';
         $scope.request.payLoad = $scope.find_info;
         $scope.request.entityAttribute = 'find_info';
         $scope.request.message = 'You have rejected the find and finder has been notified for the same';

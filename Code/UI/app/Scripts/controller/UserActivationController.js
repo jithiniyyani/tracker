@@ -4,7 +4,7 @@ app.controller('UserActivationController', function($scope, $http, $uibModal,$lo
     $scope.activateUser = function() {
     $scope.request = {};
     $scope.request.method = 'get';
-    $scope.request.url = 'http://localhost/StolenVehicle/activateUser?id=' + $scope.activationId;
+    $scope.request.url = 'http://mylostcar.com/StolenVehicle/activateUser?id=' + $scope.activationId;
     $scope.request.modalTime = 2000;
     $scope.request.successMessage = "Your account has been succesfully activated. Kindly login to user our service";
     $scope.modalInstance = $uibModal.open({
@@ -25,7 +25,7 @@ app.controller('UserActivationController', function($scope, $http, $uibModal,$lo
 
         });
 
-        $window.location='/app/#/login';
+        $window.location='/#/login';
     };
 
 });

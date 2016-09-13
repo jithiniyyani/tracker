@@ -5,7 +5,7 @@ app.controller('RewardsController',function($scope,$http,$uibModal){
 
     $scope.findInfoListReadyForReward;
 
-    $http.get("http://localhost/StolenVehicle/findInformationListReadyForReward").then(function(response) {
+    $http.get("http://mylostcar.com/StolenVehicle/findInformationListReadyForReward").then(function(response) {
         $scope.findInfoListReadyForReward = response.data.find_info_list;
     }, function(data) {
 
@@ -17,7 +17,7 @@ app.controller('RewardsController',function($scope,$http,$uibModal){
       reward.theftId = findInfo.theft_information_id;
       reward.findInformationId = findInfo.id;
       $scope.request.method = 'post';
-      $scope.request.url = 'http://localhost/StolenVehicle/reward';
+      $scope.request.url = 'http://mylostcar.com/StolenVehicle/reward';
       $scope.request.payLoad = reward;
       $scope.request.entityAttribute = 'reward';
       $scope.modalInstance = $uibModal.open({

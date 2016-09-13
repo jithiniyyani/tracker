@@ -1,7 +1,7 @@
 app.controller('LoginController', function($scope, $http, $uibModal,LoginService,$window) {
 
     //all labels section go here
-    $scope.lc_mainMessage = "Please login to repot your lost vehicle";
+    $scope.lc_mainMessage = "Please login to report your lost vehicle";
     $scope.lc_emailAddressLabel = "Email Address";
     $scope.lc_passowrd = "Password";
     $scope.lc_submit = "Login";
@@ -17,7 +17,7 @@ app.controller('LoginController', function($scope, $http, $uibModal,LoginService
 
         var modalRequest = {};
         modalRequest.method = 'post';
-        modalRequest.url = 'http://localhost/StolenVehicle/login';
+        modalRequest.url = 'http://mylostcar.com/StolenVehicle/login';
         modalRequest.entityAttribute = 'user';
         modalRequest.payLoad = $scope.user;
         modalRequest.successMessage = 'Welcome';
@@ -37,11 +37,16 @@ app.controller('LoginController', function($scope, $http, $uibModal,LoginService
         //Check the response
         modalRequest.modalInstance.result.then(function(result) {
             LoginService.setLoginStatus(true);
-            $window.location='/app/#/landing';
+            $window.location='/#/landing';
         }, function() {
           LoginService.setLoginStatus(false);
           LoginService.setUser(null);
         });
     };
+
+    $scope.clear = function(feild){
+
+      $scope.user[feild] = "";
+    }
 
 });

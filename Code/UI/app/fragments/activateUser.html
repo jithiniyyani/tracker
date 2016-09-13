@@ -1,13 +1,13 @@
 <div class="container" ng-controller="UserActivationController">
   <div class="col-md-12">
-      <div class="alert alert-info">
+      <div class="alert">
          Lets Activate your account
       </div>
   </div>
   <div class="col-md-6">
     <form name="activateUserForm">
       <div class="form-group">
-          <label for="activationId">Reset Password</label>
+          <label for="activationId">Activation Id</label>
           <input type="text" name="activationId" class="form-control" ng-model="activationId" readonly/>
       </div>
       <button type="submit" class="btn btn-default" ng-click="activateUser()">Activate Account</button>

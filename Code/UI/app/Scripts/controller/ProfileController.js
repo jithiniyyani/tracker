@@ -1,6 +1,6 @@
 app.controller('ProfileController', function($scope, LoginService, $http, $uibModal) {
 
-    $http.get("http://localhost/StolenVehicle/user").then(function(response) {
+    $http.get("http://mylostcar.com/StolenVehicle/user").then(function(response) {
         LoginService.setLoginStatus(true);
         LoginService.setUser(response.data.user);
     }, function(data) {
@@ -11,7 +11,7 @@ app.controller('ProfileController', function($scope, LoginService, $http, $uibMo
     $scope.user = LoginService.getUser();
     $scope.countryList = {};
 
-    $http.get("http://localhost/StolenVehicle/countries").then(function(response) {
+    $http.get("http://mylostcar.com/StolenVehicle/countries").then(function(response) {
         $scope.countryList = response.data;
     }, function(data) {
 
@@ -35,7 +35,7 @@ app.controller('ProfileController', function($scope, LoginService, $http, $uibMo
 
         var modalRequest = {};
         modalRequest.method = 'post';
-        modalRequest.url = 'http://localhost/StolenVehicle/user';
+        modalRequest.url = 'http://mylostcar.com/StolenVehicle/user';
         modalRequest.entityAttribute = 'user';
         modalRequest.payLoad = $scope.user;
         modalRequest.successMessage = 'Profile details updated';
@@ -54,7 +54,7 @@ app.controller('ProfileController', function($scope, LoginService, $http, $uibMo
 
         //Check the response
         modalRequest.modalInstance.result.then(function(result) {
-            $window.location = '/app/#/landing';
+            $window.location = '/#/landing';
         }, function() {
 
         });
@@ -66,7 +66,7 @@ app.controller('ProfileController', function($scope, LoginService, $http, $uibMo
 
         var modalRequest = {};
         modalRequest.method = 'post';
-        modalRequest.url = 'http://localhost/StolenVehicle/password';
+        modalRequest.url = 'http://mylostcar.com/StolenVehicle/password';
         modalRequest.entityAttribute = 'password';
         modalRequest.payLoad = {};
         modalRequest.payLoad.userId = $scope.user.id;
@@ -89,7 +89,7 @@ app.controller('ProfileController', function($scope, LoginService, $http, $uibMo
 
         //Check the response
         modalRequest.modalInstance.result.then(function(result) {
-            $window.location = '/app/#/landing';
+            $window.location = '/#/landing';
         }, function() {
 
         });

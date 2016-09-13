@@ -6,7 +6,7 @@ app.controller('AttachmentUploadController', ['$scope', 'Upload', '$timeout', fu
         $scope.errFiles = errFiles;
         angular.forEach(files, function(file) {
             file.upload = Upload.upload({
-                url: 'http://localhost/StolenVehicle/uploadAttachmentsForTheft',
+                url: 'http://mylostcar.com/StolenVehicle/uploadAttachmentsForTheft',
                 data: {file: file}
             });
 
@@ -30,7 +30,7 @@ app.controller('AttachmentUploadController', ['$scope', 'Upload', '$timeout', fu
         $scope.errFiles = errFiles;
         angular.forEach(files, function(file) {
             file.upload = Upload.upload({
-                url: 'http://localhost/StolenVehicle/uploadAttachmentsForAnonymousTheft',
+                url: 'http://mylostcar.com/StolenVehicle/uploadAttachmentsForAnonymousTheft',
                 data: {file: file}
             });
 

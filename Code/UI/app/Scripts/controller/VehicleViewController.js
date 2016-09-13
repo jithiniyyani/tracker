@@ -8,7 +8,7 @@ app.controller('VehicleViewController',function($scope,$window,request){
     $scope.confirm = function(){
 
         $scope.request.modalInstance.dismiss('cancel');
-        $window.location='/app/#/found/upload';
+        $window.location='/#/found/upload';
 
     }
 

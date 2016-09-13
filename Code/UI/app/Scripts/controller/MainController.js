@@ -17,13 +17,13 @@ app.controller('MainController',function($scope,LoginService,$http,$window,$loca
   };
 
   $scope.logout = function() {
-  	$http.post("http://localhost/StolenVehicle/logout").then(
+  	$http.post("http://mylostcar.com/StolenVehicle/logout").then(
 				function(data) {
 					LoginService.setLoginStatus(false);
-          $window.location='/app/#/landing';
+          $window.location='/#/landing';
 				}, function(data) {
 					LoginService.setLoginStatus(false);
-          $window.location='/app/#/landing';
+          $window.location='/#/landing';
 				}
 	  );
 	};

@@ -6,7 +6,7 @@ app.controller('VehicleStatusController', function($scope, LoginService, $http,$
 
         var modalRequest = {};
         modalRequest.method = 'get';
-        modalRequest.url = 'http://localhost/StolenVehicle/searchForTheft?regNumber=' + registrationNumber;
+        modalRequest.url = 'http://mylostcar.com/StolenVehicle/searchForTheft?regNumber=' + registrationNumber;
         modalRequest.modalInstance = $uibModal.open({
             animation: true,
             templateUrl: 'dialog/loader.html',

@@ -2,9 +2,8 @@
  margin-top : 10px;
 }
 
-
 .full{
-   background: url('../images/background.jpeg') no-repeat center center fixed;
+   background: url('/images/background.jpeg') no-repeat center center fixed;
    -webkit-background-size: cover;
    -moz-background-size: cover;
    background-size: cover;
@@ -12,9 +11,20 @@
    height:100%;
 }
 
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #00000;
+  color : #ffffff;
+}
+
 .modal_theme{
   background:#C3CCD5;
 }
+
 .thumb {
     width: 24px;
     height: 24px;

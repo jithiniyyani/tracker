@@ -6,7 +6,7 @@ app.controller('ResetPasswordController', function($scope, $http, $uibModal) {
      $scope.resetPasswordForUser = function(user) {
 
         $scope.request.method = 'post';
-        $scope.request.url = 'http://localhost/StolenVehicle/restPassword';
+        $scope.request.url = 'http://mylostcar.com/StolenVehicle/restPassword';
         $scope.request.payLoad = $scope.resetPassword;
         $scope.request.entityAttribute = 'resetPassword';
         $scope.modalInstance = $uibModal.open({

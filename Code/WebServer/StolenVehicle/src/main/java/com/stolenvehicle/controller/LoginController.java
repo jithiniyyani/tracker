@@ -203,19 +203,25 @@ public class LoginController {
 	@RequestMapping(method = RequestMethod.POST, path = "/setPassword")
 	public ResponseEntity<String> setPassword(@RequestBody String jsonRequest, HttpServletRequest request) {
 		ResponseEntity<String> response = null;
+		boolean status = false;
+		SetPasswordTo setPasswordTo = null;
+		String errorCause = "";
 		try {
 
-			SetPasswordTo setPasswordTo = JsonUtil.toObject(jsonRequest, Constants.SET_PASSWORD, SetPasswordTo.class);
-			boolean status = userService.setUserPassword(setPasswordTo);
+			setPasswordTo = JsonUtil.toObject(jsonRequest, Constants.SET_PASSWORD, SetPasswordTo.class);
+			status = userService.setUserPassword(setPasswordTo);
 			response = status ? new ResponseEntity<String>(HttpStatus.OK)
 					: new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 
 		} catch (Exception ex) {
 
 			LOGGER.error("Error while setting password request : " + jsonRequest, ex);
+			errorCause = ex.getMessage();
 			response = ExceptionProcessor.handleException(ex);
 		} finally {
 
+			auditService.audit(setPasswordTo.getEmailAddress(), AuditEnum.SET_PASSWORD,
+					status ? Constants.SUCCESS : Constants.ERROR, errorCause);
 		}
 		return response;
 	}

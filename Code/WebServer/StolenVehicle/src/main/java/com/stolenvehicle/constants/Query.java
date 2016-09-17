@@ -7,7 +7,7 @@ public class Query {
 	public static final String SAVE_USER = "insert into user values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),null,null);";
 	public static final String ACTIVATE_USER = "update user set status = 'ACTIVE',activation_id = null where activation_id = ?";
 	public static final String RESET_USER_PASSWORD = "update user set status = 'PASSWORD_RESET',activation_id = ? where emailaddress = ?";
-	public static final String SET_USER_PASSWORD = "update user set status = 'ACTIVE',activation_id = null,password = ? where emailaddress = ? and activation_id=?";
+	public static final String SET_USER_PASSWORD = "update user set status = 'ACTIVE', activation_id = null, password = ? where emailaddress = ? and activation_id=?";
 	public static final String SAVE_VEHICLE = "insert into vehicle values(?,?,?,?,?,?,?,?,?,?,?,?,now(),null,null);";
 	public static final String SAVE_THEFT = "insert into theft_information values(?,?,?,?,?,?,?,?,?,now(),null,null);";
 	public static final String GET_THEFT_INFO_BY_ID = "select ti.id,ti.status,u.name,u.id, v.registrationNo,v.color,ti.theft_dateTime,ti.theft_location_cordinates,ti.rewards,v.id,v.type,v.make,v.model,v.year_of_make from theft_information ti,vehicle v,user u where ti.status = 'lost' and ti.vehicle_id = v.id and v.user_id = u.id and ti.id = ?";

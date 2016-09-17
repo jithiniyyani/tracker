@@ -44,14 +44,9 @@ public class EmailServiceImpl implements EmailService {
 		try {
 			MimeMessage m = new MimeMessage(mailSession);
 			Address from = new InternetAddress(senderEmailId);
-			// Address[] to = new InternetAddress[] { new
-			// InternetAddress(emailTo.getReceipent()) };
 			Address[] to = new InternetAddress[] { new InternetAddress("jitsonfire@gmail.com") };
-			//Address[] bcc = new InternetAddress[] { new InternetAddress("jyotinaik27@gmail.com") };
 			m.setFrom(from);
 			m.setRecipients(Message.RecipientType.TO, to);
-			//m.setRecipients(Message.RecipientType.BCC, bcc);
-
 			m.setSubject(emailTo.getSubject());
 			m.setSentDate(new java.util.Date());
 			m.setContent(emailTo.getMessage(), "text/plain");

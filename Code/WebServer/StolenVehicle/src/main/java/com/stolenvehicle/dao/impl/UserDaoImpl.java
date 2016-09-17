@@ -80,7 +80,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
 				LOGGER.error("User found but not in valid state" + emailAddress + " " + user.getUserStatus());
 				throw new BusinessException(ExceptionConstants.INVALID_ACCOUNT_STATE);
-			} else if (user.getPassword().equals(password)) {
+			} else if (!user.getPassword().equals(password)) {
 
 				LOGGER.error("User found but password doesnot match " + password + " with " + user.getPassword());
 				throw new BusinessException(ExceptionConstants.INVALID_PASSWORD);

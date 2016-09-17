@@ -99,6 +99,7 @@ public class LoginController {
 
 			// #TODO: handle trasaction here as well
 			user = JsonUtil.toObject(requestBody, Constants.USER, UserTo.class);
+			//#TODO: validate this json before passing it forward
 			user.setUserStatus(UserStatusEnum.EMAIL_VERIFICATION_PENDING);
 			user = userService.registerUser(user);
 			String emailContent = templateService.generateContent(
@@ -146,8 +147,8 @@ public class LoginController {
 			@RequestParam(value = "id") String activationId,
 			HttpServletRequest request) {
 		ResponseEntity<String> response = null;
-		boolean status = false;
-		String errorCause = null;
+		String errorCause = "Invalid activation id";
+		boolean activateUser = false;
 		try {
 
 			if (StringUtils.isEmpty(activationId)) {
@@ -155,7 +156,7 @@ public class LoginController {
 						ExceptionConstants.EMPTY_INPUT);
 			} else {
 
-				boolean activateUser = userService.activateUser(activationId);
+				activateUser = userService.activateUser(activationId);
 				response = activateUser ? new ResponseEntity<String>(
 						HttpStatus.OK) : new ResponseEntity<String>(
 						JsonUtil.toJson(
@@ -166,7 +167,7 @@ public class LoginController {
 										ErrorEnum.ACTIVATE_USER_ID_NOT_FOUND
 												.getMessage())),
 						HttpStatus.BAD_REQUEST);
-				status = true;
+	
 			}
 		} catch (Exception ex) {
 
@@ -176,8 +177,8 @@ public class LoginController {
 			response = ExceptionProcessor.handleException(ex);
 		} finally {
 
-			auditService.audit(Constants.NO_USER_ID, AuditEnum.ACTIVATE_USER,
-					status ? Constants.SUCCESS : Constants.ERROR, errorCause);
+			auditService.audit(activationId != null ? activationId : "NOT_VALID", AuditEnum.ACTIVATE_USER,
+					activateUser ? Constants.SUCCESS : Constants.ERROR, errorCause);
 		}
 		return response;
 	}

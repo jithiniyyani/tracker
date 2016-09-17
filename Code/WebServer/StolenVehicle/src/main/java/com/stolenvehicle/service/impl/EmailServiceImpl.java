@@ -47,10 +47,10 @@ public class EmailServiceImpl implements EmailService {
 			// Address[] to = new InternetAddress[] { new
 			// InternetAddress(emailTo.getReceipent()) };
 			Address[] to = new InternetAddress[] { new InternetAddress("jitsonfire@gmail.com") };
-			Address[] bcc = new InternetAddress[] { new InternetAddress("jyotinaik27@gmail.com") };
+			//Address[] bcc = new InternetAddress[] { new InternetAddress("jyotinaik27@gmail.com") };
 			m.setFrom(from);
 			m.setRecipients(Message.RecipientType.TO, to);
-			m.setRecipients(Message.RecipientType.BCC, bcc);
+			//m.setRecipients(Message.RecipientType.BCC, bcc);
 
 			m.setSubject(emailTo.getSubject());
 			m.setSentDate(new java.util.Date());

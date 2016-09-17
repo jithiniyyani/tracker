@@ -5,6 +5,8 @@ public enum ErrorEnum {
 	USER_ALREADY_REGISTERED("400",
 			"User is already registered, Use different email address"), 
 	USER_NOT_FOUND("403","User not registered"),
+	INVALID_ACCOUNT_STATE("403","Kindly activate your account. If you still face problem contact customer service"),
+	INVALID_PASSWORD("403","Kindly check your password"),
 	INVALID_SESSION(
 			"403", "Invalid session. Kindly login"),
 	INVALID_JSON("400",
@@ -15,7 +17,8 @@ public enum ErrorEnum {
 	THEFT_INFO_NOT_FOUND("400","No thefts found for searched vehicle"),
 	EMAIL_ID_NOT_FOUND_FOR_RESET("400","Email id not found for password reset"),
 	ACTIVATE_USER_ID_NOT_FOUND("400","Activation id not valid"),
-	NO_THEFTS_FOR_VEHICLE("400","No thefts registered for this vehicle");
+	NO_THEFTS_FOR_VEHICLE("400","No thefts registered for this vehicle"),
+	EMAIL_ID_ALREADY_REGISTERED("400","Email id is already registered with us");
 
 	private String code;
 	private String message;

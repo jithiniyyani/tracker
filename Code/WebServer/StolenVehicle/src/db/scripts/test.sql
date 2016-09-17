@@ -1,4 +1,4 @@
-use findmystolenvehicle;
+use mylostcar;
 
 select * from find_information;
 select * from vehicle
@@ -29,3 +29,8 @@ commit;
 CREATE USER 'webapp'@'localhost' IDENTIFIED BY 'test';
 GRANT ALL PRIVILEGES ON * . * TO 'webapp'@'localhost';
 FLUSH PRIVILEGES;
+
+
+delete from audit;
+
+select * from audit;

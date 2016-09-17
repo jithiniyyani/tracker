@@ -2,7 +2,7 @@ package com.stolenvehicle.constants;
 
 public class Query {
 
-	public static final String GET_USER_BY_EMAIL_ID = "select * from user where emailaddress = ? and password  = ? and status = 'ACTIVE'";
+	public static final String GET_USER_BY_EMAIL_ID = "select * from user where emailaddress = ?";
 	public static final String GET_EMAIL_BY_USER_ID = "select emailaddress from user where id = ?;";
 	public static final String SAVE_USER = "insert into user values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),null,null);";
 	public static final String ACTIVATE_USER = "update user set status = 'ACTIVE',activation_id = null where activation_id = ?";

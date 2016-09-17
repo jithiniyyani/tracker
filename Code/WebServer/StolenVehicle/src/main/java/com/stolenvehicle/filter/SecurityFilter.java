@@ -35,7 +35,7 @@ public class SecurityFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 		//#TODO: remove this after it goes up
-		httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
+		//httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
 		chain.doFilter(request, response);
 		
 		

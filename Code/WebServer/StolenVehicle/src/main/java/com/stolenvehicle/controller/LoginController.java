@@ -38,8 +38,7 @@ import com.stolenvehicle.util.JsonUtil;
 @Controller
 public class LoginController {
 
-	private static final Logger LOGGER = Logger
-			.getLogger(LoginController.class);
+	private static final Logger LOGGER = Logger.getLogger(LoginController.class);
 
 	@Autowired
 	private UserService userService;
@@ -54,8 +53,7 @@ public class LoginController {
 	private AuditService auditService;
 
 	@RequestMapping(method = RequestMethod.POST, path = "/login")
-	public ResponseEntity<String> login(@RequestBody String requestBody,
-			HttpServletRequest request) {
+	public ResponseEntity<String> login(@RequestBody String requestBody, HttpServletRequest request) {
 
 		ResponseEntity<String> response;
 		UserTo user = null;
@@ -67,23 +65,21 @@ public class LoginController {
 			user = userService.authenticateUser(user);
 			HttpSession session = request.getSession(true);
 			session.setAttribute(Constants.USER, user);
-			response = new ResponseEntity<String>(JsonUtil.toJson(
-					Constants.SUCCESS,
-					new ErrorTo(SuccessEnum.LOGIN_SUCCESS.getCode(),
-							SuccessEnum.LOGIN_SUCCESS.getMessage())),
+			response = new ResponseEntity<String>(
+					JsonUtil.toJson(Constants.SUCCESS,
+							new ErrorTo(SuccessEnum.LOGIN_SUCCESS.getCode(), SuccessEnum.LOGIN_SUCCESS.getMessage())),
 					HttpStatus.OK);
 			status = true;
 
 		} catch (Exception ex) {
 
 			errorCause = ex.toString();
-			LOGGER.error(
-					"Error while authenticaing user json : " + requestBody, ex);
+			LOGGER.error("Error while authenticaing user json : " + requestBody, ex);
 			response = ExceptionProcessor.handleException(ex);
 		} finally {
 
-			auditService.audit(user.getEmailaddress(), AuditEnum.LOGIN,
-					status ? Constants.SUCCESS : Constants.ERROR, errorCause);
+			auditService.audit(user.getEmailaddress(), AuditEnum.LOGIN, status ? Constants.SUCCESS : Constants.ERROR,
+					errorCause);
 		}
 		return response;
 	}
@@ -99,32 +95,27 @@ public class LoginController {
 
 			// #TODO: handle trasaction here as well
 			user = JsonUtil.toObject(requestBody, Constants.USER, UserTo.class);
-			//#TODO: validate this json before passing it forward
+			// #TODO: validate this json before passing it forward
 			user.setUserStatus(UserStatusEnum.EMAIL_VERIFICATION_PENDING);
 			user = userService.registerUser(user);
-			String emailContent = templateService.generateContent(
-					Constants.VM_REGISTRATION_EMAIL, Constants.USER, user,
+			String emailContent = templateService.generateContent(Constants.VM_REGISTRATION_EMAIL, Constants.USER, user,
 					AppUtil.getResourceBundle(new Locale(Constants.US_LOCALE)));
-			emailService.sendEmail(new EmailTo(user.getEmailaddress(),
-					Constants.WELCOME_EMAIL_SUBJECT, emailContent));
-			response = new ResponseEntity<String>(JsonUtil.toJson(
-					Constants.SUCCESS,
-					new ErrorTo(SuccessEnum.ACTIVATE_ACCOUNT.getCode(),
-							SuccessEnum.ACTIVATE_ACCOUNT.getMessage())),
+			emailService.sendEmail(new EmailTo(user.getEmailaddress(), Constants.WELCOME_EMAIL_SUBJECT, emailContent));
+			response = new ResponseEntity<String>(JsonUtil.toJson(Constants.SUCCESS,
+					new ErrorTo(SuccessEnum.ACTIVATE_ACCOUNT.getCode(), SuccessEnum.ACTIVATE_ACCOUNT.getMessage())),
 					HttpStatus.OK);
 			status = true;
 
 		} catch (Exception ex) {
 
 			errorCause = ex.toString();
-			LOGGER.error("Error while registering user request " + requestBody,
-					ex);
+			LOGGER.error("Error while registering user request " + requestBody, ex);
 			response = ExceptionProcessor.handleException(ex);
 
 		} finally {
 
-			auditService.audit(user.getEmailaddress(), AuditEnum.REGISTER,
-					status ? Constants.SUCCESS : Constants.ERROR, errorCause);
+			auditService.audit(user.getEmailaddress(), AuditEnum.REGISTER, status ? Constants.SUCCESS : Constants.ERROR,
+					errorCause);
 		}
 
 		return response;
@@ -137,14 +128,12 @@ public class LoginController {
 		response = invalidateSession ? new ResponseEntity<>(HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		// to be improved upon
-		auditService.audit(Constants.NO_USER_ID, AuditEnum.LOGOUT,
-				Constants.SUCCESS, null);
+		auditService.audit(Constants.NO_USER_ID, AuditEnum.LOGOUT, Constants.SUCCESS, null);
 		return response;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/activateUser")
-	public ResponseEntity<String> activate(
-			@RequestParam(value = "id") String activationId,
+	public ResponseEntity<String> activate(@RequestParam(value = "id") String activationId,
 			HttpServletRequest request) {
 		ResponseEntity<String> response = null;
 		String errorCause = "Invalid activation id";
@@ -152,28 +141,22 @@ public class LoginController {
 		try {
 
 			if (StringUtils.isEmpty(activationId)) {
-				throw new IllegalArgumentException(
-						ExceptionConstants.EMPTY_INPUT);
+				throw new IllegalArgumentException(ExceptionConstants.EMPTY_INPUT);
 			} else {
 
 				activateUser = userService.activateUser(activationId);
-				response = activateUser ? new ResponseEntity<String>(
-						HttpStatus.OK) : new ResponseEntity<String>(
-						JsonUtil.toJson(
-								Constants.ERROR,
-								new ErrorTo(
-										ErrorEnum.ACTIVATE_USER_ID_NOT_FOUND
-												.getCode(),
-										ErrorEnum.ACTIVATE_USER_ID_NOT_FOUND
-												.getMessage())),
-						HttpStatus.BAD_REQUEST);
-	
+				response = activateUser ? new ResponseEntity<String>(HttpStatus.OK)
+						: new ResponseEntity<String>(
+								JsonUtil.toJson(Constants.ERROR,
+										new ErrorTo(ErrorEnum.ACTIVATE_USER_ID_NOT_FOUND.getCode(),
+												ErrorEnum.ACTIVATE_USER_ID_NOT_FOUND.getMessage())),
+								HttpStatus.BAD_REQUEST);
+
 			}
 		} catch (Exception ex) {
 
 			errorCause = ex.toString();
-			LOGGER.error("Error while activating user activation id "
-					+ activationId, ex);
+			LOGGER.error("Error while activating user activation id " + activationId, ex);
 			response = ExceptionProcessor.handleException(ex);
 		} finally {
 
@@ -184,57 +167,52 @@ public class LoginController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "/restPassword")
-	public ResponseEntity<String> resetPassword(
-			@RequestBody String jsonRequest, HttpServletRequest request) {
+	public ResponseEntity<String> resetPassword(@RequestBody String jsonRequest, HttpServletRequest request) {
 		ResponseEntity<String> response = null;
+		ResetPasswordTo passwordResetTo = null;
+		boolean status = false;
+		String errorCause = "";
 		try {
 
-			ResetPasswordTo passwordResetTo = JsonUtil.toObject(jsonRequest,
-					Constants.RESET_PASSWORD, ResetPasswordTo.class);
-			String activationCode = userService
-					.resetUserPassword(passwordResetTo.getEmailAddress());
+			passwordResetTo = JsonUtil.toObject(jsonRequest, Constants.RESET_PASSWORD, ResetPasswordTo.class);
+			String activationCode = userService.resetUserPassword(passwordResetTo.getEmailAddress());
 			passwordResetTo.setActivationCode(activationCode);
 
-			// #TODO: to handle corner case when db gets updated but mailing
-			// fails we need to have transaction
-			String emailContent = templateService.generateContent(
-					Constants.VM_RESET_EMAIL, Constants.RESET_PASSWORD,
-					passwordResetTo,
-					AppUtil.getResourceBundle(new Locale(Constants.US_LOCALE)));
+			String emailContent = templateService.generateContent(Constants.VM_RESET_EMAIL, Constants.RESET_PASSWORD,
+					passwordResetTo, AppUtil.getResourceBundle(new Locale(Constants.US_LOCALE)));
 
-			emailService.sendEmail(new EmailTo(passwordResetTo
-					.getEmailAddress(), Constants.PASSWORD_EMAIL_SUBJECT,
-					emailContent));
+			emailService.sendEmail(
+					new EmailTo(passwordResetTo.getEmailAddress(), Constants.PASSWORD_EMAIL_SUBJECT, emailContent));
 			response = new ResponseEntity<String>(HttpStatus.OK);
+			status = true;
 
 		} catch (Exception ex) {
 
-			LOGGER.error("Error while reseting password request : " + request,
-					ex);
+			LOGGER.error("Error while reseting password request : " + request, ex);
+			errorCause = ex.getMessage();
 			response = ExceptionProcessor.handleException(ex);
 		} finally {
 
+			auditService.audit(passwordResetTo.getEmailAddress(), AuditEnum.RESET_PASSWORD,
+					status ? Constants.SUCCESS : Constants.ERROR, errorCause);
 		}
 
 		return response;
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "/setPassword")
-	public ResponseEntity<String> setPassword(@RequestBody String jsonRequest,
-			HttpServletRequest request) {
+	public ResponseEntity<String> setPassword(@RequestBody String jsonRequest, HttpServletRequest request) {
 		ResponseEntity<String> response = null;
 		try {
 
-			SetPasswordTo setPasswordTo = JsonUtil.toObject(jsonRequest,
-					Constants.SET_PASSWORD, SetPasswordTo.class);
+			SetPasswordTo setPasswordTo = JsonUtil.toObject(jsonRequest, Constants.SET_PASSWORD, SetPasswordTo.class);
 			boolean status = userService.setUserPassword(setPasswordTo);
 			response = status ? new ResponseEntity<String>(HttpStatus.OK)
 					: new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 
 		} catch (Exception ex) {
 
-			LOGGER.error("Error while setting password request : "
-					+ jsonRequest, ex);
+			LOGGER.error("Error while setting password request : " + jsonRequest, ex);
 			response = ExceptionProcessor.handleException(ex);
 		} finally {
 

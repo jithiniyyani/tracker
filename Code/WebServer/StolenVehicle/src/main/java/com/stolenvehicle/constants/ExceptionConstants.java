@@ -17,6 +17,7 @@ public class ExceptionConstants {
 	public static final String ILLEGAL_DATE = "Illegal date in request";
 	public static final String VEHICLE_NOT_FOUND = "No thefts have been registered with the vehicle number";
 	public static final String EMAIL_ID_ALREADY_REGISTERED = "Email is already registered with us";
+	public static final String OLD_PASSWORD_NOT_VALID = "Old password not valid";
 	
 
 }

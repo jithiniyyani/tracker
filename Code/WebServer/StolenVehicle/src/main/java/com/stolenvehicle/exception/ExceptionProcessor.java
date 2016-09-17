@@ -114,6 +114,14 @@ public class ExceptionProcessor {
 								ErrorEnum.EMAIL_ID_ALREADY_REGISTERED.getMessage())),
 						HttpStatus.BAD_REQUEST);
 				break;
+			
+			case ExceptionConstants.OLD_PASSWORD_NOT_VALID:
+
+				response = new ResponseEntity<String>(
+						JsonUtil.toJson(Constants.ERROR, new ErrorTo(ErrorEnum.OLD_PASSWORD_NOT_VALID.getCode(),
+								ErrorEnum.OLD_PASSWORD_NOT_VALID.getMessage())),
+						HttpStatus.BAD_REQUEST);
+				break;
 			default:
 
 				response = new ResponseEntity<String>(

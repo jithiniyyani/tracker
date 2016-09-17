@@ -34,3 +34,5 @@ FLUSH PRIVILEGES;
 delete from audit;
 
 select * from audit;
+
+select * from user;

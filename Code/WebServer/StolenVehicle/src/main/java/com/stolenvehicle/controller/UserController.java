@@ -49,6 +49,9 @@ public class UserController {
 
 			AppUtil.checkIfUserHasSession(request);
 			UserTo user = AppUtil.getUserFromSession(request);
+			if(user == null){
+				return new ResponseEntity<String>(HttpStatus.FORBIDDEN);
+			}
 			response = new ResponseEntity<String>(JsonUtil.toJson(Constants.USER, user), HttpStatus.OK);
 		} catch (Exception ex) {
 

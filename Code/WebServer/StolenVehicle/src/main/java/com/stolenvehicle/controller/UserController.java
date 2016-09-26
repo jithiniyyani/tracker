@@ -106,7 +106,7 @@ public class UserController {
 			if (status) {
 				AppUtil.invalidateSession(request);
 			}
-			response = status ? new ResponseEntity<String>(HttpStatus.OK)
+			response = status ? new ResponseEntity<String>(HttpStatus.OK)	
 					: new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		} catch (Exception ex) {
 

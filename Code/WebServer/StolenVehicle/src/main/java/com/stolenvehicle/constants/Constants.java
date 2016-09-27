@@ -17,9 +17,12 @@ public class Constants {
 	public static final String WELCOME_EMAIL_SUBJECT = "Welcome to find my stolen vehicle";
 	public static final String NOTIFICATION_EMAIL_SUBJECT = "Some one found your car";
 	public static final String PASSWORD_EMAIL_SUBJECT = "Password reset";
+	public static final String FIND_ACCEPT_EMAIL_SUBJECT = "Congratulations your find has been accepted by the reportee";
+	public static final String FIND_REJECT_EMAIL_SUBJECT = "Find status update";
 	public static final String WELCOME_EMAIL_BODY = "Kindly click on the following link to activate your account";
 	public static final String ATTACHMENTS = "attachments";
 	public static final String RESET_PASSWORD = "resetPassword";
+	public static final String FIND_INFORMATION = "findInformation";
 	public static final String SET_PASSWORD = "setPassword";
 	public static final String PASSWORD = "password";
 	public static final String RESOURCE_BUNDLE = "resourceBundle";
@@ -27,5 +30,7 @@ public class Constants {
 	public static final String VM_REGISTRATION_EMAIL = "templates/en_registrationEmail.vm";
 	public static final String VM_NOTIFICATOIN_EMAIL = "templates/en_notificationEmail.vm";
 	public static final String VM_RESET_EMAIL = "templates/en_passwordResetEmail.vm";
+	public static final String VM_ACCEPT_FIND_EMAIL = "templates/en_acceptFindEmail.vm";
+	public static final String VM_REJECT_FIND_EMAIL = "templates/en_rejectFindEmail.vm";
 	public static final String NO_USER_ID = "NO_USER_ID";
 }

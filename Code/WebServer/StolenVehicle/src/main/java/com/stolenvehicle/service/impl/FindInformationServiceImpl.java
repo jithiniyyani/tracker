@@ -66,4 +66,11 @@ public class FindInformationServiceImpl implements FindInformationService {
 		return ConversionUtil.convertFindInformationEntityList(findInforamtionForUser);
 	}
 
+	@Override
+	public FindInformationTo findFindInformationById(String findId) throws BusinessException {
+
+		FindInformation findFindInformationById = findInformationDao.findFindInformationById(findId);
+		return ConversionUtil.convertFindInformationEntity(findFindInformationById);
+	}
+
 }

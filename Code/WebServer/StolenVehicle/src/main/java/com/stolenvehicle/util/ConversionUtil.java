@@ -193,6 +193,15 @@ public class ConversionUtil {
 		return findInformationToList;
 	}
 
+	public static FindInformationTo convertFindInformationEntity(FindInformation findInformation) {
+
+		FindInformationTo findInformationTo = new FindInformationTo(findInformation.getId(),
+				findInformation.getLocators_name(), findInformation.getLocators_email(),
+				findInformation.getLocators_contactNumber(), findInformation.getFind_location_cordinates());
+		findInformationTo.setTheft_information_id(findInformation.getTheft_information_id());
+		return findInformationTo;
+	}
+
 	public static List<CountryTo> convertCountryEntityList(List<Country> countryList) {
 
 		List<CountryTo> countryToList = new ArrayList<>();

@@ -1,5 +1,9 @@
 Thank you for using our service.
 
-We want you to click on this link so that you can activate your account with us
+We want you to click on this link  http://mylostcar.com/#/activateUser?id=$user.activationId  so that we can activate your account.
 
-http://mylostcar.com/#/activateUser?id=$user.activationId
+
+Regards,
+MyLostCar team
+
+

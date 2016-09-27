@@ -8,17 +8,13 @@ import com.stolenvehicle.exception.BusinessException;
 
 public interface FindInformationDao extends GenericDao {
 
-	public FindInformation saveFindInformation(FindInformation findInformation)
-			throws BusinessException;
+	public FindInformation saveFindInformation(FindInformation findInformation) throws BusinessException;
 
-	public List<FindInformation> getFindInforamtionForUser(String user_id)
-			throws BusinessException;
-	
-	
-	public List<FindInformation> findInformationListReadyForReward(String user_id)
-			throws BusinessException;
-	
-	
-	public boolean updateFindInformatoinStatus(String find_id,
-			FindStatusEnum findStatus) throws BusinessException;
+	public List<FindInformation> getFindInforamtionForUser(String user_id) throws BusinessException;
+
+	public List<FindInformation> findInformationListReadyForReward(String user_id) throws BusinessException;
+
+	public boolean updateFindInformatoinStatus(String find_id, FindStatusEnum findStatus) throws BusinessException;
+
+	public FindInformation findFindInformationById(String findId) throws BusinessException;
 }

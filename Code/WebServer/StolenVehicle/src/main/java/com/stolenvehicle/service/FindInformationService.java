@@ -16,4 +16,6 @@ public interface FindInformationService {
 
 	public boolean updateFindInformationStatus(String find_id, FindStatusEnum findStatus) throws BusinessException;
 
+	public FindInformationTo findFindInformationById(String findId) throws BusinessException;
+
 }

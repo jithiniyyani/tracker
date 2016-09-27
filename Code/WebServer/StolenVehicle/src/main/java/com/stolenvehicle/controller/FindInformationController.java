@@ -32,7 +32,6 @@ import com.stolenvehicle.dto.AttachmentTo;
 import com.stolenvehicle.dto.EmailTo;
 import com.stolenvehicle.dto.FindInformationTo;
 import com.stolenvehicle.dto.UserTo;
-import com.stolenvehicle.entity.User;
 import com.stolenvehicle.exception.ExceptionProcessor;
 import com.stolenvehicle.service.AuditService;
 import com.stolenvehicle.service.EmailService;
